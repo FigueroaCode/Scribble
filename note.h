@@ -4,8 +4,9 @@
 
 class Note
 {
+private:
 public:
-    Note();
+    Note(QString filePath);
 };
 
 #endif // NOTE_H

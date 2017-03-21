@@ -13,7 +13,4 @@ SignUpWindow::~SignUpWindow()
     delete ui;
 }
 
-void SignUpWindow::on_signInBtn_clicked()
-{
 
-}
