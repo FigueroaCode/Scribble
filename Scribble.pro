@@ -24,8 +24,26 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        signupwindow.cpp
+        signupwindow.cpp \
+    courselist.cpp \
+    course.cpp \
+    textbook.cpp \
+    chapter.cpp \
+    note.cpp \
+    userbranchnote.cpp \
+    change.cpp \
+    student.cpp \
+    database.cpp
 
-HEADERS  += signupwindow.h
+HEADERS  += signupwindow.h \
+    courselist.h \
+    course.h \
+    textbook.h \
+    chapter.h \
+    note.h \
+    userbranchnote.h \
+    change.h \
+    student.h \
+    database.h
 
 FORMS    += signupwindow.ui
