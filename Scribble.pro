@@ -33,8 +33,7 @@ SOURCES += main.cpp\
     userbranchnote.cpp \
     change.cpp \
     student.cpp \
-    database.cpp \
-    addnote.cpp
+    database.cpp
 
 HEADERS  += signupwindow.h \
     courselist.h \
@@ -45,8 +44,6 @@ HEADERS  += signupwindow.h \
     userbranchnote.h \
     change.h \
     student.h \
-    database.h \
-    addnote.h
+    database.h
 
-FORMS    += signupwindow.ui \
-    addnote.ui
+FORMS    += signupwindow.ui
