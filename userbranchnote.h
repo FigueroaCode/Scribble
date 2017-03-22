@@ -9,7 +9,10 @@ class UserBranchNote: public Note
 private:
     Note* note;
 public:
+    UserBranchNote();
     UserBranchNote(QString filename);
+    // ----change to vector----
+    //Change[] compareToMain();
 };
 
 #endif // USERBRANCHNOTE_H
