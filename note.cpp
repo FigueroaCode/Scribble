@@ -19,6 +19,8 @@ Note::Note(QString filename)
         QString line = in.readLine();
         fileText += line + "\n";
     }
+
+    file.close();
 }
 
 QString Note::getFileText(){

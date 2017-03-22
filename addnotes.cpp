@@ -1,9 +1,7 @@
 #include "addnotes.h"
 #include "ui_addnotes.h"
-//#include <QtGlobal> // ----For Macros
 #include <QFileDialog>
 #include <QDir>
-#include <QMessageBox>
 #include "note.h"
 
 AddNotes::AddNotes(QWidget *parent) :
@@ -20,20 +18,6 @@ AddNotes::~AddNotes()
 
 void AddNotes::on_pushButton_clicked()
 {
-//    //How to Check Operating System
-//    //Windows
-//    #ifdef Q_OS_WIN64
-//    os = "windows"; // change to path
-//    #endif
-//    //Mac
-//    #ifdef Q_OS_MACOS
-//    os = "mac";
-//    #endif
-//    //Linux
-//    #ifdef Q_OS_LINUX
-//    os = "linux";
-//    #endif
-
     //------ Open File explorer so user can select the file, then save path in string
       QString filename = QFileDialog::getOpenFileName(
                   this,
