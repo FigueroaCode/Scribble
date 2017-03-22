@@ -14,10 +14,6 @@ SignUpWindow::~SignUpWindow()
 {
     delete ui;
 }
-<<<<<<< HEAD
-=======
-
-
 
 void SignUpWindow::on_signInBtn_clicked()
 {
@@ -38,4 +34,4 @@ void SignUpWindow::on_signUpBtn_clicked()
     window.setModal(true);
     window.exec();
 }
->>>>>>> addFileBranch
+
