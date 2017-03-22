@@ -2,13 +2,14 @@
 #define USERBRANCHNOTE_H
 
 #include "note.h"
+#include <QString>
 
 class UserBranchNote: public Note
 {
 private:
     Note* note;
 public:
-    UserBranchNote();
+    UserBranchNote(QString filename);
 };
 
 #endif // USERBRANCHNOTE_H

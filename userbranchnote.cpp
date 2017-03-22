@@ -1,6 +1,6 @@
 #include "userbranchnote.h"
 
-UserBranchNote::UserBranchNote()
+UserBranchNote::UserBranchNote(QString filename):Note(filename)
 {
 
 }

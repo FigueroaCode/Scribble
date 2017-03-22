@@ -1,5 +1,6 @@
 #include "signupwindow.h"
 #include "ui_signupwindow.h"
+#include "addnotes.h"
 
 SignUpWindow::SignUpWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -14,3 +15,10 @@ SignUpWindow::~SignUpWindow()
 }
 
 
+
+void SignUpWindow::on_signInBtn_clicked()
+{
+    AddNotes myNote;
+    myNote.setModal(true);
+    myNote.exec();
+}

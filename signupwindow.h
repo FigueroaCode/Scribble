@@ -15,6 +15,9 @@ public:
     explicit SignUpWindow(QWidget *parent = 0);
     ~SignUpWindow();
 
+private slots:
+    void on_signInBtn_clicked();
+
 private:
     Ui::SignUpWindow *ui;
 };
