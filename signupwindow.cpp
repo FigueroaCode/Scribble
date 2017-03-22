@@ -1,6 +1,7 @@
 #include "signupwindow.h"
 #include "ui_signupwindow.h"
-#include "addnotes.h"
+#include "mainwindow.h"
+#include "registerwindow.h"
 
 SignUpWindow::SignUpWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -18,7 +19,20 @@ SignUpWindow::~SignUpWindow()
 
 void SignUpWindow::on_signInBtn_clicked()
 {
-    AddNotes myNote;
-    myNote.setModal(true);
-    myNote.exec();
+    // --Hide Window--
+    hide();
+    // ----Open Main Window if sign in successful----
+    MainWindow window;
+    window.setModal(true);
+    window.exec();
+}
+
+void SignUpWindow::on_signUpBtn_clicked()
+{
+    // --Hide Window--
+    hide();
+    // ----Open Register Window----
+    RegisterWindow window;
+    window.setModal(true);
+    window.exec();
 }

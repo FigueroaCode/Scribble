@@ -24,7 +24,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        signupwindow.cpp \
     courselist.cpp \
     course.cpp \
     textbook.cpp \
@@ -34,9 +33,12 @@ SOURCES += main.cpp\
     change.cpp \
     student.cpp \
     database.cpp \
-    addnotes.cpp
+    addnotes.cpp \
+    mainwindow.cpp \
+    registerwindow.cpp \
+    signupwindow.cpp
 
-HEADERS  += signupwindow.h \
+HEADERS  += \
     courselist.h \
     course.h \
     textbook.h \
@@ -46,7 +48,13 @@ HEADERS  += signupwindow.h \
     change.h \
     student.h \
     database.h \
-    addnotes.h
+    addnotes.h \
+    mainwindow.h \
+    registerwindow.h \
+    signupwindow.h
 
-FORMS    += signupwindow.ui \
-    addnotes.ui
+FORMS    += \
+    addnotes.ui \
+    mainwindow.ui \
+    registerwindow.ui \
+    signupwindow.ui
