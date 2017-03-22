@@ -17,12 +17,12 @@ Note::Note(QString filename)
     // loop through text file
     while(!in.atEnd()){
         QString line = in.readLine();
-        fileText += line + "\n";
+        text += line + "\n";
     }
 
     file.close();
 }
 
-QString Note::getFileText(){
-    return fileText;
+QString Note::getText(){
+    return text;
 }

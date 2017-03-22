@@ -27,5 +27,5 @@ void AddNotes::on_pushButton_clicked()
                   );
 
     Note myNote(filename);
-    ui->textEdit->setText(myNote.getFileText());
+    ui->textEdit->setText(myNote.getText());
 }
