@@ -27,3 +27,18 @@ Chapter::callVote()
     //Implement a UI which allows the user to pick a date and time
     //at which the vote will end.
 }
+
+Chapter::findDifferences(Note note)
+{
+
+}
+
+Chapter::isSynonym()
+{
+
+}
+
+Chapter::mergeNotes(UserBranchNote note)
+{
+
+}
