@@ -1,7 +1,7 @@
 #ifndef CHAPTER_H
 #define CHAPTER_H
 
-#include <string>
+#include <QString>
 #include <QDateTime>
 
 class Chapter
@@ -15,7 +15,7 @@ public:
     bool isSynonym(string word);
     void mergeNotes(UserBranchNote note);
 private:
-    string ChapterName;
+    QString ChapterName;
     Note mainNote;
 };
 
