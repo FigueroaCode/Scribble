@@ -36,7 +36,8 @@ SOURCES += main.cpp\
     addnotes.cpp \
     mainwindow.cpp \
     registerwindow.cpp \
-    signupwindow.cpp
+    signupwindow.cpp \
+    getdirectorywindow.cpp
 
 HEADERS  += \
     courselist.h \
@@ -51,10 +52,12 @@ HEADERS  += \
     addnotes.h \
     mainwindow.h \
     registerwindow.h \
-    signupwindow.h
+    signupwindow.h \
+    getdirectorywindow.h
 
 FORMS    += \
     addnotes.ui \
     mainwindow.ui \
     registerwindow.ui \
-    signupwindow.ui
+    signupwindow.ui \
+    getdirectorywindow.ui
