@@ -23,7 +23,7 @@ void AddNotes::on_addFileBtn_clicked()
       QString filename = QFileDialog::getOpenFileName(
                   this,
                   "Open File",
-                  QDir::currentPath(),
+                  QDir::homePath(),
                   "All Files (*.*);; Text File (*.txt)"
                   );
 
@@ -31,12 +31,14 @@ void AddNotes::on_addFileBtn_clicked()
     //Display file text
     ui->textEdit->setText(myNote.getText());
 
-    //This is for testing getSentences
+//    //This is for testing getWords
 //    QString text = "";
-//    for(int i = 0; i < myNote.getSentences().size(); i++){
-//        text += myNote.getSentences().at(i) + "\n";
+//    for(int i = 0; i < myNote.getWords().size(); i++){
+//        for(int j = 0; j < myNote.getWords().at(i).size(); j++){
+//            text += myNote.getWords().at(i).at(j) + " ";
+//        }
+//        text += "\n";
 //    }
-
 //    ui->textEdit->setText(text);
 }
 
