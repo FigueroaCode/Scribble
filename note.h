@@ -23,9 +23,9 @@ public:
     void showNote();
     void allowVoting(QDateTime time);
     void editNote();
-    QVector<QString> getSentences;
-    QVector<Change> getChangeLog;
-    QVector<Change> getConfirmedChanges;
+    QVector<QString> getSentences();
+    QVector<Change> getChangeLog();
+    QVector<Change> getConfirmedChanges();
 };
 
 #endif // NOTE_H
