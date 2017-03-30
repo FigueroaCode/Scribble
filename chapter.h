@@ -17,6 +17,7 @@ public:
     bool isSynonym(QString word);
     void mergeNotes(UserBranchNote* note);
     Note* getMainNote();
+    int compareSentences(QVector<QString> sentence1, QVector<QString> sentence2);
 private:
     QString chapterName;
     Note* mainNote;
