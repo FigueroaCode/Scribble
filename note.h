@@ -4,6 +4,7 @@
 #include <QString>
 #include "change.h"
 #include <QDateTime>
+#include <QVector>
 
 class Note
 {
@@ -11,11 +12,9 @@ private:
     QString text;
     QString editedText;
     bool underVote;
-    // --- change into vectors ---
-//    QString sentences[10];
-//    Change changeLog[10];
-//    Change confirmedChanges[10];
-
+    QVector<QString> sentences;
+    QVector<Change> changeLog;
+    QVector<Change> confirmedChanges;
 
 public:
     Note();
@@ -23,10 +22,10 @@ public:
     QString getText();
     void showNote();
     void allowVoting(QDateTime time);
-    QString removeArticles();
-//    QString separateToSentences()[10];
-//    QString separateToWords()[10];
     void editNote();
+    QVector<QString> getSentences;
+    QVector<Change> getChangeLog;
+    QVector<Change> getConfirmedChanges;
 };
 
 #endif // NOTE_H

@@ -3,6 +3,8 @@
 #include <QTextStream>
 #include <QMessageBox>
 
+Note::Note(){}
+
 Note::Note(QString filename)
 {
     QFile file(filename);
@@ -25,4 +27,8 @@ Note::Note(QString filename)
 
 QString Note::getText(){
     return text;
+}
+
+void Note::showNote(){
+
 }
