@@ -14,10 +14,8 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_clicked()
+
+void MainWindow::on_coursesList_itemClicked(QListWidgetItem *item)
 {
-    // ----Open file adding window----
-    AddNotes myNote;
-    myNote.setModal(true);
-    myNote.exec();
+
 }

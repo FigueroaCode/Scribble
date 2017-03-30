@@ -16,7 +16,8 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_clicked();
+
+    void on_coursesList_itemClicked(QListWidgetItem *item);
 
 private:
     Ui::MainWindow *ui;
