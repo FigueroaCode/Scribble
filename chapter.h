@@ -3,20 +3,23 @@
 
 #include <QString>
 #include <QDateTime>
+#include "note.h"
+#include "userbranchnote.h"
 
 class Chapter
 {
 public:
     Chapter();
-    Chapter(string ChapterName);
-    Chapter(string ChapterName);
+    Chapter(QString ChapterName);
+    Chapter(QString ChapterName, Note* note);
     void callVote();
-    void findDifferences(Note note);
-    bool isSynonym(string word);
-    void mergeNotes(UserBranchNote note);
+    void findDifferences(Note* note);
+    bool isSynonym(QString word);
+    void mergeNotes(UserBranchNote* note);
+    Note* getMainNote();
 private:
-    QString ChapterName;
-    Note mainNote;
+    QString chapterName;
+    Note* mainNote;
 };
 
 #endif // CHAPTER_H

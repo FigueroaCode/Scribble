@@ -1,19 +1,18 @@
 #ifndef CHANGE_H
 #define CHANGE_H
 
-#include <vector>
-#include <string>
+#include <QVector>
 
 class Change
 {
 public:
     Change();
-    Change(string originalSentence, string proposedSentence);
+    Change(QString originalSentence, QString proposedSentence);
     void upVote();
     void downVote();
     int getVoteCount();
 private:
-    vector<string> words;
+    QVector<QString> words;
     bool isConfirmed = false;
     int voteCount = 0;
 };

@@ -1,11 +1,11 @@
-#ifndef DATABASE_H
-#define DATABASE_H
+//#ifndef DATABASE_H
+//#define DATABASE_H
 
 
-class Database
-{
-public:
-    Database();
-};
+//class Database
+//{
+//public:
+//    Database();
+//};
 
-#endif // DATABASE_H
+//#endif // DATABASE_H
