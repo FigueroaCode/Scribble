@@ -15,7 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="addFileBtn">
      <property name="text">
       <string>Add File</string>
      </property>
@@ -23,6 +23,13 @@
    </item>
    <item>
     <widget class="QTextEdit" name="textEdit"/>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

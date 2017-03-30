@@ -17,8 +17,6 @@ public:
 
 private slots:
 
-    void on_coursesList_itemClicked(QListWidgetItem *item);
-
 private:
     Ui::MainWindow *ui;
 };

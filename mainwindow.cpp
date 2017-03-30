@@ -13,9 +13,3 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-
-
-void MainWindow::on_coursesList_itemClicked(QListWidgetItem *item)
-{
-
-}
