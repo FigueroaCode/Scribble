@@ -21,24 +21,27 @@ Chapter::Chapter(string name, Note note)
     mainNote = note;
 }
 
-Chapter::callVote()
+void Chapter::callVote()
 {
     //To-Do:
     //Implement a UI which allows the user to pick a date and time
     //at which the vote will end.
 }
 
-Chapter::findDifferences(Note note)
+void Chapter::findDifferences(Note note)
+{
+    mainNoteText = mainNote.getEditedText();
+    newNoteText = note.getEditedText();
+
+
+}
+
+bool Chapter::isSynonym()
 {
 
 }
 
-Chapter::isSynonym()
-{
-
-}
-
-Chapter::mergeNotes(UserBranchNote note)
+void Chapter::mergeNotes(UserBranchNote note)
 {
 
 }
