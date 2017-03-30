@@ -20,4 +20,5 @@ void MainWindow::on_pushButton_clicked()
     AddNotes myNote;
     myNote.setModal(true);
     myNote.exec();
+
 }

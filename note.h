@@ -23,6 +23,9 @@ public:
     void showNote();
     void allowVoting(QDateTime time);
     void editNote();
+    void findSentences();
+    bool isTitle(QString word);
+    bool isPunctuation(QChar p);
     QVector<QString> getSentences();
     QVector<Change> getChangeLog();
     QVector<Change> getConfirmedChanges();
