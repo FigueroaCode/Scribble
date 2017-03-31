@@ -62,6 +62,12 @@ void Chapter::findDifferences(Note* note)
             }
         }
     }
+
+    //Create a Change object for each sentence group.
+    for(int i = 0; i < similarSentences.size(); i++)
+    {
+
+    }
 }
 
 int Chapter::compareSentences(QVector<QString> sentence1, QVector<QString> sentence2)
