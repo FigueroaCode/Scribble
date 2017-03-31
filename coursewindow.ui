@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CourseWindow</class>
+ <widget class="QDialog" name="CourseWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QPlainTextEdit" name="plainTextEdit"/>
+   </item>
+   <item>
+    <widget class="QPushButton" name="noteOneBtn">
+     <property name="text">
+      <string>makeNote1</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="notTwoBtn">
+     <property name="text">
+      <string>makeNote2</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="diffButton">
+     <property name="text">
+      <string>difference</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
