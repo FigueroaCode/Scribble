@@ -11,10 +11,13 @@ public:
     void upVote();
     void downVote();
     int getVoteCount();
+    QString getOriginalSentence();
+    QString getProposedSentence();
 private:
-    QVector<QString> words;
-    bool isConfirmed = false;
-    int voteCount = 0;
+    QString originalSentence;
+    QString proposedSentence;
+    bool isConfirmed;
+    int voteCount;
 };
 
 #endif // CHANGE_H

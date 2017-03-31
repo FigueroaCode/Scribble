@@ -70,7 +70,10 @@ void Chapter::findDifferences(Note* note)
     //Create a Change object for each sentence group.
     for(int i = 0; i < similarSentences.size(); i++)
     {
-
+        QString sentence1 = similarSentences.at(i).at(0);
+        QString sentence2 = similarSentences.at(i).at(1);
+        Change* change = new Change(sentence1, sentence2);
+        note->addChange(change);
     }
 }
 
@@ -111,10 +114,10 @@ int Chapter::compareSentences(QVector<QString> sentence1, QVector<QString> sente
 
 //bool Chapter::isSynonym()
 //{
-
+//    return false;
 //}
 
-//void Chapter::mergeNotes(UserBranchNote* note)
+//void Chapter::mergeNotes(Note* note)
 //{
 
 //}

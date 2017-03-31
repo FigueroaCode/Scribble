@@ -29,7 +29,6 @@ SOURCES += main.cpp\
     textbook.cpp \
     chapter.cpp \
     note.cpp \
-    userbranchnote.cpp \
     change.cpp \
     student.cpp \
     database.cpp \
@@ -46,7 +45,6 @@ HEADERS  += \
     textbook.h \
     chapter.h \
     note.h \
-    userbranchnote.h \
     change.h \
     student.h \
     database.h \
