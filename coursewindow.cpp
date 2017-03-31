@@ -46,4 +46,6 @@ void CourseWindow::on_diffButton_clicked()
     if(chapter != NULL && noteOne != NULL && noteTwo != NULL){
         chapter->findDifferences(noteTwo);
     }
+
+
 }

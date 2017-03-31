@@ -36,8 +36,6 @@ public:
     void addChange(Change* change);
     QVector<QString> getOriginalSentences();
     QVector<QVector<QString>> getEditedSentences();
-    QVector<Change> getChangeLog();
-    QVector<Change> getConfirmedChanges();
 };
 
 #endif // NOTE_H
