@@ -37,8 +37,10 @@ void Chapter::findDifferences(Note* note)
 {
     QVector<QVector<QString>> mainNoteSentences = getMainNote()->getWords();
     QVector<QVector<QString>> newNoteSentences = note->getWords();
-    QVector<QVector<QString>> sentenceGroup;
-    QVector<QVector<QVector<QString>>> similarSentences;
+    QVector<QString> originalMainNoteSentences = getMainNote()->getSentences();
+    QVector<QString> originalNewNoteSentences = getMainNote()->getSentences();
+    QVector<QString> sentenceGroup;
+    QVector<QVector<QString>> similarSentences;
 
     //Compare sentences of the current Main Note to the newly submitted Note.
     for(int i = 0; i < newNoteSentences.size(); i++)
@@ -55,8 +57,10 @@ void Chapter::findDifferences(Note* note)
             //Vector of sentences grouped by similarity.
             if(sentenceSimilarity >= 60)
             {
-                sentenceGroup.push_back(mainSentence);
-                sentenceGroup.push_back(newSentence);
+                QString mainSentenceString = originalMainNoteSentences.at(i);
+                QString newSentenceString = originalNewNoteSentences.at(j);
+                sentenceGroup.push_back(mainSentenceString);
+                sentenceGroup.push_back(newSentenceString);
                 similarSentences.push_back(sentenceGroup);
                 sentenceGroup.clear();
             }
