@@ -13,12 +13,3 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-
-void MainWindow::on_pushButton_clicked()
-{
-    // ----Open file adding window----
-    AddNotes myNote;
-    myNote.setModal(true);
-    myNote.exec();
-
-}
