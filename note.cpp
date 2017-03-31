@@ -150,9 +150,9 @@ bool Note::isPunctuation(QChar p){
 
     return false;
 }
-QVector<QString> Note::getSentences(){
+QVector<QString> Note::getOriginalSentences(){
      return sentences;
  }
-QVector<QVector<QString>> Note::getWords(){
+QVector<QVector<QString>> Note::getEditedSentences(){
     return words;
 }

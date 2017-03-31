@@ -31,8 +31,8 @@ public:
     bool isSymbol(QChar symbol);
     bool isTitle(QString word);
     bool isPunctuation(QChar p);
-    QVector<QString> getSentences();
-    QVector<QVector<QString>> getWords();
+    QVector<QString> getOriginalSentences();
+    QVector<QVector<QString>> getEditedSentences();
     QVector<Change> getChangeLog();
     QVector<Change> getConfirmedChanges();
 };
