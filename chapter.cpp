@@ -35,10 +35,10 @@ void Chapter::callVote()
 
 void Chapter::findDifferences(Note* note)
 {
-    QVector<QVector<QString>> mainNoteSentences = getMainNote()->getWords();
-    QVector<QVector<QString>> newNoteSentences = note->getWords();
-    QVector<QString> originalMainNoteSentences = getMainNote()->getSentences();
-    QVector<QString> originalNewNoteSentences = getMainNote()->getSentences();
+    QVector<QVector<QString>> mainNoteSentences = getMainNote()->getEditedSentences();
+    QVector<QVector<QString>> newNoteSentences = note->getEditedSentences();
+    QVector<QString> originalMainNoteSentences = getMainNote()->getOriginalSentences();
+    QVector<QString> originalNewNoteSentences = getMainNote()->getOriginalSentences();
     QVector<QString> sentenceGroup;
     QVector<QVector<QString>> similarSentences;
 
