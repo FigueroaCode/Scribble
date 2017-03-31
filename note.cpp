@@ -90,6 +90,7 @@ void Note::findSentences(){
         }
     }
 }
+
 void Note::removeSymbols(){
     for(int i = 0; i < text.size(); i++){
         if(!isSymbol(text.at(i))){
@@ -99,6 +100,7 @@ void Note::removeSymbols(){
         }
     }
 }
+
 bool Note::isArticle(QString article){
     QString articles[3] = {
         "the","a","an",
@@ -111,6 +113,7 @@ bool Note::isArticle(QString article){
 
     return false;
 }
+
 bool Note::isSymbol(QChar symbol){
     //take care fo exceptions first
     if(isPunctuation(symbol))
@@ -127,6 +130,7 @@ bool Note::isSymbol(QChar symbol){
 
     return false;
 }
+
 bool Note::isTitle(QString word){
     QString titles[4] = {
         "mr","ms","dr","ex",
@@ -139,6 +143,7 @@ bool Note::isTitle(QString word){
 
     return false;
 }
+
 bool Note::isPunctuation(QChar p){
     char punct[3] = {
         '.','?','!'
@@ -150,9 +155,15 @@ bool Note::isPunctuation(QChar p){
 
     return false;
 }
-QVector<QString> Note::getSentences(){
+
+QVector<QString> Note::getOriginalSentences(){
      return sentences;
  }
-QVector<QVector<QString>> Note::getWords(){
+QVector<QVector<QString>> Note::getEditedSentences(){
     return words;
+}
+
+void Note::addChange(Change* change)
+{
+    this->changeLog.append(change);
 }

@@ -14,8 +14,8 @@ private:
     bool underVote;
     QVector<QString> sentences;
     QVector<QVector<QString>> words;
-    QVector<Change> changeLog;
-    QVector<Change> confirmedChanges;
+    QVector<Change*> changeLog;
+    QVector<Change*> confirmedChanges;
 
 public:
     Note();
@@ -31,10 +31,11 @@ public:
     bool isSymbol(QChar symbol);
     bool isTitle(QString word);
     bool isPunctuation(QChar p);
-    QVector<QString> getSentences();
-    QVector<QVector<QString>> getWords();
-    QVector<Change> getChangeLog();
-    QVector<Change> getConfirmedChanges();
+    QVector<Change*> getChangeLog();
+    QVector<Change*> getConfirmedChanges();
+    void addChange(Change* change);
+    QVector<QString> getOriginalSentences();
+    QVector<QVector<QString>> getEditedSentences();
 };
 
 #endif // NOTE_H
