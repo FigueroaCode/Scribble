@@ -26,7 +26,7 @@ public:
     void allowVoting(QDateTime time);
     void editNote();
     void findSentences();
-    void removeSymbolsArticles();
+    void removeSymbols();
     bool isArticle(QString article);
     bool isSymbol(QChar symbol);
     bool isTitle(QString word);

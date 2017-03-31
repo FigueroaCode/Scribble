@@ -2,8 +2,12 @@
 #include <QFile>
 #include <QTextStream>
 #include <QMessageBox>
+#include <QDebug>
 
-Note::Note(){}
+Note::Note(){
+    text = "";
+    editedText = "";
+}
 
 Note::Note(QString filename)
 {
@@ -25,9 +29,23 @@ Note::Note(QString filename)
     file.close();
 
     //remove articles and symbols that arent needed
-    removeSymbolsArticles();
+    removeSymbols();
     //initialize sentence vector
     findSentences();
+
+//    qDebug() << "Sentences";
+//    for(int i = 0; i < sentences.size(); i++){
+//        qDebug() << sentences.at(i);
+//    }
+//    qDebug() << "Words";
+//    QString txt = "";
+//      for(int i = 0; i < words.size(); i++){
+//          for(int j = 0; j < words.at(i).size(); j++){
+//              txt += words.at(i).at(j) + " ";
+//          }
+//          qDebug() << txt;
+//          txt = "";
+//      }
 }
 
 QString Note::getText(){
@@ -55,8 +73,15 @@ void Note::findSentences(){
             currentWord += editedText.at(i);
         }
         if(isPunctuation(editedText.at(i)) && !isTitle(currentWord)){
-            // ---Doesnt add the period to the sentence---
+            //take of punctuation before adding word
+            currentWord.truncate(currentWord.size()-1);
+            //resolved last word not being added
+            wordSentence.append(currentWord);
+            //add punctuation to sentence
+            currentSentence += editedText.at(i);
+
             words.append(wordSentence);
+            wordSentence.clear();
             sentences.append(currentSentence);
             currentSentence = "";
             currentWord = "";
@@ -65,7 +90,7 @@ void Note::findSentences(){
         }
     }
 }
-void Note::removeSymbolsArticles(){
+void Note::removeSymbols(){
     for(int i = 0; i < text.size(); i++){
         if(!isSymbol(text.at(i))){
             //not a symbol
