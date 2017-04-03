@@ -54,24 +54,26 @@ SOURCES       = main.cpp \
 		textbook.cpp \
 		chapter.cpp \
 		note.cpp \
-		userbranchnote.cpp \
 		change.cpp \
 		student.cpp \
 		database.cpp \
 		addnotes.cpp \
 		mainwindow.cpp \
 		registerwindow.cpp \
-		signupwindow.cpp moc_addnotes.cpp \
+		signupwindow.cpp \
+		getdirectorywindow.cpp \
+		coursewindow.cpp moc_addnotes.cpp \
 		moc_mainwindow.cpp \
 		moc_registerwindow.cpp \
-		moc_signupwindow.cpp
+		moc_signupwindow.cpp \
+		moc_getdirectorywindow.cpp \
+		moc_coursewindow.cpp
 OBJECTS       = main.o \
 		courselist.o \
 		course.o \
 		textbook.o \
 		chapter.o \
 		note.o \
-		userbranchnote.o \
 		change.o \
 		student.o \
 		database.o \
@@ -79,10 +81,14 @@ OBJECTS       = main.o \
 		mainwindow.o \
 		registerwindow.o \
 		signupwindow.o \
+		getdirectorywindow.o \
+		coursewindow.o \
 		moc_addnotes.o \
 		moc_mainwindow.o \
 		moc_registerwindow.o \
-		moc_signupwindow.o
+		moc_signupwindow.o \
+		moc_getdirectorywindow.o \
+		moc_coursewindow.o
 DIST          = ../../Qt/5.8/clang_64/mkspecs/features/spec_pre.prf \
 		../../Qt/5.8/clang_64/mkspecs/qdevice.pri \
 		../../Qt/5.8/clang_64/mkspecs/features/device_config.prf \
@@ -232,6 +238,7 @@ DIST          = ../../Qt/5.8/clang_64/mkspecs/features/spec_pre.prf \
 		../../Qt/5.8/clang_64/mkspecs/features/qt_config.prf \
 		../../Qt/5.8/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../Qt/5.8/clang_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../Qt/5.8/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../Qt/5.8/clang_64/mkspecs/features/mac/sdk.prf \
 		../../Qt/5.8/clang_64/mkspecs/features/toolchain.prf \
@@ -263,27 +270,29 @@ DIST          = ../../Qt/5.8/clang_64/mkspecs/features/spec_pre.prf \
 		textbook.h \
 		chapter.h \
 		note.h \
-		userbranchnote.h \
 		change.h \
 		student.h \
 		database.h \
 		addnotes.h \
 		mainwindow.h \
 		registerwindow.h \
-		signupwindow.h main.cpp \
+		signupwindow.h \
+		getdirectorywindow.h \
+		coursewindow.h main.cpp \
 		courselist.cpp \
 		course.cpp \
 		textbook.cpp \
 		chapter.cpp \
 		note.cpp \
-		userbranchnote.cpp \
 		change.cpp \
 		student.cpp \
 		database.cpp \
 		addnotes.cpp \
 		mainwindow.cpp \
 		registerwindow.cpp \
-		signupwindow.cpp
+		signupwindow.cpp \
+		getdirectorywindow.cpp \
+		coursewindow.cpp
 QMAKE_TARGET  = Scribble
 DESTDIR       = 
 TARGET        = Scribble.app/Contents/MacOS/Scribble
@@ -292,7 +301,7 @@ TARGET        = Scribble.app/Contents/MacOS/Scribble
 first: all
 ####### Build rules
 
-$(TARGET): ui_addnotes.h ui_mainwindow.h ui_registerwindow.h ui_signupwindow.h $(OBJECTS)  
+$(TARGET): ui_addnotes.h ui_mainwindow.h ui_registerwindow.h ui_signupwindow.h ui_getdirectorywindow.h ui_coursewindow.h $(OBJECTS)  
 	@test -d Scribble.app/Contents/MacOS/ || mkdir -p Scribble.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -445,6 +454,7 @@ Makefile: Scribble.pro ../../Qt/5.8/clang_64/mkspecs/macx-clang/qmake.conf ../..
 		../../Qt/5.8/clang_64/mkspecs/features/qt_config.prf \
 		../../Qt/5.8/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../Qt/5.8/clang_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../Qt/5.8/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../Qt/5.8/clang_64/mkspecs/features/mac/sdk.prf \
 		../../Qt/5.8/clang_64/mkspecs/features/toolchain.prf \
@@ -626,6 +636,7 @@ Makefile: Scribble.pro ../../Qt/5.8/clang_64/mkspecs/macx-clang/qmake.conf ../..
 ../../Qt/5.8/clang_64/mkspecs/features/qt_config.prf:
 ../../Qt/5.8/clang_64/mkspecs/macx-clang/qmake.conf:
 ../../Qt/5.8/clang_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../Qt/5.8/clang_64/mkspecs/features/exclusive_builds.prf:
 ../../Qt/5.8/clang_64/mkspecs/features/mac/sdk.prf:
 ../../Qt/5.8/clang_64/mkspecs/features/toolchain.prf:
@@ -687,9 +698,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../Qt/5.8/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents courselist.h course.h textbook.h chapter.h note.h userbranchnote.h change.h student.h database.h addnotes.h mainwindow.h registerwindow.h signupwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp courselist.cpp course.cpp textbook.cpp chapter.cpp note.cpp userbranchnote.cpp change.cpp student.cpp database.cpp addnotes.cpp mainwindow.cpp registerwindow.cpp signupwindow.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents addnotes.ui mainwindow.ui registerwindow.ui signupwindow.ui $(DISTDIR)/
+	$(COPY_FILE) --parents courselist.h course.h textbook.h chapter.h note.h change.h student.h database.h addnotes.h mainwindow.h registerwindow.h signupwindow.h getdirectorywindow.h coursewindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp courselist.cpp course.cpp textbook.cpp chapter.cpp note.cpp change.cpp student.cpp database.cpp addnotes.cpp mainwindow.cpp registerwindow.cpp signupwindow.cpp getdirectorywindow.cpp coursewindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents addnotes.ui mainwindow.ui registerwindow.ui signupwindow.ui getdirectorywindow.ui coursewindow.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -699,6 +710,7 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r Scribble.app
+	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -720,9 +732,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../Qt/5.8/clang_64/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk -mmacosx-version-min=10.9 $(EXPORT_QMAKE_XARCH_CFLAGS) -g -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h ../../Qt/5.8/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_addnotes.cpp moc_mainwindow.cpp moc_registerwindow.cpp moc_signupwindow.cpp
+compiler_moc_header_make_all: moc_addnotes.cpp moc_mainwindow.cpp moc_registerwindow.cpp moc_signupwindow.cpp moc_getdirectorywindow.cpp moc_coursewindow.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_addnotes.cpp moc_mainwindow.cpp moc_registerwindow.cpp moc_signupwindow.cpp
+	-$(DEL_FILE) moc_addnotes.cpp moc_mainwindow.cpp moc_registerwindow.cpp moc_signupwindow.cpp moc_getdirectorywindow.cpp moc_coursewindow.cpp
 moc_addnotes.cpp: ../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
 		addnotes.h \
@@ -732,6 +744,8 @@ moc_addnotes.cpp: ../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog 
 
 moc_mainwindow.cpp: ../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QListWidgetItem \
+		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qlistwidget.h \
 		mainwindow.h \
 		moc_predefs.h \
 		../../Qt/5.8/clang_64/bin/moc
@@ -751,11 +765,34 @@ moc_signupwindow.cpp: ../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QMai
 		../../Qt/5.8/clang_64/bin/moc
 	/Users/Miranda-Ferguson/Qt/5.8/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/Miranda-Ferguson/Qt/5.8/clang_64/mkspecs/macx-clang -I/Users/Miranda-Ferguson/Desktop/Scribble -I/Users/Miranda-Ferguson/Qt/5.8/clang_64/lib/QtWidgets.framework/Headers -I/Users/Miranda-Ferguson/Qt/5.8/clang_64/lib/QtGui.framework/Headers -I/Users/Miranda-Ferguson/Qt/5.8/clang_64/lib/QtSql.framework/Headers -I/Users/Miranda-Ferguson/Qt/5.8/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/Miranda-Ferguson/Qt/5.8/clang_64/lib signupwindow.h -o moc_signupwindow.cpp
 
+moc_getdirectorywindow.cpp: ../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		getdirectorywindow.h \
+		moc_predefs.h \
+		../../Qt/5.8/clang_64/bin/moc
+	/Users/Miranda-Ferguson/Qt/5.8/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/Miranda-Ferguson/Qt/5.8/clang_64/mkspecs/macx-clang -I/Users/Miranda-Ferguson/Desktop/Scribble -I/Users/Miranda-Ferguson/Qt/5.8/clang_64/lib/QtWidgets.framework/Headers -I/Users/Miranda-Ferguson/Qt/5.8/clang_64/lib/QtGui.framework/Headers -I/Users/Miranda-Ferguson/Qt/5.8/clang_64/lib/QtSql.framework/Headers -I/Users/Miranda-Ferguson/Qt/5.8/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/Miranda-Ferguson/Qt/5.8/clang_64/lib getdirectorywindow.h -o moc_getdirectorywindow.cpp
+
+moc_coursewindow.cpp: ../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		note.h \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QString \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		change.h \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QVector \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDateTime \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		chapter.h \
+		coursewindow.h \
+		moc_predefs.h \
+		../../Qt/5.8/clang_64/bin/moc
+	/Users/Miranda-Ferguson/Qt/5.8/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/Miranda-Ferguson/Qt/5.8/clang_64/mkspecs/macx-clang -I/Users/Miranda-Ferguson/Desktop/Scribble -I/Users/Miranda-Ferguson/Qt/5.8/clang_64/lib/QtWidgets.framework/Headers -I/Users/Miranda-Ferguson/Qt/5.8/clang_64/lib/QtGui.framework/Headers -I/Users/Miranda-Ferguson/Qt/5.8/clang_64/lib/QtSql.framework/Headers -I/Users/Miranda-Ferguson/Qt/5.8/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/Miranda-Ferguson/Qt/5.8/clang_64/lib coursewindow.h -o moc_coursewindow.cpp
+
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_addnotes.h ui_mainwindow.h ui_registerwindow.h ui_signupwindow.h
+compiler_uic_make_all: ui_addnotes.h ui_mainwindow.h ui_registerwindow.h ui_signupwindow.h ui_getdirectorywindow.h ui_coursewindow.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_addnotes.h ui_mainwindow.h ui_registerwindow.h ui_signupwindow.h
+	-$(DEL_FILE) ui_addnotes.h ui_mainwindow.h ui_registerwindow.h ui_signupwindow.h ui_getdirectorywindow.h ui_coursewindow.h
 ui_addnotes.h: addnotes.ui \
 		../../Qt/5.8/clang_64/bin/uic
 	/Users/Miranda-Ferguson/Qt/5.8/clang_64/bin/uic addnotes.ui -o ui_addnotes.h
@@ -771,6 +808,14 @@ ui_registerwindow.h: registerwindow.ui \
 ui_signupwindow.h: signupwindow.ui \
 		../../Qt/5.8/clang_64/bin/uic
 	/Users/Miranda-Ferguson/Qt/5.8/clang_64/bin/uic signupwindow.ui -o ui_signupwindow.h
+
+ui_getdirectorywindow.h: getdirectorywindow.ui \
+		../../Qt/5.8/clang_64/bin/uic
+	/Users/Miranda-Ferguson/Qt/5.8/clang_64/bin/uic getdirectorywindow.ui -o ui_getdirectorywindow.h
+
+ui_coursewindow.h: coursewindow.ui \
+		../../Qt/5.8/clang_64/bin/uic
+	/Users/Miranda-Ferguson/Qt/5.8/clang_64/bin/uic coursewindow.ui -o ui_coursewindow.h
 
 compiler_rez_source_make_all:
 compiler_rez_source_clean:
@@ -797,16 +842,36 @@ courselist.o: courselist.cpp courselist.h
 course.o: course.cpp course.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o course.o course.cpp
 
-textbook.o: textbook.cpp textbook.h
+textbook.o: textbook.cpp textbook.h \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QVector \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		student.h \
+		chapter.h \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QString \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDateTime \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		note.h \
+		change.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o textbook.o textbook.cpp
 
-chapter.o: chapter.cpp chapter.h
+chapter.o: chapter.cpp chapter.h \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QString \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDateTime \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		note.h \
+		change.h \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QVector \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qvector.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o chapter.o chapter.cpp
 
 note.o: note.cpp note.h \
 		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QString \
 		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
 		change.h \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QVector \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qvector.h \
 		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDateTime \
 		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
 		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QFile \
@@ -814,25 +879,20 @@ note.o: note.cpp note.h \
 		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QTextStream \
 		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
 		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
-		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h
+		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o note.o note.cpp
 
-userbranchnote.o: userbranchnote.cpp userbranchnote.h \
-		note.h \
-		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QString \
-		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
-		change.h \
-		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDateTime \
-		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdatetime.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o userbranchnote.o userbranchnote.cpp
-
-change.o: change.cpp change.h
+change.o: change.cpp change.h \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QVector \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qvector.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o change.o change.cpp
 
 student.o: student.cpp student.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o student.o student.cpp
 
-database.o: database.cpp database.h
+database.o: database.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o database.o database.cpp
 
 addnotes.o: addnotes.cpp addnotes.h \
@@ -847,6 +907,8 @@ addnotes.o: addnotes.cpp addnotes.h \
 		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QString \
 		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
 		change.h \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QVector \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qvector.h \
 		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDateTime \
 		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdatetime.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o addnotes.o addnotes.cpp
@@ -854,15 +916,29 @@ addnotes.o: addnotes.cpp addnotes.h \
 mainwindow.o: mainwindow.cpp mainwindow.h \
 		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QListWidgetItem \
+		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qlistwidget.h \
 		ui_mainwindow.h \
-		addnotes.h
+		addnotes.h \
+		coursewindow.h \
+		note.h \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QString \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		change.h \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QVector \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDateTime \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		chapter.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
 
 registerwindow.o: registerwindow.cpp registerwindow.h \
 		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
 		ui_registerwindow.h \
-		mainwindow.h
+		mainwindow.h \
+		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QListWidgetItem \
+		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qlistwidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o registerwindow.o registerwindow.cpp
 
 signupwindow.o: signupwindow.cpp signupwindow.h \
@@ -872,8 +948,54 @@ signupwindow.o: signupwindow.cpp signupwindow.h \
 		mainwindow.h \
 		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
-		registerwindow.h
+		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QListWidgetItem \
+		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qlistwidget.h \
+		registerwindow.h \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDir \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdir.h \
+		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		getdirectorywindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o signupwindow.o signupwindow.cpp
+
+getdirectorywindow.o: getdirectorywindow.cpp getdirectorywindow.h \
+		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		ui_getdirectorywindow.h \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QString \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
+		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDir \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdir.h \
+		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		mainwindow.h \
+		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QListWidgetItem \
+		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qlistwidget.h \
+		signupwindow.h \
+		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o getdirectorywindow.o getdirectorywindow.cpp
+
+coursewindow.o: coursewindow.cpp coursewindow.h \
+		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		note.h \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QString \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		change.h \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QVector \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDateTime \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		chapter.h \
+		ui_coursewindow.h \
+		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
+		../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDir \
+		../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdir.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o coursewindow.o coursewindow.cpp
 
 moc_addnotes.o: moc_addnotes.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_addnotes.o moc_addnotes.cpp
@@ -886,6 +1008,12 @@ moc_registerwindow.o: moc_registerwindow.cpp
 
 moc_signupwindow.o: moc_signupwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_signupwindow.o moc_signupwindow.cpp
+
+moc_getdirectorywindow.o: moc_getdirectorywindow.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_getdirectorywindow.o moc_getdirectorywindow.cpp
+
+moc_coursewindow.o: moc_coursewindow.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_coursewindow.o moc_coursewindow.cpp
 
 ####### Install
 

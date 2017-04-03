@@ -16,36 +16,45 @@
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QPushButton>
-#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QListWidget>
+#include <QtWidgets/QSplitter>
 
 QT_BEGIN_NAMESPACE
 
 class Ui_MainWindow
 {
 public:
-    QVBoxLayout *verticalLayout;
+    QLabel *coursesLabel;
+    QSplitter *splitter;
     QLabel *label;
-    QPushButton *pushButton;
+    QListWidget *courseList;
 
     void setupUi(QDialog *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(400, 300);
-        verticalLayout = new QVBoxLayout(MainWindow);
-        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        label = new QLabel(MainWindow);
+        MainWindow->resize(400, 375);
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(MainWindow->sizePolicy().hasHeightForWidth());
+        MainWindow->setSizePolicy(sizePolicy);
+        coursesLabel = new QLabel(MainWindow);
+        coursesLabel->setObjectName(QStringLiteral("coursesLabel"));
+        coursesLabel->setGeometry(QRect(10, 90, 61, 17));
+        splitter = new QSplitter(MainWindow);
+        splitter->setObjectName(QStringLiteral("splitter"));
+        splitter->setGeometry(QRect(20, 10, 361, 33));
+        splitter->setOrientation(Qt::Horizontal);
+        label = new QLabel(splitter);
         label->setObjectName(QStringLiteral("label"));
+        sizePolicy.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
+        label->setSizePolicy(sizePolicy);
         label->setAlignment(Qt::AlignHCenter|Qt::AlignTop);
-
-        verticalLayout->addWidget(label);
-
-        pushButton = new QPushButton(MainWindow);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-
-        verticalLayout->addWidget(pushButton);
-
+        splitter->addWidget(label);
+        courseList = new QListWidget(MainWindow);
+        courseList->setObjectName(QStringLiteral("courseList"));
+        courseList->setGeometry(QRect(10, 110, 121, 192));
 
         retranslateUi(MainWindow);
 
@@ -55,8 +64,8 @@ public:
     void retranslateUi(QDialog *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Dialog", Q_NULLPTR));
+        coursesLabel->setText(QApplication::translate("MainWindow", "Courses", Q_NULLPTR));
         label->setText(QApplication::translate("MainWindow", "<h1>Main Window</h1>", Q_NULLPTR));
-        pushButton->setText(QApplication::translate("MainWindow", "Temp Button for opening file adding window", Q_NULLPTR));
     } // retranslateUi
 
 };
