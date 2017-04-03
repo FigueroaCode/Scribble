@@ -6,6 +6,8 @@
 #include <QMessageBox>
 #include "mainwindow.h"
 #include "signupwindow.h"
+#include <QTextStream>
+#include <QFile>
 
 GetDirectoryWindow::GetDirectoryWindow(QWidget *parent) :
     QDialog(parent),
@@ -71,12 +73,25 @@ void GetDirectoryWindow::on_nextBtn_clicked()
                 dir.mkdir("Logs");
             }
         }
+        //make a text file to store directory path
+        QString pathname = filepath + "/" + dirName;
+        dir.cd(QDir::homePath());
+        if(!dir.exists("StateInfo")){
+            dir.mkdir("StateInfo");
+        }
+        QFile file(QDir::homePath()+"/StateInfo/Directory_Path.txt");
+        if (file.open(QIODevice::WriteOnly | QIODevice::Text)){
+            QTextStream out(&file);
+            out << pathname;
+        }
+        file.close();
+
+
         //hide window
         hide();
         //then send to main window
-        MainWindow main;
-        main.setModal(true);
-        main.exec();
+        SignUpWindow *window = new SignUpWindow();
+        window->show();
     }
 }
 
