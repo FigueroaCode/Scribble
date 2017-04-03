@@ -22,6 +22,7 @@ private slots:
 
 private:
     Ui::SignUpWindow *ui;
+    QString dirPath;
 };
 
 #endif // SIGNUPWINDOW_H
