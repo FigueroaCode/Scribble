@@ -86,19 +86,21 @@ void GetDirectoryWindow::on_nextBtn_clicked()
         }
         file.close();
 
-
-        //hide window
-        hide();
-        //then send to main window
-        SignUpWindow *window = new SignUpWindow();
-        window->show();
+        close();
+//        //hide window
+//        hide();
+//        //then send to main window
+//        SignUpWindow *window = new SignUpWindow();
+//        window->show();
     }
 }
 
 void GetDirectoryWindow::on_cancelBtn_clicked()
 {
+    close();
+    /*
     hide();
 
     SignUpWindow *window = new SignUpWindow();
-    window->show();
+    window->show();*/
 }
