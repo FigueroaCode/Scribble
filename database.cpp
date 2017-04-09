@@ -1,135 +1,150 @@
 #include "database.h"
+#include <sql.h>
+#include <windows.h>
+#include <QSqlDatabase>
+#include <QSqlDriver>
+#include <QSqlQuery>
+#include <QVariant>
+#include <QSqlError>
+#include <QDebug>
 
-Database::Database()
-{
-  public:
-    QSqlDatabase db;
-    //Constructor
-    Database(QString serverName, QString dbName) {
-        setConnections(serverName, dbName);
-    }
-    
-    void createTable();
 
-    //Student-related Methods
-    void addStudent(QString studentName, QString passcode) {
-        QSqlQuery query;
-        String sid;
-        query.exec("SELECT * FROM Student");
+//Constructor
+Database:: Database(QString dbName) {
+    setConnections(dbName);
+}
 
-        QSqlDatabase defaultDB = QSqlDatabase::database();
-        if (defaultDB.driver() ->hasFeature(QSqlDriver :: QuerySize)) {
-            sid = query.size() + 1;
-        } else {
-            query.last();
-            sid = query.at() + 2;
-        }
+//Student-related Methods
+void Database::addStudent(QString studentName, QString passcode) {
+    QSqlQuery query;
+    QString sid;
+    query.exec("SELECT * FROM Student");
 
-        QSqlQuery2 query2;
-        QString queryString = "INSERT INTO Student (sid, sname, passcode) VALUES (sid, studentName, passcode)");
-
-        query2.prepare(queryString);
-
-    }
-  
-    void removeStudent(QString sid) {
-        QSqlQuery query;
-        query.exec("DELETE FROM Student WHERE sid = %1", sid);
-    }
-  
-    void getStudent(QString sid) {
-        QSqlQuery query;
-
-        if (query.exec("SELECT * FROM Student WHERE sid = %1", sid)) {
-            while (query.next()) {
-                qDebug << query.value(1).toString();
-            }
-        } else {
-           qDebug << "Oops " << db.lastError().text();
-        }
-
+    QSqlDatabase defaultDB = QSqlDatabase::database();
+    if (defaultDB.driver() ->hasFeature(QSqlDriver :: QuerySize)) {
+        sid = query.size() + 1;
+    } else {
+        query.last();
+        sid = query.at() + 2;
     }
 
-    //Course-related Methods attributes votes
-    void addCourse(QString courseNum, QStrig courseName) {
-        QSqlQuery query;
-        QString queryString = "INSERT INTO Course (courseNum, courseName) VALUES (courseNum, courseName)");
-        query.prepare(queryString);
-    }
-  
-    void removeCourse(QString cid) {
-        QSqlQuery query;
-        query.exec("DELETE FROM Course WHERE cid = %1", cid);
-    }
-  
-    void getCourse(QString cid) {
-        QSqlQuery query;
+    QSqlQuery query2;
+    QString queryString = "INSERT INTO Student (sid, sname, passcode) VALUES (sid, studentName, passcode)";
 
-        if (query.exec("SELECT * FROM Course WHERE cid = %1", cid)) {
-            while (query.next()) {
-                qDebug << query.value(1).toString();
-            }
-        } else {
-           qDebug << "Oops " << db.lastError().text();
-        }
-    }
-
-    //File-related Methods
-    void addFile(QString file) {
-        QSqlQuery query;
-        String fid;
-        query.exec("SELECT * FROM File");
-
-        QSqlDatabase defaultDB = QSqlDatabase::database();
-        if (defaultDB.driver() ->hasFeature(QSqlDriver :: QuerySize)) {
-            fid = query.size() + 1;
-        } else {
-            query.last();
-            fid = query.at() + 2;
-        }
-
-        QSqlQuery2 query2;
-        QString queryString = "INSERT INTO File (fid, file) VALUES (fid, file)");
-
-        query2.prepare(queryString);
-    }
-  
-    void removeFile(QString fid) {
-        QSqlQuery query;
-        query.exec("DELETE FROM File WHERE fid = %1", fid);
-    }
-  
-    void getFile(QString fid) {
-        QSqlQuery query;
-
-        if (query.exec("SELECT * FROM File WHERE sid = %1", fid)) {
-            while (query.next()) {
-                qDebug << query.value(1).toString();
-            }
-        } else {
-           qDebug << "Oops " << db.lastError().text();
-        }
-    }
-
-private:
-    void setConnections(QString serverName, QString dbName) {
-        db = QSqlDatabase::addDatabase("QODBC");
-        db.setConnectOptions();
-
-        QString dsn = QString("DRIVER = {SQL Native Client}; SERVER = %1; DATABASE = %2; Trusted_Connection=Yes;", serverName, dbName);
-        db.setDatabaseName(dsn);
-        if (db.open()) {
-            qDebug << "open successfully";
-        } else {
-            qDebug << "Oops " << db.lastError().text();
-        }
-    }
-    
-    void closeDatabase() {
-        db.close();
-    }
-
-};
-
+    query2.prepare(queryString);
 
 }
+
+void Database::removeStudent(QString sid) {
+    QSqlQuery query;
+    query.prepare("DELETE FROM Student WHERE sid = ?");
+    query.boundValue(sid);
+    query.exec();
+}
+
+void Database::getStudent(QString sid) {
+    QSqlQuery query;
+    QString userStr("SELECT * FROM Student WHERE sid = :sid");
+    query.prepare(userStr);
+    query.bindValue(":sid", sid);
+    if (query.exec()) {
+        while (query.next()) {
+            qDebug() << query.value(1).toString();
+        }
+    } else {
+       qDebug() << "Oops " << db.lastError().text();
+    }
+
+}
+
+//Course-related Methods attributes votes
+void Database::addCourse(QString courseNum, QString courseName) {
+    QSqlQuery query;
+    QString queryString = "INSERT INTO Course (courseNum, courseName) VALUES (courseNum, courseName)";
+    query.prepare(queryString);
+}
+
+void Database::removeCourse(QString cid) {
+    QSqlQuery query;
+    QString userStr = "DELETE FROM Course WHERE cid = :cid";
+    query.prepare(userStr);
+    query.bindValue(":cid", cid);
+    query.exec();
+}
+
+void Database::getCourse(QString cid) {
+    QSqlQuery query;
+    QString userStr = "SELECT * FROM Course WHERE cid = :cid";
+    query.prepare(userStr);
+    query.bindValue(":cid", cid);
+
+
+    if (query.exec()) {
+        while (query.next()) {
+            qDebug() << query.value(1).toString();
+        }
+    } else {
+       qDebug() << "Oops " << db.lastError().text();
+    }
+}
+
+//File-related Methods
+void Database::addFile(QString file) {
+    QSqlQuery query;
+    QString fid;
+    query.exec("SELECT * FROM File");
+
+    QSqlDatabase defaultDB = QSqlDatabase::database();
+    if (defaultDB.driver() ->hasFeature(QSqlDriver :: QuerySize)) {
+        fid = query.size() + 1;
+    } else {
+        query.last();
+        fid = query.at() + 2;
+    }
+
+    QSqlQuery query2;
+    QString queryString = "INSERT INTO File (fid, file) VALUES (fid, file)";
+
+    query2.prepare(queryString);
+}
+
+void Database::removeFile(QString fid) {
+    QSqlQuery query;
+    QString userStr = "DELETE FROM File WHERE fid = :fid";
+    query.prepare(userStr);
+    query.bindValue(":fid", fid);
+    query.exec();
+}
+
+void Database::getFile(QString fid) {
+    QSqlQuery query;
+    QString userStr = "SELECT * FROM File WHERE fid = :fid";
+    query.prepare(userStr);
+    query.bindValue(":fid", fid);
+    if (query.exec()) {
+        while (query.next()) {
+            QString msg = query.value(1).toString();
+            qDebug() << msg;
+        }
+    } else {
+       qDebug() << "Oops " << db.lastError().text();
+    }
+}
+
+void Database::setConnections(QString dbName) {
+    db = QSqlDatabase::addDatabase("QODBC");
+    db.setConnectOptions();
+
+    QString dsn = "DRIVER = {SQL Native Client}; SERVER = MSSQLSERVER; DATABASE = " + dbName + "; Trusted_Connection=Yes;";
+    db.setDatabaseName(dsn);
+    if (db.open()) {
+        qDebug() << "open successfully";
+    } else {
+        qDebug() << "Oops " << db.lastError().text();
+    }
+}
+
+void Database::closeDatabase() {
+    db.close();
+}
+
