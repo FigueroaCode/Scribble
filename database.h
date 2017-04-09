@@ -8,25 +8,30 @@ class Database
 {
 public:
     QSqlDatabase db;
-    Database(QString dbName);
+    Database();
 
     //Student-related Methods
     void addStudent(QString studentName, QString passcode);
     void removeStudent(QString sid);
-    void getStudent(QString sid);
+    QString getStudent(QString sid);
 
     //Course-related Methods attributes votes
-    void addCourse(QString courseNum, QString courseName);
+    void addCourse(QString courseName);
     void removeCourse(QString cid);
-    void getCourse(QString cid);
+    QString getCourse(QString cid);
 
-    //File-related Methods
-    void addFile(QString file);
-    void removeFile(QString fid);
-    void getFile(QString fid);
+    //Chapter-related Methods
+    void addChapter(QString chapterName,QString courseName, QString date);
+    void removeChapter(QString chapterName, QString courseName, QString date);
+    QString getChapter(QString chapterName, QString courseName, QString studentId,QString date);
+
+    //Notes-related Methods
+    void addNote(QString courseName,QString chapterName,QString date, QString studentId, QString contents);
+    void removeNote(QString courseName,QString chapterName,QString studentId);
+    QString getNote(QString courseName,QString chapterName,QString studentId);
 
 private:
-    void setConnections(QString dbName);
+    void setConnections();
     void closeDatabase();
 
 };
