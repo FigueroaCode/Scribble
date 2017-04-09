@@ -4,6 +4,7 @@
 #include <QDialog>
 #include "note.h"
 #include "chapter.h"
+#include "differenceswidget.h"
 
 namespace Ui {
 class CourseWindow;
@@ -29,6 +30,7 @@ private:
     Chapter* chapter;
     Note* noteOne;
     Note* noteTwo;
+    DifferencesWidget *differences;
 
 };
 
