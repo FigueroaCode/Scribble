@@ -15,6 +15,9 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
+    <widget class="QPlainTextEdit" name="plainTextEdit"/>
+   </item>
+   <item>
     <widget class="QPushButton" name="noteOneBtn">
      <property name="text">
       <string>makeNote1</string>
