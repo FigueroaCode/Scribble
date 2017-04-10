@@ -1,9 +1,13 @@
+
 #ifndef DATABASE_H
 #define DATABASE_H
 
 #include <QString>
 #include <QSqlDatabase>
 
+
+
+#include <QString>
 class Database
 {
 public:
@@ -37,6 +41,6 @@ private:
 };
 
 
-#endif // DATABASE_H
 
+#endif // DATABASE_H
 

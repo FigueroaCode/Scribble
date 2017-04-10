@@ -1,12 +1,14 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "addnotes.h"
+#include "coursewindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->courseList->addItem("Course 1");
 }
 
 MainWindow::~MainWindow()
@@ -14,10 +16,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_clicked()
+
+void MainWindow::on_courseList_itemClicked(QListWidgetItem *item)
 {
-    // ----Open file adding window----
-    AddNotes myNote;
-    myNote.setModal(true);
-    myNote.exec();
+    CourseWindow window;
+    window.setModal(true);
+    window.exec();
 }

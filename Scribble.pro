@@ -29,14 +29,16 @@ SOURCES += main.cpp\
     textbook.cpp \
     chapter.cpp \
     note.cpp \
-    userbranchnote.cpp \
     change.cpp \
     student.cpp \
     database.cpp \
     addnotes.cpp \
     mainwindow.cpp \
     registerwindow.cpp \
-    signupwindow.cpp
+    signupwindow.cpp \
+    getdirectorywindow.cpp \
+    coursewindow.cpp \
+    differenceswidget.cpp
 
 HEADERS  += \
     courselist.h \
@@ -44,17 +46,22 @@ HEADERS  += \
     textbook.h \
     chapter.h \
     note.h \
-    userbranchnote.h \
     change.h \
     student.h \
     database.h \
     addnotes.h \
     mainwindow.h \
     registerwindow.h \
-    signupwindow.h
+    signupwindow.h \
+    getdirectorywindow.h \
+    coursewindow.h \
+    differenceswidget.h
 
 FORMS    += \
     addnotes.ui \
     mainwindow.ui \
     registerwindow.ui \
-    signupwindow.ui
+    signupwindow.ui \
+    getdirectorywindow.ui \
+    coursewindow.ui \
+    differenceswidget.ui

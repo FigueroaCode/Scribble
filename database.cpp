@@ -153,12 +153,11 @@ QString Database::getNote(QString courseName,QString chapterName,QString student
     }
 }
 
-//if the database you want to access is Course Database,
-//pass database name "Courses" as the parameter there to get the access
 
 void Database::setConnections() {
     db = QSqlDatabase::addDatabase("QODBC");
     db.setConnectOptions();
+
 
     QString dsn = "DRIVER = {SQL Native Client}; SERVER = MSSQLSERVER; DATABASE = COP3503; Trusted_Connection=Yes;";
     db.setDatabaseName(dsn);
