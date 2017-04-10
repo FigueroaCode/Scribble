@@ -1,6 +1,6 @@
 #include "database.h"
-#include <sql.h>
-#include <windows.h>
+//#include <sql.h>
+//#include <windows.h>
 #include <QSqlDatabase>
 #include <QSqlDriver>
 #include <QSqlQuery>
