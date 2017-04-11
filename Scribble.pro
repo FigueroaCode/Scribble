@@ -31,10 +31,10 @@ SOURCES += main.cpp\
     note.cpp \
     change.cpp \
     addnotes.cpp \
-    mainwindow.cpp \
     getdirectorywindow.cpp \
     coursewindow.cpp \
-    differenceswidget.cpp
+    differenceswidget.cpp \
+    mainwindow.cpp
 
 HEADERS  += \
     courselist.h \
@@ -44,14 +44,14 @@ HEADERS  += \
     note.h \
     change.h \
     addnotes.h \
-    mainwindow.h \
     getdirectorywindow.h \
     coursewindow.h \
-    differenceswidget.h
+    differenceswidget.h \
+    mainwindow.h
 
 FORMS    += \
     addnotes.ui \
-    mainwindow.ui \
     getdirectorywindow.ui \
     coursewindow.ui \
-    differenceswidget.ui
+    differenceswidget.ui \
+    mainwindow.ui

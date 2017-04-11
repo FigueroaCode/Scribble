@@ -13,59 +13,50 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
-#include <QtWidgets/QDialog>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QLabel>
 #include <QtWidgets/QListWidget>
-#include <QtWidgets/QSplitter>
+#include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenuBar>
+#include <QtWidgets/QStatusBar>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
 class Ui_MainWindow
 {
 public:
-    QLabel *coursesLabel;
-    QSplitter *splitter;
-    QLabel *label;
+    QWidget *centralwidget;
     QListWidget *courseList;
+    QMenuBar *menubar;
+    QStatusBar *statusbar;
 
-    void setupUi(QDialog *MainWindow)
+    void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(400, 375);
-        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(MainWindow->sizePolicy().hasHeightForWidth());
-        MainWindow->setSizePolicy(sizePolicy);
-        coursesLabel = new QLabel(MainWindow);
-        coursesLabel->setObjectName(QStringLiteral("coursesLabel"));
-        coursesLabel->setGeometry(QRect(10, 90, 61, 17));
-        splitter = new QSplitter(MainWindow);
-        splitter->setObjectName(QStringLiteral("splitter"));
-        splitter->setGeometry(QRect(20, 10, 361, 33));
-        splitter->setOrientation(Qt::Horizontal);
-        label = new QLabel(splitter);
-        label->setObjectName(QStringLiteral("label"));
-        sizePolicy.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
-        label->setSizePolicy(sizePolicy);
-        label->setAlignment(Qt::AlignHCenter|Qt::AlignTop);
-        splitter->addWidget(label);
-        courseList = new QListWidget(MainWindow);
+        MainWindow->resize(800, 600);
+        centralwidget = new QWidget(MainWindow);
+        centralwidget->setObjectName(QStringLiteral("centralwidget"));
+        courseList = new QListWidget(centralwidget);
         courseList->setObjectName(QStringLiteral("courseList"));
-        courseList->setGeometry(QRect(10, 110, 121, 192));
+        courseList->setGeometry(QRect(30, 80, 161, 231));
+        MainWindow->setCentralWidget(centralwidget);
+        menubar = new QMenuBar(MainWindow);
+        menubar->setObjectName(QStringLiteral("menubar"));
+        menubar->setGeometry(QRect(0, 0, 800, 22));
+        MainWindow->setMenuBar(menubar);
+        statusbar = new QStatusBar(MainWindow);
+        statusbar->setObjectName(QStringLiteral("statusbar"));
+        MainWindow->setStatusBar(statusbar);
 
         retranslateUi(MainWindow);
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
 
-    void retranslateUi(QDialog *MainWindow)
+    void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Dialog", Q_NULLPTR));
-        coursesLabel->setText(QApplication::translate("MainWindow", "Courses", Q_NULLPTR));
-        label->setText(QApplication::translate("MainWindow", "<h1>Main Window</h1>", Q_NULLPTR));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
     } // retranslateUi
 
 };

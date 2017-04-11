@@ -1,14 +1,14 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QDialog>
+#include <QMainWindow>
 #include <QListWidgetItem>
 
 namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QDialog
+class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
@@ -17,8 +17,6 @@ public:
     ~MainWindow();
 
 private slots:
-
-
     void on_courseList_itemClicked(QListWidgetItem *item);
 
 private:
