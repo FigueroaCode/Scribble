@@ -15,7 +15,6 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QVBoxLayout>
 
@@ -25,7 +24,6 @@ class Ui_CourseWindow
 {
 public:
     QVBoxLayout *verticalLayout;
-    QPlainTextEdit *plainTextEdit;
     QPushButton *noteOneBtn;
     QPushButton *notTwoBtn;
     QPushButton *diffButton;
@@ -37,11 +35,6 @@ public:
         CourseWindow->resize(400, 300);
         verticalLayout = new QVBoxLayout(CourseWindow);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        plainTextEdit = new QPlainTextEdit(CourseWindow);
-        plainTextEdit->setObjectName(QStringLiteral("plainTextEdit"));
-
-        verticalLayout->addWidget(plainTextEdit);
-
         noteOneBtn = new QPushButton(CourseWindow);
         noteOneBtn->setObjectName(QStringLiteral("noteOneBtn"));
 

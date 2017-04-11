@@ -1,0 +1,4 @@
+SERVER = MSSQLSERVER; 
+DATABASE = COP3503;
+
+Above are the names of both server and database

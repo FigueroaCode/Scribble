@@ -2,12 +2,15 @@
 #include "ui_coursewindow.h"
 #include <QFileDialog>
 #include <QDir>
+#include "differenceswidget.h"
 
 CourseWindow::CourseWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::CourseWindow)
 {
     ui->setupUi(this);
+    differences = new DifferencesWidget();
+    ui->verticalLayout->addWidget(differences);
 
 }
 
