@@ -30,12 +30,8 @@ SOURCES += main.cpp\
     chapter.cpp \
     note.cpp \
     change.cpp \
-    student.cpp \
-    database.cpp \
     addnotes.cpp \
     mainwindow.cpp \
-    registerwindow.cpp \
-    signupwindow.cpp \
     getdirectorywindow.cpp \
     coursewindow.cpp \
     differenceswidget.cpp
@@ -47,12 +43,8 @@ HEADERS  += \
     chapter.h \
     note.h \
     change.h \
-    student.h \
-    database.h \
     addnotes.h \
     mainwindow.h \
-    registerwindow.h \
-    signupwindow.h \
     getdirectorywindow.h \
     coursewindow.h \
     differenceswidget.h
@@ -60,8 +52,6 @@ HEADERS  += \
 FORMS    += \
     addnotes.ui \
     mainwindow.ui \
-    registerwindow.ui \
-    signupwindow.ui \
     getdirectorywindow.ui \
     coursewindow.ui \
     differenceswidget.ui

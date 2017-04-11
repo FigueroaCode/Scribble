@@ -32,20 +32,6 @@ Note::Note(QString filename)
     removeSymbols();
     //initialize sentence vector
     findSentences();
-
-//    qDebug() << "Sentences";
-//    for(int i = 0; i < sentences.size(); i++){
-//        qDebug() << sentences.at(i);
-//    }
-//    qDebug() << "Words";
-//    QString txt = "";
-//      for(int i = 0; i < words.size(); i++){
-//          for(int j = 0; j < words.at(i).size(); j++){
-//              txt += words.at(i).at(j) + " ";
-//          }
-//          qDebug() << txt;
-//          txt = "";
-//      }
 }
 
 QString Note::getText(){

@@ -2,7 +2,6 @@
 #define TEXTBOOK_H
 
 #include <QVector>
-#include "student.h"
 #include "chapter.h"
 
 //QVector methods:
@@ -22,13 +21,13 @@ public:
     void createChapter(QString chapterName, Note mainNote);
     void createChapter(QString chapterName);
     void deleteChapter(Chapter chapter);
-    void grantAdmin(Student student);
-    bool isAdmin(Student student);
-    void setOriginalAdmin(Student student);
-    Student getOriginalAdmin();
+    //void grantAdmin(Student student);
+    //bool isAdmin(Student student);
+    //void setOriginalAdmin(Student student);
+    //Student getOriginalAdmin();
 private:
-    Student originalAdmin;
-    QVector<Student> admins;
+    //Student originalAdmin;
+    //QVector<Student> admins;
 };
 
 #endif // TEXTBOOK_H
