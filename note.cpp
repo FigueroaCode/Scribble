@@ -32,7 +32,6 @@ Note::Note(QString filename)
     removeSymbols();
     //initialize sentence vector
     findSentences();
-
 }
 
 QString Note::getText(){

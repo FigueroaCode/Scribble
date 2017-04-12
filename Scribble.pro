@@ -30,15 +30,11 @@ SOURCES += main.cpp\
     chapter.cpp \
     note.cpp \
     change.cpp \
-    student.cpp \
-    database.cpp \
     addnotes.cpp \
-    mainwindow.cpp \
-    registerwindow.cpp \
-    signupwindow.cpp \
     getdirectorywindow.cpp \
     coursewindow.cpp \
-    differenceswidget.cpp
+    differenceswidget.cpp \
+    mainwindow.cpp
 
 HEADERS  += \
     courselist.h \
@@ -47,24 +43,22 @@ HEADERS  += \
     chapter.h \
     note.h \
     change.h \
-    student.h \
-    database.h \
     addnotes.h \
-    mainwindow.h \
-    registerwindow.h \
-    signupwindow.h \
     getdirectorywindow.h \
     coursewindow.h \
-    differenceswidget.h
+    differenceswidget.h \
+    mainwindow.h
 
 FORMS    += \
     addnotes.ui \
-    mainwindow.ui \
-    registerwindow.ui \
-    signupwindow.ui \
     getdirectorywindow.ui \
     coursewindow.ui \
+<<<<<<< HEAD
     differenceswidget.ui
 
 RESOURCES += \
     resources.qrc
+=======
+    differenceswidget.ui \
+    mainwindow.ui
+>>>>>>> 8590591c906bb59aaa7130fab6925e285fe096fa

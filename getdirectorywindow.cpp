@@ -5,7 +5,6 @@
 #include <QDir>
 #include <QMessageBox>
 #include "mainwindow.h"
-#include "signupwindow.h"
 #include <QTextStream>
 #include <QFile>
 
@@ -79,6 +78,7 @@ void GetDirectoryWindow::on_nextBtn_clicked()
         if(!dir.exists("StateInfo")){
             dir.mkdir("StateInfo");
         }
+         //use this file path to get project dir
         QFile file(QDir::homePath()+"/StateInfo/Directory_Path.txt");
         if (file.open(QIODevice::WriteOnly | QIODevice::Text)){
             QTextStream out(&file);
@@ -87,20 +87,10 @@ void GetDirectoryWindow::on_nextBtn_clicked()
         file.close();
 
         close();
-//        //hide window
-//        hide();
-//        //then send to main window
-//        SignUpWindow *window = new SignUpWindow();
-//        window->show();
     }
 }
 
 void GetDirectoryWindow::on_cancelBtn_clicked()
 {
     close();
-    /*
-    hide();
-
-    SignUpWindow *window = new SignUpWindow();
-    window->show();*/
 }
