@@ -36,7 +36,7 @@ SOURCES += main.cpp\
     differenceswidget.cpp \
     mainwindow.cpp
 
-HEADERS  += \
+HEADERS += \
     courselist.h \
     course.h \
     textbook.h \
@@ -49,16 +49,13 @@ HEADERS  += \
     differenceswidget.h \
     mainwindow.h
 
-FORMS    += \
+FORMS += \
     addnotes.ui \
     getdirectorywindow.ui \
     coursewindow.ui \
-<<<<<<< HEAD
     differenceswidget.ui
 
 RESOURCES += \
     resources.qrc
-=======
-    differenceswidget.ui \
+    differenceswidget.ui
     mainwindow.ui
->>>>>>> 8590591c906bb59aaa7130fab6925e285fe096fa
