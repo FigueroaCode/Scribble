@@ -61,7 +61,9 @@ SOURCES       = main.cpp \
 		differenceswidget.cpp \
 		mainwindow.cpp \
 		addcoursewindow.cpp \
-		chapterinfowindow.cpp moc_addnotes.cpp \
+		chapterinfowindow.cpp qrc_resources.cpp \
+		qrc_qmake_qmake_immediate.cpp \
+		moc_addnotes.cpp \
 		moc_getdirectorywindow.cpp \
 		moc_coursewindow.cpp \
 		moc_differenceswidget.cpp \
@@ -82,6 +84,8 @@ OBJECTS       = main.o \
 		mainwindow.o \
 		addcoursewindow.o \
 		chapterinfowindow.o \
+		qrc_resources.o \
+		qrc_qmake_qmake_immediate.o \
 		moc_addnotes.o \
 		moc_getdirectorywindow.o \
 		moc_coursewindow.o \
@@ -299,7 +303,7 @@ TARGET        = Scribble.app/Contents/MacOS/Scribble
 first: all
 ####### Build rules
 
-$(TARGET): ui_addnotes.h ui_getdirectorywindow.h ui_coursewindow.h ui_differenceswidget.h ui_mainwindow.h ui_addcoursewindow.h ui_chapterinfowindow.h $(OBJECTS)  
+$(TARGET): ui_addnotes.h ui_getdirectorywindow.h ui_coursewindow.h ui_differenceswidget.h $(OBJECTS)  
 	@test -d Scribble.app/Contents/MacOS/ || mkdir -p Scribble.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -480,6 +484,8 @@ Makefile: Scribble.pro ../../../../Qt/5.8/clang_64/mkspecs/macx-clang/qmake.conf
 		../../../../Qt/5.8/clang_64/mkspecs/features/yacc.prf \
 		../../../../Qt/5.8/clang_64/mkspecs/features/lex.prf \
 		Scribble.pro \
+		resources.qrc \
+		qmake_qmake_immediate.qrc \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/QtWidgets.prl \
 		../../../../Qt/5.8/clang_64/lib/QtGui.framework/QtGui.prl \
 		../../../../Qt/5.8/clang_64/lib/QtSql.framework/QtSql.prl \
@@ -662,6 +668,8 @@ Makefile: Scribble.pro ../../../../Qt/5.8/clang_64/mkspecs/macx-clang/qmake.conf
 ../../../../Qt/5.8/clang_64/mkspecs/features/yacc.prf:
 ../../../../Qt/5.8/clang_64/mkspecs/features/lex.prf:
 Scribble.pro:
+resources.qrc:
+qmake_qmake_immediate.qrc:
 ../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/QtWidgets.prl:
 ../../../../Qt/5.8/clang_64/lib/QtGui.framework/QtGui.prl:
 ../../../../Qt/5.8/clang_64/lib/QtSql.framework/QtSql.prl:
@@ -695,10 +703,11 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents resources.qrc qmake_qmake_immediate.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../Qt/5.8/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents courselist.h course.h textbook.h chapter.h note.h change.h addnotes.h getdirectorywindow.h coursewindow.h differenceswidget.h mainwindow.h addcoursewindow.h chapterinfowindow.h $(DISTDIR)/
 	$(COPY_FILE) --parents main.cpp courselist.cpp course.cpp textbook.cpp chapter.cpp note.cpp change.cpp addnotes.cpp getdirectorywindow.cpp coursewindow.cpp differenceswidget.cpp mainwindow.cpp addcoursewindow.cpp chapterinfowindow.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents addnotes.ui getdirectorywindow.ui coursewindow.ui differenceswidget.ui mainwindow.ui addcoursewindow.ui chapterinfowindow.ui $(DISTDIR)/
+	$(COPY_FILE) --parents addnotes.ui getdirectorywindow.ui coursewindow.ui differenceswidget.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -722,8 +731,22 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_resources.cpp qrc_qmake_qmake_immediate.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_resources.cpp qrc_qmake_qmake_immediate.cpp
+qrc_resources.cpp: resources.qrc \
+		../../../../Qt/5.8/clang_64/bin/rcc \
+		thesaurus.txt
+	/Users/debrian/Qt/5.8/clang_64/bin/rcc -name resources resources.qrc -o qrc_resources.cpp
+
+qrc_qmake_qmake_immediate.cpp: qmake_qmake_immediate.qrc \
+		../../../../Qt/5.8/clang_64/bin/rcc \
+		mainwindow.ui \
+		addcoursewindow.ui \
+		differenceswidget.ui \
+		chapterinfowindow.ui
+	/Users/debrian/Qt/5.8/clang_64/bin/rcc -name qmake_qmake_immediate qmake_qmake_immediate.qrc -o qrc_qmake_qmake_immediate.cpp
+
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
@@ -798,6 +821,8 @@ moc_mainwindow.cpp: ../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qtreewidget.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDir \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdir.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QVBoxLayout \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qboxlayout.h \
 		courselist.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
@@ -818,6 +843,21 @@ moc_addcoursewindow.cpp: ../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Hea
 
 moc_chapterinfowindow.cpp: ../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		mainwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QTreeWidgetItem \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qtreewidget.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDir \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdir.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QVBoxLayout \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qboxlayout.h \
+		courselist.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QVector \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		course.h \
 		chapterinfowindow.h \
 		moc_predefs.h \
 		../../../../Qt/5.8/clang_64/bin/moc
@@ -825,9 +865,9 @@ moc_chapterinfowindow.cpp: ../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/H
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_addnotes.h ui_getdirectorywindow.h ui_coursewindow.h ui_differenceswidget.h ui_mainwindow.h ui_addcoursewindow.h ui_chapterinfowindow.h
+compiler_uic_make_all: ui_addnotes.h ui_getdirectorywindow.h ui_coursewindow.h ui_differenceswidget.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_addnotes.h ui_getdirectorywindow.h ui_coursewindow.h ui_differenceswidget.h ui_mainwindow.h ui_addcoursewindow.h ui_chapterinfowindow.h
+	-$(DEL_FILE) ui_addnotes.h ui_getdirectorywindow.h ui_coursewindow.h ui_differenceswidget.h
 ui_addnotes.h: addnotes.ui \
 		../../../../Qt/5.8/clang_64/bin/uic
 	/Users/debrian/Qt/5.8/clang_64/bin/uic addnotes.ui -o ui_addnotes.h
@@ -844,18 +884,6 @@ ui_differenceswidget.h: differenceswidget.ui \
 		../../../../Qt/5.8/clang_64/bin/uic
 	/Users/debrian/Qt/5.8/clang_64/bin/uic differenceswidget.ui -o ui_differenceswidget.h
 
-ui_mainwindow.h: mainwindow.ui \
-		../../../../Qt/5.8/clang_64/bin/uic
-	/Users/debrian/Qt/5.8/clang_64/bin/uic mainwindow.ui -o ui_mainwindow.h
-
-ui_addcoursewindow.h: addcoursewindow.ui \
-		../../../../Qt/5.8/clang_64/bin/uic
-	/Users/debrian/Qt/5.8/clang_64/bin/uic addcoursewindow.ui -o ui_addcoursewindow.h
-
-ui_chapterinfowindow.h: chapterinfowindow.ui \
-		../../../../Qt/5.8/clang_64/bin/uic
-	/Users/debrian/Qt/5.8/clang_64/bin/uic chapterinfowindow.ui -o ui_chapterinfowindow.h
-
 compiler_rez_source_make_all:
 compiler_rez_source_clean:
 compiler_yacc_decl_make_all:
@@ -864,7 +892,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
@@ -875,6 +903,8 @@ main.o: main.cpp mainwindow.h \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qtreewidget.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDir \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdir.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QVBoxLayout \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qboxlayout.h \
 		courselist.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
@@ -920,7 +950,13 @@ chapter.o: chapter.cpp chapter.h \
 		note.h \
 		change.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QVector \
-		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qvector.h
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtextstream.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o chapter.o chapter.cpp
 
 note.o: note.cpp note.h \
@@ -981,6 +1017,8 @@ getdirectorywindow.o: getdirectorywindow.cpp getdirectorywindow.h \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QTreeWidgetItem \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qtreewidget.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QVBoxLayout \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qboxlayout.h \
 		courselist.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QVector \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qvector.h \
@@ -1035,7 +1073,14 @@ differenceswidget.o: differenceswidget.cpp differenceswidget.h \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QLabel \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
 		change.h \
-		ui_differenceswidget.h
+		ui_differenceswidget.h \
+		note.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDateTime \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o differenceswidget.o differenceswidget.cpp
 
 mainwindow.o: mainwindow.cpp mainwindow.h \
@@ -1045,6 +1090,8 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qtreewidget.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDir \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdir.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QVBoxLayout \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qboxlayout.h \
 		courselist.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
@@ -1057,6 +1104,7 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
 		addcoursewindow.h \
 		chapterinfowindow.h \
+		addnotes.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QFileInfo \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfileinfo.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QFile \
@@ -1064,9 +1112,7 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDirIterator \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdiriterator.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
-		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h \
-		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QVBoxLayout \
-		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qboxlayout.h
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
 
 addcoursewindow.o: addcoursewindow.cpp addcoursewindow.h \
@@ -1080,8 +1126,29 @@ addcoursewindow.o: addcoursewindow.cpp addcoursewindow.h \
 chapterinfowindow.o: chapterinfowindow.cpp chapterinfowindow.h \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		mainwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QTreeWidgetItem \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qtreewidget.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDir \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdir.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QVBoxLayout \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qboxlayout.h \
+		courselist.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QVector \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		course.h \
 		ui_chapterinfowindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o chapterinfowindow.o chapterinfowindow.cpp
+
+qrc_resources.o: qrc_resources.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp
+
+qrc_qmake_qmake_immediate.o: qrc_qmake_qmake_immediate.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_qmake_qmake_immediate.o qrc_qmake_qmake_immediate.cpp
 
 moc_addnotes.o: moc_addnotes.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_addnotes.o moc_addnotes.cpp

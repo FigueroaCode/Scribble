@@ -23,6 +23,9 @@ void ChapterInfoWindow::on_addNoteBtn_clicked()
     if(!name.isEmpty()){
         //noteName = name;
         mainWidget->addChild(mainWidget->getCurrentItem(),name);
+        //----------------TODO------------------------------
+        //----------------------Make a txt file with this name in the right
+        //file directory----------------------------------------------------
         //reset input
         ui->noteNameInput->setText("");
     }

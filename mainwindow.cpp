@@ -110,6 +110,9 @@ void MainWindow::on_addCourseBtn_clicked()
         addChild(textbookItem,chapter);
     }
 
+    //----------------TODO------------------------------
+    //----------------------Make the directories for these in the
+    //project folder----------------------------------------------------
 }
 
 void MainWindow::on_courseList_itemClicked(QTreeWidgetItem *item, int column)
