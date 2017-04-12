@@ -65,3 +65,6 @@ FORMS    += \
     getdirectorywindow.ui \
     coursewindow.ui \
     differenceswidget.ui
+
+RESOURCES += \
+    resources.qrc

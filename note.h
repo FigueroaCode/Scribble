@@ -22,7 +22,6 @@ public:
     Note(QString filename);
     QString getText();
     QString getEditedText();
-    void showNote();
     void allowVoting(QDateTime time);
     void editNote();
     void findSentences();

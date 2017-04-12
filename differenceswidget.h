@@ -19,7 +19,7 @@ class DifferencesWidget : public QScrollArea
 
 public:
     explicit DifferencesWidget(QWidget *parent = 0);
-    QVector<Change*> addDifference(QVector<Change*> changes);
+    void addDifferences(QVector<Change*> changes);
     ~DifferencesWidget();
 
 private:

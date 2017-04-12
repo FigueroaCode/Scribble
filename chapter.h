@@ -11,9 +11,8 @@ public:
     Chapter();
     Chapter(QString ChapterName);
     Chapter(QString ChapterName, Note* note);
-    void callVote();
     void findDifferences(Note* note);
-    bool isSynonym(QString word);
+    bool isSynonym(QString word1, QString word2);
     void mergeNotes(Note* note);
     Note* getMainNote();
     int compareSentences(QVector<QString> sentence1, QVector<QString> sentence2);

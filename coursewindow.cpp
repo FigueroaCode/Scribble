@@ -3,12 +3,15 @@
 #include <QFileDialog>
 #include <QDir>
 #include "differenceswidget.h"
+#include "change.h"
 
 CourseWindow::CourseWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::CourseWindow)
 {
     ui->setupUi(this);
+    noteOne = NULL;
+    noteTwo = NULL;
     differences = new DifferencesWidget();
     ui->verticalLayout->addWidget(differences);
 
@@ -46,9 +49,12 @@ void CourseWindow::on_notTwoBtn_clicked()
 
 void CourseWindow::on_diffButton_clicked()
 {
-    if(chapter != NULL && noteOne != NULL && noteTwo != NULL){
+    if(chapter != NULL && noteOne != NULL && noteTwo != NULL
+            && !(noteOne->getText().isEmpty()) && !(noteTwo->getText().isEmpty())
+            ){
         chapter->findDifferences(noteTwo);
+        QVector<Change*> changeLog = noteTwo->getChangeLog();
+        differences->addDifferences(changeLog);
+        chapter->isSynonym("word1", "word2");
     }
-
-
 }

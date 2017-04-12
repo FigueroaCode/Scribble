@@ -33,19 +33,6 @@ Note::Note(QString filename)
     //initialize sentence vector
     findSentences();
 
-//    qDebug() << "Sentences";
-//    for(int i = 0; i < sentences.size(); i++){
-//        qDebug() << sentences.at(i);
-//    }
-//    qDebug() << "Words";
-//    QString txt = "";
-//      for(int i = 0; i < words.size(); i++){
-//          for(int j = 0; j < words.at(i).size(); j++){
-//              txt += words.at(i).at(j) + " ";
-//          }
-//          qDebug() << txt;
-//          txt = "";
-//      }
 }
 
 QString Note::getText(){
@@ -55,9 +42,6 @@ QString Note::getEditedText(){
     return editedText;
 }
 
-void Note::showNote(){
-
-}
 void Note::findSentences(){
     QString currentWord = "";
     QString currentSentence = "";
@@ -167,4 +151,9 @@ QVector<QVector<QString>> Note::getEditedSentences(){
 void Note::addChange(Change* change)
 {
     this->changeLog.append(change);
+}
+
+QVector<Change*> Note::getChangeLog()
+{
+    return changeLog;
 }

@@ -1,4 +1,7 @@
 #include "chapter.h"
+#include <QDebug>
+#include <QFile>
+#include <QTextStream>
 
 Chapter::Chapter()
 {
@@ -26,13 +29,6 @@ Note* Chapter::getMainNote()
     return mainNote;
 }
 
-void Chapter::callVote()
-{
-    //To-Do:
-    //Implement a UI which allows the user to pick a date and time
-    //at which the vote will end.
-}
-
 void Chapter::findDifferences(Note* note)
 {
     QVector<QVector<QString>> mainNoteSentences = getMainNote()->getEditedSentences();
@@ -42,80 +38,20 @@ void Chapter::findDifferences(Note* note)
     QVector<QString> sentenceGroup;
     QVector<QVector<QString>> similarSentences;
 
-    //Compare sentences of the current Main Note to the newly submitted Note.
-    for(int i = 0; i < newNoteSentences.size(); i++)
-    {
-        for(int j = 0; j < mainNoteSentences.size(); j++)
-        {
-            QVector<QString> newSentence = newNoteSentences.at(i);
-            QVector<QString> mainSentence = mainNoteSentences.at(j);
+    const int UPPERTHRESHOLD = 95;
+    const int LOWERTHRESHOLD = 30;
 
-            int sentenceSimilarity = compareSentences(newSentence, mainSentence);
-
-            //If two sentences are similar above a 60% degree of similarity
-            //Add these two to a temporary group, and add this group to a
-            //Vector of sentences grouped by similarity.
-            if(sentenceSimilarity >= 60)
-            {
-                QString mainSentenceString = originalMainNoteSentences.at(i);
-                QString newSentenceString = originalNewNoteSentences.at(j);
-                sentenceGroup.push_back(mainSentenceString);
-                sentenceGroup.push_back(newSentenceString);
-                similarSentences.push_back(sentenceGroup);
-                sentenceGroup.clear();
-            }
-        }
-    }
-
-    //Create a Change object for each sentence group.
-    for(int i = 0; i < similarSentences.size(); i++)
-    {
-        QString sentence1 = similarSentences.at(i).at(0);
-        QString sentence2 = similarSentences.at(i).at(1);
-        Change* change = new Change(sentence1, sentence2);
-        note->addChange(change);
-    }
 }
 
 int Chapter::compareSentences(QVector<QString> sentence1, QVector<QString> sentence2)
 {
-    int percentSimilarity;
-    int similarWords = 0;
-    int totalWords;
-
-    //Compare words across both sentences to one another.
-    for(int i = 0; i < sentence1.size(); i++)
-    {
-        for(int j = 0; j < sentence2.size(); j++)
-        {
-            QString word1 = sentence1.at(i);
-            QString word2 = sentence2.at(j);
-
-            //NOTE THIS NEEDS TO LATER ACCOUNT FOR SYNONYMS AS WELL.
-            if(word1 == word2)
-            {
-                similarWords++;
-            }
-        }
-    }
-
-    //Total words should actually equal the word count of the longest sentence.
-    if(sentence1.size() > sentence2.size())
-    {
-        totalWords = sentence1.size();
-    }else{
-        totalWords = sentence2.size();
-    }
-
-    percentSimilarity = (similarWords/totalWords) * 100;
-
-    return percentSimilarity;
+    return 0;
 }
 
-//bool Chapter::isSynonym()
-//{
-//    return false;
-//}
+bool Chapter::isSynonym(QString word1, QString word2)
+{
+    return false;
+}
 
 //void Chapter::mergeNotes(Note* note)
 //{
