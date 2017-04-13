@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     currentItem = NULL;
     groupBoxLayout = NULL;
+    itemToDel = NULL;
     projectPath = "";
 
     initializeCourseList();
@@ -138,14 +139,16 @@ void MainWindow::on_addCourseBtn_clicked()
 
 void MainWindow::on_courseList_itemClicked(QTreeWidgetItem *item, int column)
 {
-
+    //change name of delete button
+    ui->deleteBtn->setText("Delete " + item->text(column));
+    itemToDel = item;
     if(item->parent() != NULL){
         int nestNum = countNest(item);
        if(nestNum == 2){
             currentItem = item;
            //its a chapter
             //set title of group box
-            ui->groupBox->setTitle("Information of " + item->text(0));
+            ui->groupBox->setTitle("Information of " + item->text(column));
             //hide the note window if its shown
            if(noteWindow != NULL)
                noteWindow->hide();
@@ -163,7 +166,7 @@ void MainWindow::on_courseList_itemClicked(QTreeWidgetItem *item, int column)
        }else if(nestNum == 3){
            //its a note
            //set title of group box
-           ui->groupBox->setTitle("Information of " + item->text(0));
+           ui->groupBox->setTitle("Information of " + item->text(column));
            //check if infowindow is shown and hide it if it is
            if(infoWindow != NULL)
                 infoWindow->hide();
@@ -190,4 +193,19 @@ int MainWindow::countNest(QTreeWidgetItem *parent){
 
 QTreeWidgetItem* MainWindow::getCurrentItem(){
     return currentItem;
+}
+
+void MainWindow::on_deleteBtn_clicked()
+{
+    if(itemToDel != NULL){
+        qDebug() << "Deleting";
+        //delete current item and all its children
+        QTreeWidgetItem *temp = itemToDel;
+        delete temp;
+        itemToDel = NULL;
+        ui->deleteBtn->setText("Delete");
+
+        //-------------Delete the directories as well-----------//
+
+    }
 }

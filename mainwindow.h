@@ -32,10 +32,13 @@ private slots:
 
     void on_courseList_itemClicked(QTreeWidgetItem *item, int column);
 
+    void on_deleteBtn_clicked();
+
 private:
     Ui::MainWindow *ui;
     CourseList courses;
     QTreeWidgetItem *currentItem;
+    QTreeWidgetItem *itemToDel;
     QVBoxLayout *groupBoxLayout;
     //path to file that has filepath to project folder
     QString projectPath;
