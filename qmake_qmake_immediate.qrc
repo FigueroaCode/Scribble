@@ -1,8 +1,0 @@
-<!DOCTYPE RCC><RCC version="1.0">
-<qresource prefix="/">
-<file alias="differenceswidget.ui">/Users/debrian/Documents/Programming/Qt/Scribble/differenceswidget.ui</file>
-<file alias="mainwindow.ui">/Users/debrian/Documents/Programming/Qt/Scribble/mainwindow.ui</file>
-<file alias="addcoursewindow.ui">/Users/debrian/Documents/Programming/Qt/Scribble/addcoursewindow.ui</file>
-<file alias="chapterinfowindow.ui">/Users/debrian/Documents/Programming/Qt/Scribble/chapterinfowindow.ui</file>
-</qresource>
-</RCC>
