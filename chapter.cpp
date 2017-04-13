@@ -50,6 +50,17 @@ int Chapter::compareSentences(QVector<QString> sentence1, QVector<QString> sente
 
 bool Chapter::isSynonym(QString word1, QString word2)
 {
+    QString thesaurus = "";
+    QFile thesaurusFile(":/resources/thesaurus.txt");
+    QTextStream in(&thesaurusFile);
+
+    while(!in.atEnd()) {
+        QString line = in.readLine();
+        thesaurus += line;
+    }
+
+    thesaurusFile.close();
+
     return false;
 }
 
