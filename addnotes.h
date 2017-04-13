@@ -15,17 +15,8 @@ public:
     explicit AddNotes(QWidget *parent = 0);
     ~AddNotes();
 
-private slots:
-
-    void on_addFileBtn_clicked();
-
-    void on_buttonBox_accepted();
-
-    void on_buttonBox_rejected();
-
 private:
     Ui::AddNotes *ui;
-    QString os;
 };
 
 #endif // ADDNOTES_H

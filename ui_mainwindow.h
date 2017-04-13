@@ -13,11 +13,15 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTreeWidget>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -26,8 +30,14 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
-    QListWidget *courseList;
+    QWidget *layoutWidget;
+    QVBoxLayout *verticalLayout;
+    QPushButton *addCourseBtn;
+    QTreeWidget *courseList;
+    QPushButton *deleteBtn;
+    QGroupBox *groupBox;
     QMenuBar *menubar;
+    QMenu *menuSettings;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -37,17 +47,42 @@ public:
         MainWindow->resize(800, 600);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
-        courseList = new QListWidget(centralwidget);
+        layoutWidget = new QWidget(centralwidget);
+        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
+        layoutWidget->setGeometry(QRect(10, 50, 211, 321));
+        verticalLayout = new QVBoxLayout(layoutWidget);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        addCourseBtn = new QPushButton(layoutWidget);
+        addCourseBtn->setObjectName(QStringLiteral("addCourseBtn"));
+
+        verticalLayout->addWidget(addCourseBtn);
+
+        courseList = new QTreeWidget(layoutWidget);
         courseList->setObjectName(QStringLiteral("courseList"));
-        courseList->setGeometry(QRect(30, 80, 161, 231));
+
+        verticalLayout->addWidget(courseList);
+
+        deleteBtn = new QPushButton(layoutWidget);
+        deleteBtn->setObjectName(QStringLiteral("deleteBtn"));
+
+        verticalLayout->addWidget(deleteBtn);
+
+        groupBox = new QGroupBox(centralwidget);
+        groupBox->setObjectName(QStringLiteral("groupBox"));
+        groupBox->setGeometry(QRect(240, 50, 381, 321));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QStringLiteral("menubar"));
         menubar->setGeometry(QRect(0, 0, 800, 22));
+        menuSettings = new QMenu(menubar);
+        menuSettings->setObjectName(QStringLiteral("menuSettings"));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QStringLiteral("statusbar"));
         MainWindow->setStatusBar(statusbar);
+
+        menubar->addAction(menuSettings->menuAction());
 
         retranslateUi(MainWindow);
 
@@ -57,6 +92,12 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
+        addCourseBtn->setText(QApplication::translate("MainWindow", "Add Course", Q_NULLPTR));
+        QTreeWidgetItem *___qtreewidgetitem = courseList->headerItem();
+        ___qtreewidgetitem->setText(0, QApplication::translate("MainWindow", "My Courses", Q_NULLPTR));
+        deleteBtn->setText(QApplication::translate("MainWindow", "Delete", Q_NULLPTR));
+        groupBox->setTitle(QApplication::translate("MainWindow", "Information", Q_NULLPTR));
+        menuSettings->setTitle(QApplication::translate("MainWindow", "Settings", Q_NULLPTR));
     } // retranslateUi
 
 };

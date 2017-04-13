@@ -14,9 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
-#include <QtWidgets/QDialogButtonBox>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QPushButton>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QVBoxLayout>
 
@@ -26,9 +24,7 @@ class Ui_AddNotes
 {
 public:
     QVBoxLayout *verticalLayout;
-    QPushButton *addFileBtn;
     QTextEdit *textEdit;
-    QDialogButtonBox *buttonBox;
 
     void setupUi(QDialog *AddNotes)
     {
@@ -37,21 +33,10 @@ public:
         AddNotes->resize(400, 300);
         verticalLayout = new QVBoxLayout(AddNotes);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        addFileBtn = new QPushButton(AddNotes);
-        addFileBtn->setObjectName(QStringLiteral("addFileBtn"));
-
-        verticalLayout->addWidget(addFileBtn);
-
         textEdit = new QTextEdit(AddNotes);
         textEdit->setObjectName(QStringLiteral("textEdit"));
 
         verticalLayout->addWidget(textEdit);
-
-        buttonBox = new QDialogButtonBox(AddNotes);
-        buttonBox->setObjectName(QStringLiteral("buttonBox"));
-        buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
-
-        verticalLayout->addWidget(buttonBox);
 
 
         retranslateUi(AddNotes);
@@ -62,7 +47,6 @@ public:
     void retranslateUi(QDialog *AddNotes)
     {
         AddNotes->setWindowTitle(QApplication::translate("AddNotes", "Note", Q_NULLPTR));
-        addFileBtn->setText(QApplication::translate("AddNotes", "Add File", Q_NULLPTR));
     } // retranslateUi
 
 };

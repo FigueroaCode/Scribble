@@ -49,28 +49,7 @@ void GetDirectoryWindow::on_nextBtn_clicked()
             if(!dir.exists(dirName)){
                 dir.mkdir(dirName);
             }
-            //switch to project folder directory
-            dir.cd(filepath + "/" + dirName);
-            //Add textbook and other essentials
-            if(!dir.exists("Courses")){
-                dir.mkdir("Courses");
-            }
-            //
-            dir.cd(filepath+"/"+ dirName + "/Courses" );
-            //Add textbook and other essentials
-            if(!dir.exists("Textbook")){
-                dir.mkdir("Textbook");
-            }
-            //switch to textbook folder
-            dir.cd(filepath+ "/"+ dirName + "/Courses/Textbook");
-            if(!dir.exists("Chapter")){
-                dir.mkdir("Chapter");
-            }
-            //switch to project folder dir
-            dir.cd(filepath + "/" + dirName);
-            if(!dir.exists("Logs")){
-                dir.mkdir("Logs");
-            }
+
         }
         //make a text file to store directory path
         QString pathname = filepath + "/" + dirName;
