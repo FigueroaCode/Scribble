@@ -2,6 +2,8 @@
 #include <QDebug>
 #include <QFile>
 #include <QTextStream>
+#include <QResource>
+#include <QIODevice>
 
 Chapter::Chapter()
 {
@@ -54,10 +56,9 @@ bool Chapter::isSynonym(QString word1, QString word2)
     QFile thesaurusFile(":/resources/thesaurus.txt");
     QTextStream in(&thesaurusFile);
 
-    while(!in.atEnd()) {
-        QString line = in.readLine();
-        thesaurus += line;
-    }
+    thesaurusFile.open(QIODevice::ReadOnly);
+
+    thesaurus = in.readAll();
 
     thesaurusFile.close();
 
