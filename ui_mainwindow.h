@@ -34,6 +34,7 @@ public:
     QVBoxLayout *verticalLayout;
     QPushButton *addCourseBtn;
     QTreeWidget *courseList;
+    QPushButton *pushButton;
     QGroupBox *groupBox;
     QMenuBar *menubar;
     QMenu *menuSettings;
@@ -62,6 +63,11 @@ public:
 
         verticalLayout->addWidget(courseList);
 
+        pushButton = new QPushButton(layoutWidget);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+
+        verticalLayout->addWidget(pushButton);
+
         groupBox = new QGroupBox(centralwidget);
         groupBox->setObjectName(QStringLiteral("groupBox"));
         groupBox->setGeometry(QRect(240, 50, 381, 321));
@@ -89,6 +95,7 @@ public:
         addCourseBtn->setText(QApplication::translate("MainWindow", "Add Course", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem = courseList->headerItem();
         ___qtreewidgetitem->setText(0, QApplication::translate("MainWindow", "My Courses", Q_NULLPTR));
+        pushButton->setText(QApplication::translate("MainWindow", "Delete", Q_NULLPTR));
         groupBox->setTitle(QApplication::translate("MainWindow", "Information", Q_NULLPTR));
         menuSettings->setTitle(QApplication::translate("MainWindow", "Settings", Q_NULLPTR));
     } // retranslateUi

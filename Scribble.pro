@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
+QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -57,11 +57,10 @@ FORMS += \
     addnotes.ui \
     getdirectorywindow.ui \
     coursewindow.ui \
-    differenceswidget.ui
+    differenceswidget.ui\
+    addcoursewindow.ui\
+    chapterinfowindow.ui\
+    mainwindow.ui
 
 RESOURCES += \
     resources.qrc\
-    differenceswidget.ui \
-    mainwindow.ui \
-    addcoursewindow.ui \
-    chapterinfowindow.ui
