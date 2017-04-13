@@ -1,5 +1,8 @@
 #include "chapterinfowindow.h"
 #include "ui_chapterinfowindow.h"
+#include <QFileDialog>
+#include <QDir>
+#include <QDebug>
 
 ChapterInfoWindow::ChapterInfoWindow(QWidget *parent) :
     QDialog(parent),
@@ -29,4 +32,19 @@ void ChapterInfoWindow::on_addNoteBtn_clicked()
         //reset input
         ui->noteNameInput->setText("");
     }
+}
+
+void ChapterInfoWindow::on_addNewNoteBtn_clicked()
+{
+    QString filename = QFileDialog::getOpenFileName(this,"Choose your Note",QDir::homePath(),
+                                                    "All Files (*.*);; Text File (*.txt)");
+    int slashIndex = filename.lastIndexOf("/");
+    int dotIndex = filename.lastIndexOf(".");
+    //get just the name of the file
+    QString name = filename.mid(slashIndex+1,(dotIndex-slashIndex)-1);
+
+    if(!name.isEmpty()){
+        mainWidget->addChild(mainWidget->getCurrentItem(),name);
+    }
+
 }

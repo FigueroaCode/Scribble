@@ -7,6 +7,7 @@
 #include <QVBoxLayout>
 #include "courselist.h"
 #include "course.h"
+#include "textbook.h"
 
 namespace Ui {
 class MainWindow;

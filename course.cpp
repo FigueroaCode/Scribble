@@ -4,40 +4,30 @@
 
 Course::Course()
 {
-    instructorName = "";
-    courseID = "";
     courseName = "";
-    institution = "";
-}
-
-QString Course::getInstructorName(){
-    return instructorName;
-}
-
-QString Course::getCourseID(){
-    return courseID;
 }
 
 QString Course::getCourseName(){
     return courseName;
 }
 
-QString Course::getInstitution(){
-    return institution;
+QVector<Textbook*> Course::getTextbooks(){
+    return textbooks;
 }
 
-void Course::setInstructorName(QString instructor){
-    instructorName = instructor;
+Textbook* Course::getTextbook(int index){
+    return textbooks.at(index);
 }
 
-void Course::setCourseID(QString id){
-    courseID = id;
+void Course::addTextbook(Textbook* textbook){
+    textbooks.append(textbook);
+}
+
+void Course::removeTextbook(int index){
+    textbooks.remove(index);
 }
 
 void Course::setCourseName(QString name){
     courseName = name;
 }
 
-void Course::setInstitution(QString school){
-    institution = school;
-}

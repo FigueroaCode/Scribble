@@ -16,18 +16,17 @@
 
 class Textbook
 {
+private:
+    QString textbookName;
+    QVector<Chapter*> chapters;
 public:
     Textbook();
-    void createChapter(QString chapterName, Note mainNote);
-    void createChapter(QString chapterName);
-    void deleteChapter(Chapter chapter);
-    //void grantAdmin(Student student);
-    //bool isAdmin(Student student);
-    //void setOriginalAdmin(Student student);
-    //Student getOriginalAdmin();
-private:
-    //Student originalAdmin;
-    //QVector<Student> admins;
+    QString getTextbookName();
+    void setTextbookName(QString name);
+    QVector<Chapter*> getChaptersList();
+    Chapter* getChapter(int index);
+    void addChapter(Chapter* chapter);
+    void removeChapter(int index);
 };
 
 #endif // TEXTBOOK_H

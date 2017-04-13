@@ -2,25 +2,23 @@
 #define COURSE_H
 
 #include <QString>
-
+#include <QVector>
+#include "textbook.h"
 
 class Course
 {
 private:
-    QString instructorName;
-    QString courseID;
     QString courseName;
-    QString institution;
+    QVector<Textbook*> textbooks;
+
 public:
     Course();
-    QString getInstructorName();
-    QString getCourseID();
     QString getCourseName();
-    QString getInstitution();
-    void setInstructorName(QString instructor);
-    void setCourseID(QString id);
+    QVector<Textbook*> getTextbooks();
+    Textbook* getTextbook(int index);
+    void addTextbook(Textbook* textbook);
+    void removeTextbook(int index);
     void setCourseName(QString name);
-    void setInstitution(QString school);
 };
 
 #endif // COURSE_H

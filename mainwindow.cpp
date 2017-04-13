@@ -89,19 +89,39 @@ QTreeWidgetItem* MainWindow::addChild(QTreeWidgetItem *parent, QString name){
 void MainWindow::loadCourseList(){
 
         QTreeWidgetItem* root = NULL;
+        QTreeWidgetItem* prevCourse = NULL;
+        int index = -1;
+        int type = 0;//0 is a textbook,1 is chapter, 2 is a note, reset after 2
         //go to project path and check for course dir
         QDir projectDir(projectPath);
         QDirIterator iter(projectDir,QDirIterator::Subdirectories);
         while(iter.hasNext()){
             iter.next();
-            //qDebug() << "File Path: " << iter.fileName();
+            qDebug() << "File Path: " << iter.fileName();
             QString filename = iter.fileName();
             if(filename != "." && filename != ".." && courses.courseExist(filename)){
                 //its a root
                 root = addRoot(filename);
+                prevCourse = root;
+                index++;
             }else if(filename != "." && filename != ".." ){
                 //not a root
-                root = addChild(root,filename);
+                if(type == 0){
+                    //textbook
+                      type++;
+                      root = addChild(root,filename);
+                }else if(type == 1){
+                    //chapter
+                      type++;
+                      root = addChild(root,filename);
+                }else if(type == 2){
+                    //note
+                    type = 0;
+                    addChild(root,filename);
+                    root =prevCourse;
+                }
+
+                root = addChild(root,filename);     
             }
 
         }
@@ -130,6 +150,13 @@ void MainWindow::on_addCourseBtn_clicked()
         QTreeWidgetItem* courseRoot = addRoot(course);
         QTreeWidgetItem* textbookItem = addChild(courseRoot,textbook);
         addChild(textbookItem,chapter);
+        Course *crs = new Course();
+        Textbook *txtbook = new Textbook();
+        Chapter *chapter1 = new Chapter();
+        txtbook->addChapter(chapter1);
+        crs->addTextbook(txtbook);
+        courses.addCourse(crs);
+
     }
 
     //----------------TODO------------------------------

@@ -13,11 +13,8 @@ private:
 public:
     CourseList();
     QString sortName(QString name);
-    QString sortByID(QString id);
-    QString sortByProfessor(QString professor);
-    QString sortByInstitution(QString institution);
     bool courseExist(QString name);
-    Course *getCourse(QString name, QString id);
+    Course *getCourse(QString name);
     void addCourse(Course* course);
 
 };
