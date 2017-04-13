@@ -7,17 +7,18 @@ class Change
 {
 public:
     Change();
-    Change(QString originalSentence, QString proposedSentence);
-    void upVote();
-    void downVote();
-    int getVoteCount();
+    Change(QString originalSentence, QString proposedSentence, int index);
+    void setSimilarity(int sim);
+    int getSimilarity();
     QString getOriginalSentence();
     QString getProposedSentence();
+    int getIndexOfChange();
 private:
     QString originalSentence;
     QString proposedSentence;
     bool isConfirmed;
-    int voteCount;
+    int similarity;
+    int indexOfChange;
 };
 
 #endif // CHANGE_H

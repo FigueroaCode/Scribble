@@ -55,6 +55,5 @@ void CourseWindow::on_diffButton_clicked()
         chapter->findDifferences(noteTwo);
         QVector<Change*> changeLog = noteTwo->getChangeLog();
         differences->addDifferences(changeLog);
-        chapter->isSynonym("word1", "word2");
     }
 }

@@ -5,27 +5,22 @@ Change::Change()
     //This shouldn't ever run.
 }
 
-Change::Change(QString originalSentence, QString proposedSentence)
+Change::Change(QString originalSentence, QString proposedSentence, int index)
 {
     this->originalSentence = originalSentence;
     this->proposedSentence = proposedSentence;
     this->isConfirmed = false;
-    this->voteCount = 0;
+    this->indexOfChange = index;
 }
 
-void Change::upVote()
+void Change::setSimilarity(int sim)
 {
-    voteCount++;
+    similarity = sim;
 }
 
-void Change::downVote()
+int Change::getSimilarity()
 {
-    voteCount--;
-}
-
-int Change::getVoteCount()
-{
-    return voteCount;
+    return similarity;
 }
 
 QString Change::getOriginalSentence()
@@ -36,4 +31,9 @@ QString Change::getOriginalSentence()
 QString Change::getProposedSentence()
 {
     return proposedSentence;
+}
+
+int Change::getIndexOfChange()
+{
+    return indexOfChange;
 }
