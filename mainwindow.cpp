@@ -144,6 +144,9 @@ void MainWindow::on_courseList_itemClicked(QTreeWidgetItem *item, int column)
        if(nestNum == 2){
             currentItem = item;
            //its a chapter
+            //set title of group box
+            ui->groupBox->setTitle("Information of " + item->text(0));
+            //hide the note window if its shown
            if(noteWindow != NULL)
                noteWindow->hide();
            if(infoWindow != NULL){
@@ -159,6 +162,9 @@ void MainWindow::on_courseList_itemClicked(QTreeWidgetItem *item, int column)
            }
        }else if(nestNum == 3){
            //its a note
+           //set title of group box
+           ui->groupBox->setTitle("Information of " + item->text(0));
+           //check if infowindow is shown and hide it if it is
            if(infoWindow != NULL)
                 infoWindow->hide();
            if(noteWindow != NULL){
