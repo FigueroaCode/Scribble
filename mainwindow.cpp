@@ -198,9 +198,15 @@ QTreeWidgetItem* MainWindow::getCurrentItem(){
 void MainWindow::on_deleteBtn_clicked()
 {
     if(itemToDel != NULL){
-        qDebug() << "Deleting";
-        //delete current item and all its children
+        //delete current item
         QTreeWidgetItem *temp = itemToDel;
+        //hide the group box widgets if chapter or note is selected
+            if(infoWindow != NULL){
+                infoWindow->hide();
+            }
+            if(noteWindow != NULL){
+                noteWindow->hide();
+            }
         delete temp;
         itemToDel = NULL;
         ui->deleteBtn->setText("Delete");
