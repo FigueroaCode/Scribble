@@ -6,6 +6,7 @@
 #include <QDir>
 #include <QVBoxLayout>
 #include "courselist.h"
+#include "course.h"
 
 namespace Ui {
 class MainWindow;
@@ -37,9 +38,11 @@ private:
     QTreeWidgetItem *currentItem;
     QVBoxLayout *groupBoxLayout;
     //path to file that has filepath to project folder
+    QString projectPath;
     const QString pathname = QDir::homePath()+"/StateInfo/Directory_Path.txt";
     //initialize courselist
-    bool loadCourseList();
+    void loadCourseList();
+    bool initializeCourseList();
 };
 
 #endif // MAINWINDOW_H

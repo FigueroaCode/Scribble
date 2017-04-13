@@ -20,8 +20,49 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     currentItem = NULL;
     groupBoxLayout = NULL;
+    projectPath = "";
+
+    initializeCourseList();
     loadCourseList();
 
+}
+bool MainWindow::initializeCourseList(){
+    if(QFileInfo::exists(pathname)){
+        QFile file(pathname);
+         if (!file.open(QIODevice::ReadOnly | QIODevice::Text)){
+            //file didnt open, ask user to set new directory
+             GetDirectoryWindow window;
+             window.setModal(true);
+             window.exec();
+         }
+
+        projectPath = file.readAll();
+
+        file.close();
+
+        //go to project path and check for course dir
+        QDir projectDir(projectPath);
+        QDirIterator iter(projectDir,QDirIterator::NoIteratorFlags);
+        while(iter.hasNext()){
+            iter.next();
+            QString filename = iter.fileName();
+            if(filename != "." && filename != ".."){
+                Course *course = new Course();
+                course->setCourseName(filename);
+                courses.addCourse(course);
+            }
+
+        }
+
+        return true;
+    }else{
+        //ask user to set the project directory if it doesnt exist
+        GetDirectoryWindow window;
+        window.setModal(true);
+        window.exec();
+
+        return initializeCourseList();
+    }
 }
 //Add Course
 QTreeWidgetItem* MainWindow::addRoot(QString name){
@@ -44,45 +85,25 @@ QTreeWidgetItem* MainWindow::addChild(QTreeWidgetItem *parent, QString name){
 }
 
 //Add the courses to the treewidget as roots
-bool MainWindow::loadCourseList(){
-    QString projectPath = "";
-    if(QFileInfo::exists(pathname)){
-        QFile file(pathname);
-         if (!file.open(QIODevice::ReadOnly | QIODevice::Text)){
-            //file didnt open, ask user to set new directory
-             GetDirectoryWindow window;
-             window.setModal(true);
-             window.exec();
-         }
+void MainWindow::loadCourseList(){
 
-        projectPath = file.readAll();
-
-        file.close();
-
+        QTreeWidgetItem* root = NULL;
         //go to project path and check for course dir
         QDir projectDir(projectPath);
-        QDirIterator iter(projectDir,QDirIterator::NoIteratorFlags);
+        QDirIterator iter(projectDir,QDirIterator::Subdirectories);
         while(iter.hasNext()){
             iter.next();
             //qDebug() << "File Path: " << iter.fileName();
-            if(iter.fileName() != "Logs" && iter.fileName() != "." && iter.fileName() != ".."){
-                QTreeWidgetItem* courseRoot = addRoot(iter.fileName());
-                //check if it has any subdir
-                //if it does then add those too
+            QString filename = iter.fileName();
+            if(filename != "." && filename != ".." && courses.courseExist(filename)){
+                //its a root
+                root = addRoot(filename);
+            }else if(filename != "." && filename != ".." ){
+                //not a root
+                root = addChild(root,filename);
             }
+
         }
-
-        return true;
-    }else{
-        //ask user to set the project directory if it doesnt exist
-        GetDirectoryWindow window;
-        window.setModal(true);
-        window.exec();
-
-        return loadCourseList();
-    }
-
-    return false;
 }
 
 MainWindow::~MainWindow()

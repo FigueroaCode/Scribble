@@ -49,11 +49,6 @@ void GetDirectoryWindow::on_nextBtn_clicked()
             if(!dir.exists(dirName)){
                 dir.mkdir(dirName);
             }
-            //switch to project folder directory
-            dir.cd(filepath + "/" + dirName);
-            if(!dir.exists("Logs")){
-                dir.mkdir("Logs");
-            }
 
         }
         //make a text file to store directory path
