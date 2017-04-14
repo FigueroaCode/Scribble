@@ -55,7 +55,7 @@ public:
     {
         ChapterInfoWindow->setWindowTitle(QApplication::translate("ChapterInfoWindow", "Dialog", Q_NULLPTR));
         label->setText(QApplication::translate("ChapterInfoWindow", "Choose a text file you wish to add.", Q_NULLPTR));
-        addNewNoteBtn->setText(QApplication::translate("ChapterInfoWindow", "Add New Note", Q_NULLPTR));
+        addNewNoteBtn->setText(QApplication::translate("ChapterInfoWindow", "Add a New Note", Q_NULLPTR));
     } // retranslateUi
 
 };

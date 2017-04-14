@@ -28,22 +28,24 @@ void ChapterInfoWindow::on_addNewNoteBtn_clicked()
     QString filename = QFileDialog::getOpenFileName(this,"Choose your Note",QDir::homePath(),
                                                     "All Files (*.*);; Text File (*.txt)");
     int slashIndex = filename.lastIndexOf("/");
-    //int dotIndex = filename.lastIndexOf(".");
     //get just the name of the file
     QString name = filename.mid(slashIndex+1);
-
-    if(!name.isEmpty()){
-        mainWidget->addChild(mainWidget->getCurrentItem(),name);
-        //current path to desired path
-        QString path = mainWidget->getProjectPath() +"/" + getParentNames(mainWidget->getCurrentItem()) + "/";
-        //qDebug() << path;
-        QDir dir(path);
-        if(dir.exists()){
-            qDebug() << path;
-            QFile::copy(filename, path+name);
+    int childAmount = mainWidget->getCurrentItem()->childCount();
+    if(childAmount > 0){
+        //no child, so make a new note
+        if(!name.isEmpty()){
+            mainWidget->addChild(mainWidget->getCurrentItem(),name);
+            //current path to desired path
+            QString path = mainWidget->getProjectPath() +"/" + getParentNames(mainWidget->getCurrentItem()) + "/";
+            //qDebug() << path;
+            QDir dir(path);
+            if(dir.exists()){
+                QFile::copy(filename, path+name);
+            }
         }
+    }else{
+        //has a child, so merging
     }
-
 }
 
 QString ChapterInfoWindow::getParentNames(QTreeWidgetItem* parent){
@@ -55,4 +57,8 @@ QString ChapterInfoWindow::getParentNames(QTreeWidgetItem* parent){
     }else{
         return parent->text(0);
     }
+}
+
+void ChapterInfoWindow::setButtonName(QString name){
+    ui->addNewNoteBtn->setText(name);
 }

@@ -214,18 +214,27 @@ void MainWindow::on_courseList_itemClicked(QTreeWidgetItem *item, int column)
                 groupBoxLayout->addWidget(itemWindow);
             }
         }else if(nestNum == 2){
-           //its a chapter
+           //its a chapter       
             //hide the note window if its shown
            if(noteWindow != NULL)
                noteWindow->hide();
            if(itemWindow != NULL)
                itemWindow->hide();
            if(infoWindow != NULL){
+               if(item->childCount() > 0)
+                   infoWindow->setButtonName("Merge a New Note");
+               else
+                   infoWindow->setButtonName("Add a New Note");
                infoWindow->show();
            }else{
                //make container for widgets
                 infoWindow = new ChapterInfoWindow();
                 infoWindow->setMainWidget(this);
+
+                if(item->childCount() > 0)
+                    infoWindow->setButtonName("Merge a New Note");
+                else
+                    infoWindow->setButtonName("Add a New Note");
                 groupBoxLayout->addWidget(infoWindow);
            }
        }else if(nestNum == 3){
