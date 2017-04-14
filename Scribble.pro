@@ -36,7 +36,8 @@ SOURCES += main.cpp\
     differenceswidget.cpp \
     mainwindow.cpp \
     addcoursewindow.cpp \
-    chapterinfowindow.cpp
+    chapterinfowindow.cpp \
+    additemwindow.cpp
 
 HEADERS += \
     courselist.h \
@@ -51,7 +52,8 @@ HEADERS += \
     differenceswidget.h \
     mainwindow.h \
     addcoursewindow.h \
-    chapterinfowindow.h
+    chapterinfowindow.h \
+    additemwindow.h
 
 FORMS += \
     addnotes.ui \
@@ -60,7 +62,8 @@ FORMS += \
     differenceswidget.ui\
     addcoursewindow.ui\
     chapterinfowindow.ui\
-    mainwindow.ui
+    mainwindow.ui \
+    additemwindow.ui
 
 RESOURCES += \
     resources.qrc\

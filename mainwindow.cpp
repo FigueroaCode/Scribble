@@ -6,6 +6,7 @@
 #include "addnotes.h"
 #include "coursewindow.h"
 #include "note.h"
+#include "additemwindow.h"
 #include <QFileInfo>
 #include <QFile>
 #include <QDirIterator>
@@ -14,6 +15,7 @@
 //having issues if i declate it in header
 ChapterInfoWindow *infoWindow = NULL;
 AddNotes *noteWindow = NULL;
+AddItemWindow *itemWindow = NULL;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -21,9 +23,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     currentItem = NULL;
-    groupBoxLayout = NULL;
+    groupBoxLayout = new QVBoxLayout();
     itemToDel = NULL;
     projectPath = "";
+
+    ui->groupBox->setLayout(groupBoxLayout);
 
     initializeCourseList();
     loadCourseList();
@@ -182,35 +186,55 @@ void MainWindow::on_courseList_itemClicked(QTreeWidgetItem *item, int column)
 {
     //change name of delete button
     ui->deleteBtn->setText("Delete " + item->text(column));
+    ui->groupBox->setTitle("Information of " + item->text(column));
+    currentItem = item;
     itemToDel = item;
     if(item->parent() != NULL){
         int nestNum = countNest(item);
-       if(nestNum == 2){
-            currentItem = item;
+        if(nestNum == 1){
+            //its a textbook
+            if(noteWindow != NULL){
+                noteWindow->hide();
+            }
+            if(infoWindow != NULL){
+                infoWindow->hide();
+            }
+            if(itemWindow != NULL){
+                const QString TITLE = "Chapter";
+                itemWindow->setLabelName(TITLE);
+                itemWindow->setButtonName(TITLE);
+                itemWindow->show();
+            }else{
+                itemWindow = new AddItemWindow();
+                itemWindow->setMainWidget(this);
+                //set names of widgets
+                const QString TITLE = "Chapter";
+                itemWindow->setLabelName(TITLE);
+                itemWindow->setButtonName(TITLE);
+                groupBoxLayout->addWidget(itemWindow);
+            }
+        }else if(nestNum == 2){
            //its a chapter
-            //set title of group box
-            ui->groupBox->setTitle("Information of " + item->text(column));
             //hide the note window if its shown
            if(noteWindow != NULL)
                noteWindow->hide();
+           if(itemWindow != NULL)
+               itemWindow->hide();
            if(infoWindow != NULL){
                infoWindow->show();
            }else{
                //make container for widgets
-                groupBoxLayout = new QVBoxLayout();
                 infoWindow = new ChapterInfoWindow();
                 infoWindow->setMainWidget(this);
                 groupBoxLayout->addWidget(infoWindow);
-
-                ui->groupBox->setLayout(groupBoxLayout);
            }
        }else if(nestNum == 3){
            //its a note
-           //set title of group box
-           ui->groupBox->setTitle("Information of " + item->text(column));
            //check if infowindow is shown and hide it if it is
            if(infoWindow != NULL)
                 infoWindow->hide();
+           if(itemWindow != NULL)
+               itemWindow->hide();
            if(noteWindow != NULL){
                noteWindow->show();
            }else{
@@ -219,6 +243,28 @@ void MainWindow::on_courseList_itemClicked(QTreeWidgetItem *item, int column)
            }
 
        }
+    }else{
+        //its a course
+        if(noteWindow != NULL){
+            noteWindow->hide();
+        }
+        if(infoWindow != NULL){
+            infoWindow->hide();
+        }
+        if(itemWindow != NULL){
+            const QString TITLE = "Textbook";
+            itemWindow->setLabelName(TITLE);
+            itemWindow->setButtonName(TITLE);
+            itemWindow->show();
+        }else{
+            itemWindow = new AddItemWindow();
+            itemWindow->setMainWidget(this);
+            //set names of widgets
+            const QString TITLE = "Textbook";
+            itemWindow->setLabelName(TITLE);
+            itemWindow->setButtonName(TITLE);
+            groupBoxLayout->addWidget(itemWindow);
+        }
     }
 }
 
@@ -261,4 +307,8 @@ void MainWindow::on_pushButton_clicked()
 {
     CourseWindow* differences = new CourseWindow();
     differences->show();
+}
+
+QString MainWindow::getProjectPath(){
+    return projectPath;
 }

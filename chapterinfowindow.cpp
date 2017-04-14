@@ -1,8 +1,11 @@
 #include "chapterinfowindow.h"
 #include "ui_chapterinfowindow.h"
 #include <QFileDialog>
+#include <QFile>
 #include <QDir>
 #include <QDebug>
+#include <QTreeWidgetItem>
+#include <algorithm>
 
 ChapterInfoWindow::ChapterInfoWindow(QWidget *parent) :
     QDialog(parent),
@@ -20,31 +23,36 @@ ChapterInfoWindow::~ChapterInfoWindow()
     delete ui;
 }
 
-void ChapterInfoWindow::on_addNoteBtn_clicked()
-{
-    QString name = ui->noteNameInput->text();
-    if(!name.isEmpty()){
-        //noteName = name;
-        mainWidget->addChild(mainWidget->getCurrentItem(),name);
-        //----------------TODO------------------------------
-        //----------------------Make a txt file with this name in the right
-        //file directory----------------------------------------------------
-        //reset input
-        ui->noteNameInput->setText("");
-    }
-}
-
 void ChapterInfoWindow::on_addNewNoteBtn_clicked()
 {
     QString filename = QFileDialog::getOpenFileName(this,"Choose your Note",QDir::homePath(),
                                                     "All Files (*.*);; Text File (*.txt)");
     int slashIndex = filename.lastIndexOf("/");
-    int dotIndex = filename.lastIndexOf(".");
+    //int dotIndex = filename.lastIndexOf(".");
     //get just the name of the file
-    QString name = filename.mid(slashIndex+1,(dotIndex-slashIndex)-1);
+    QString name = filename.mid(slashIndex+1);
 
     if(!name.isEmpty()){
         mainWidget->addChild(mainWidget->getCurrentItem(),name);
+        //current path to desired path
+        QString path = mainWidget->getProjectPath() +"/" + getParentNames(mainWidget->getCurrentItem()) + "/";
+        //qDebug() << path;
+        QDir dir(path);
+        if(dir.exists()){
+            qDebug() << path;
+            QFile::copy(filename, path+name);
+        }
     }
 
+}
+
+QString ChapterInfoWindow::getParentNames(QTreeWidgetItem* parent){
+    if(parent->parent() != NULL){
+        //has a parent
+        QString name = parent->text(0);
+        parent = parent->parent();
+        return getParentNames(parent) + "/" + name;
+    }else{
+        return parent->text(0);
+    }
 }

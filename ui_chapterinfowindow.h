@@ -16,7 +16,6 @@
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QVBoxLayout>
 
@@ -27,31 +26,19 @@ class Ui_ChapterInfoWindow
 public:
     QVBoxLayout *verticalLayout;
     QLabel *label;
-    QLineEdit *noteNameInput;
-    QPushButton *addNoteBtn;
     QPushButton *addNewNoteBtn;
 
     void setupUi(QDialog *ChapterInfoWindow)
     {
         if (ChapterInfoWindow->objectName().isEmpty())
             ChapterInfoWindow->setObjectName(QStringLiteral("ChapterInfoWindow"));
-        ChapterInfoWindow->resize(308, 130);
+        ChapterInfoWindow->resize(308, 131);
         verticalLayout = new QVBoxLayout(ChapterInfoWindow);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         label = new QLabel(ChapterInfoWindow);
         label->setObjectName(QStringLiteral("label"));
 
         verticalLayout->addWidget(label);
-
-        noteNameInput = new QLineEdit(ChapterInfoWindow);
-        noteNameInput->setObjectName(QStringLiteral("noteNameInput"));
-
-        verticalLayout->addWidget(noteNameInput);
-
-        addNoteBtn = new QPushButton(ChapterInfoWindow);
-        addNoteBtn->setObjectName(QStringLiteral("addNoteBtn"));
-
-        verticalLayout->addWidget(addNoteBtn);
 
         addNewNoteBtn = new QPushButton(ChapterInfoWindow);
         addNewNoteBtn->setObjectName(QStringLiteral("addNewNoteBtn"));
@@ -67,8 +54,7 @@ public:
     void retranslateUi(QDialog *ChapterInfoWindow)
     {
         ChapterInfoWindow->setWindowTitle(QApplication::translate("ChapterInfoWindow", "Dialog", Q_NULLPTR));
-        label->setText(QApplication::translate("ChapterInfoWindow", "Name of Note", Q_NULLPTR));
-        addNoteBtn->setText(QApplication::translate("ChapterInfoWindow", "Create New Note", Q_NULLPTR));
+        label->setText(QApplication::translate("ChapterInfoWindow", "Choose a text file you wish to add.", Q_NULLPTR));
         addNewNoteBtn->setText(QApplication::translate("ChapterInfoWindow", "Add New Note", Q_NULLPTR));
     } // retranslateUi
 

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ChapterInfoWindow</class>
- <widget class="QDialog" name="ChapterInfoWindow">
+ <class>AddItemWindow</class>
+ <widget class="QDialog" name="AddItemWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>308</width>
-    <height>131</height>
+    <width>400</width>
+    <height>132</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,16 +15,22 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="titleLabel">
      <property name="text">
-      <string>Choose a text file you wish to add.</string>
+      <string>Add New </string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="addNewNoteBtn">
+    <widget class="QLineEdit" name="nameInput"/>
+   </item>
+   <item>
+    <widget class="QPushButton" name="createBtn">
      <property name="text">
-      <string>Add New Note</string>
+      <string>Create New </string>
      </property>
     </widget>
    </item>

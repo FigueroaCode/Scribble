@@ -25,6 +25,7 @@ public:
     //adds a child to the root given as the parent
     QTreeWidgetItem* addChild(QTreeWidgetItem *parent,QString name);
     QTreeWidgetItem* getCurrentItem();
+    QString getProjectPath();
     ~MainWindow();
 
 private slots:

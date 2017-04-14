@@ -15,10 +15,10 @@ class ChapterInfoWindow : public QDialog
 public:
     explicit ChapterInfoWindow(QWidget *parent = 0);
     void setMainWidget(MainWindow *window);
+    QString getParentNames(QTreeWidgetItem* parent);
     ~ChapterInfoWindow();
 
 private slots:
-    void on_addNoteBtn_clicked();
 
     void on_addNewNoteBtn_clicked();
 
