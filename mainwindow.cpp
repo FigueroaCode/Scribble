@@ -89,39 +89,38 @@ QTreeWidgetItem* MainWindow::addChild(QTreeWidgetItem *parent, QString name){
 void MainWindow::loadCourseList(){
 
         QTreeWidgetItem* root = NULL;
-        QTreeWidgetItem* prevCourse = NULL;
-        int index = -1;
-        int type = 0;//0 is a textbook,1 is chapter, 2 is a note, reset after 2
+        QTreeWidgetItem* prevRoot = NULL;
+        int depth = 0;
         //go to project path and check for course dir
         QDir projectDir(projectPath);
         QDirIterator iter(projectDir,QDirIterator::Subdirectories);
         while(iter.hasNext()){
             iter.next();
-            qDebug() << "File Path: " << iter.fileName();
+           // qDebug() << "File Path: " << iter.fileName();
             QString filename = iter.fileName();
             if(filename != "." && filename != ".." && courses.courseExist(filename)){
                 //its a root
                 root = addRoot(filename);
-                prevCourse = root;
-                index++;
+                prevRoot = root;
             }else if(filename != "." && filename != ".." ){
                 //not a root
-                if(type == 0){
-                    //textbook
-                      type++;
-                      root = addChild(root,filename);
-                }else if(type == 1){
-                    //chapter
-                      type++;
-                      root = addChild(root,filename);
-                }else if(type == 2){
-                    //note
-                    type = 0;
-                    addChild(root,filename);
-                    root =prevCourse;
+                depth++;
+                QDir tempDir(iter.filePath());
+                int dirSize = tempDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot).size() ;
+                if(dirSize <= 0){
+                    //end of dir
+                    if(depth == 1){
+                        root = addChild(prevRoot,filename);
+                    }else{
+                        //dont change parent
+                        addChild(root,filename);
+                    }
+                    depth = 0;
+                }else{
+                    //not end of dir
+                    root = addChild(prevRoot,filename);
                 }
 
-                root = addChild(root,filename);     
             }
 
         }
