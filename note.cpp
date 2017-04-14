@@ -156,3 +156,11 @@ QVector<Change*> Note::getChangeLog()
 {
     return changeLog;
 }
+
+void Note::setFileName(QString name){
+    fileName = name;
+}
+
+QString Note::getFileName(){
+    return fileName;
+}

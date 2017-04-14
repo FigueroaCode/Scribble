@@ -9,6 +9,7 @@
 class Note
 {
 private:
+    QString fileName;
     QString text;
     QString editedText;
     bool underVote;
@@ -22,10 +23,12 @@ public:
     Note(QString filename);
     QString getText();
     QString getEditedText();
+    QString getFileName();
     void allowVoting(QDateTime time);
     void editNote();
     void findSentences();
     void removeSymbols();
+    void setFileName(QString name);
     bool isArticle(QString article);
     bool isSymbol(QChar symbol);
     bool isTitle(QString word);
@@ -35,6 +38,7 @@ public:
     void addChange(Change* change);
     QVector<QString> getOriginalSentences();
     QVector<QVector<QString>> getEditedSentences();
+
 };
 
 #endif // NOTE_H

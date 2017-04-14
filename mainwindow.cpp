@@ -88,7 +88,8 @@ void MainWindow::traverseDir(QString path){
                      for(int y = 0; y < fileList.size();y++){
                          //make a note object for the
                          Note *note = new Note(projectDir.path() + "/"+fileList.at(y));
-                         //course->getTextbook(j)->getChapter(x)->
+                         note->setFileName(fileList.at(y));
+                         course->getTextbook(j)->getChapter(x)->setMainNote(note);
                      }
                 }
              }
@@ -128,7 +129,10 @@ void MainWindow::loadCourseList(){
            QTreeWidgetItem* parent  = addChild(root,courses.getCourse(i)->getTextbook(j)->getTextbookName());
             for(int x = 0; x < courses.getCourse(i)->getTextbook(j)->getChaptersList().size(); x++){
                 //get the chapters
-                addChild(parent,courses.getCourse(i)->getTextbook(j)->getChapter(x)->getChapterName());
+               QTreeWidgetItem* child = addChild(parent,courses.getCourse(i)->getTextbook(j)->getChapter(x)->getChapterName());
+               QString filename = courses.getCourse(i)->getTextbook(j)->getChapter(x)->getMainNote()->getFileName();
+               if(!filename.isEmpty())
+                    addChild(child,filename);
             }
         }
     }
@@ -159,8 +163,10 @@ void MainWindow::on_addCourseBtn_clicked()
         QTreeWidgetItem* textbookItem = addChild(courseRoot,textbook);
         addChild(textbookItem,chapter);
         Course *crs = new Course();
+        crs->setCourseName(course);
         Textbook *txtbook = new Textbook();
-        Chapter *chapter1 = new Chapter();
+        txtbook->setTextbookName(textbook);
+        Chapter *chapter1 = new Chapter(chapter);
         txtbook->addChapter(chapter1);
         crs->addTextbook(txtbook);
         courses.addCourse(crs);

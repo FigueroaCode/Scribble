@@ -9,6 +9,8 @@ AddCourseWindow::AddCourseWindow(QWidget *parent) :
     ui->setupUi(this);
 }
 
+
+
 AddCourseWindow::~AddCourseWindow()
 {
     delete ui;
