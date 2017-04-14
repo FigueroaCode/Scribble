@@ -7,6 +7,7 @@
 #include <QVBoxLayout>
 #include "courselist.h"
 #include "course.h"
+#include "textbook.h"
 
 namespace Ui {
 class MainWindow;
@@ -48,6 +49,7 @@ private:
     //initialize courselist
     void loadCourseList();
     bool initializeCourseList();
+    void traverseDir(QString path);
 };
 
 #endif // MAINWINDOW_H

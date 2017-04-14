@@ -36,6 +36,7 @@ Note* Chapter::getMainNote()
     return mainNote;
 }
 
+QString Chapter::getChapterName(){return chapterName;}
 void Chapter::findDifferences(Note* note)
 {
     //eMNS stands for Edited Main Note Sentences

@@ -29,12 +29,13 @@ public:
     QLabel *label;
     QLineEdit *noteNameInput;
     QPushButton *addNoteBtn;
+    QPushButton *addNewNoteBtn;
 
     void setupUi(QDialog *ChapterInfoWindow)
     {
         if (ChapterInfoWindow->objectName().isEmpty())
             ChapterInfoWindow->setObjectName(QStringLiteral("ChapterInfoWindow"));
-        ChapterInfoWindow->resize(314, 97);
+        ChapterInfoWindow->resize(308, 130);
         verticalLayout = new QVBoxLayout(ChapterInfoWindow);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         label = new QLabel(ChapterInfoWindow);
@@ -52,6 +53,11 @@ public:
 
         verticalLayout->addWidget(addNoteBtn);
 
+        addNewNoteBtn = new QPushButton(ChapterInfoWindow);
+        addNewNoteBtn->setObjectName(QStringLiteral("addNewNoteBtn"));
+
+        verticalLayout->addWidget(addNewNoteBtn);
+
 
         retranslateUi(ChapterInfoWindow);
 
@@ -62,7 +68,8 @@ public:
     {
         ChapterInfoWindow->setWindowTitle(QApplication::translate("ChapterInfoWindow", "Dialog", Q_NULLPTR));
         label->setText(QApplication::translate("ChapterInfoWindow", "Name of Note", Q_NULLPTR));
-        addNoteBtn->setText(QApplication::translate("ChapterInfoWindow", "Add New Note", Q_NULLPTR));
+        addNoteBtn->setText(QApplication::translate("ChapterInfoWindow", "Create New Note", Q_NULLPTR));
+        addNewNoteBtn->setText(QApplication::translate("ChapterInfoWindow", "Add New Note", Q_NULLPTR));
     } // retranslateUi
 
 };

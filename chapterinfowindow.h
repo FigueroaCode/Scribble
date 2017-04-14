@@ -20,6 +20,8 @@ public:
 private slots:
     void on_addNoteBtn_clicked();
 
+    void on_addNewNoteBtn_clicked();
+
 private:
     Ui::ChapterInfoWindow *ui;
     MainWindow *mainWidget;
