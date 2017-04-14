@@ -24,7 +24,7 @@
    <item>
     <widget class="QPushButton" name="addNewNoteBtn">
      <property name="text">
-      <string>Add New Note</string>
+      <string>Add a New Note</string>
      </property>
     </widget>
    </item>

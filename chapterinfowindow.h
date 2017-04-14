@@ -16,6 +16,7 @@ public:
     explicit ChapterInfoWindow(QWidget *parent = 0);
     void setMainWidget(MainWindow *window);
     QString getParentNames(QTreeWidgetItem* parent);
+    void setButtonName(QString name);
     ~ChapterInfoWindow();
 
 private slots:
