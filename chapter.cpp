@@ -73,8 +73,6 @@ void Chapter::findDifferences(Note* note)
             }
         }
 
-        qDebug()<<largestSimilarityPercent;
-
         //Analyze similarity then proceed.
         if(largestSimilarityPercent <= 100)
         {
@@ -106,7 +104,7 @@ void Chapter::findDifferences(Note* note)
         //Set a previous similarity index in case the next sentence is an insertion. We can insert it after this index.
         previousSimilarIndex = largestSimilarityIndex;
 
-        largestSimilarityIndex = 0;
+        largestSimilarityPercent = 0;
     }
 }
 
