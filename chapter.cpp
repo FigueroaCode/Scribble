@@ -2,6 +2,8 @@
 #include <QDebug>
 #include <QFile>
 #include <QTextStream>
+#include <QResource>
+#include <QIODevice>
 
 Chapter::Chapter()
 {
@@ -51,6 +53,16 @@ int Chapter::compareSentences(QVector<QString> sentence1, QVector<QString> sente
 
 bool Chapter::isSynonym(QString word1, QString word2)
 {
+    QString thesaurus = "";
+    QFile thesaurusFile(":/resources/thesaurus.txt");
+    QTextStream in(&thesaurusFile);
+
+    thesaurusFile.open(QIODevice::ReadOnly);
+
+    thesaurus = in.readAll();
+
+    thesaurusFile.close();
+
     return false;
 }
 
