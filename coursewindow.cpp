@@ -4,6 +4,7 @@
 #include <QDir>
 #include "differenceswidget.h"
 #include "change.h"
+#include <QDebug>
 
 CourseWindow::CourseWindow(QWidget *parent) :
     QDialog(parent),
@@ -49,6 +50,7 @@ void CourseWindow::on_notTwoBtn_clicked()
 
 void CourseWindow::on_diffButton_clicked()
 {
+    differences->clearDifferences();
     if(chapter != NULL && noteOne != NULL && noteTwo != NULL
             && !(noteOne->getText().isEmpty()) && !(noteTwo->getText().isEmpty())
             ){

@@ -4,6 +4,7 @@
 #include "addcoursewindow.h"
 #include "chapterinfowindow.h"
 #include "addnotes.h"
+#include "coursewindow.h"
 #include <QFileInfo>
 #include <QFile>
 #include <QDirIterator>
@@ -214,4 +215,10 @@ void MainWindow::on_deleteBtn_clicked()
         //-------------Delete the directories as well-----------//
 
     }
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    CourseWindow* differences = new CourseWindow();
+    differences->show();
 }

@@ -20,8 +20,10 @@ DifferencesWidget::DifferencesWidget(QWidget *parent) :
 
 void DifferencesWidget::addDifferences(QVector<Change*> changes){
     //put in here the text you want displayed
-        const QString labelText = "Original Sentence: " + changes.at(0)->getOriginalSentence() +
-               "\nProposed Sentence: " + changes.at(0)->getProposedSentence();
+    for(int i = 0; i < changes.size(); i++)
+    {
+        const QString labelText = "Original Sentence: " + changes.at(i)->getOriginalSentence() +
+               "\nProposed Sentence: " + changes.at(i)->getProposedSentence();
         QLabel *label = new QLabel(labelText);
         label->setSizePolicy(QSizePolicy::QSizePolicy::Maximum,QSizePolicy::Maximum);
         //creating checkbox widget
@@ -30,9 +32,15 @@ void DifferencesWidget::addDifferences(QVector<Change*> changes){
         //add these widgets to the box container
         diffBox->addWidget(check);
         diffBox->addWidget(label);
+    }
 }
 
 DifferencesWidget::~DifferencesWidget()
 {
     delete ui;
+}
+
+void DifferencesWidget::clearDifferences()
+{
+    //Should clear the current differences Widget.
 }

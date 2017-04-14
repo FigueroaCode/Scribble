@@ -21,7 +21,7 @@ public:
     explicit DifferencesWidget(QWidget *parent = 0);
     void addDifferences(QVector<Change*> changes);
     ~DifferencesWidget();
-
+    void clearDifferences();
 private:
     Ui::DifferencesWidget *ui;
     QWidget *central;

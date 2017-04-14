@@ -46,12 +46,12 @@ void Chapter::findDifferences(Note* note)
     //oNNS stands for Original New Note Sentences
     //These variable names were too long, so I made them into acronyms. - Luis
     QVector<QString> oMNS = getMainNote()->getOriginalSentences();
-    QVector<QString> oNNS = getMainNote()->getOriginalSentences();
+    QVector<QString> oNNS = note->getOriginalSentences();
 
     int currentSimilarityPercent = 0;
     int largestSimilarityPercent = 0;
     int largestSimilarityIndex;
-    int previousSimilarIndex = 0;
+    int previousSimilarIndex = eMNS.size()-1;
 
     //Compare all sentences to each other.
     for(int newIndex = 0; newIndex < eNNS.size(); newIndex++)
@@ -71,6 +71,9 @@ void Chapter::findDifferences(Note* note)
                 largestSimilarityIndex = originalIndex;
             }
         }
+
+        qDebug()<<largestSimilarityPercent;
+
         //Analyze similarity then proceed.
         if(largestSimilarityPercent <= 100)
         {
@@ -101,8 +104,9 @@ void Chapter::findDifferences(Note* note)
 
         //Set a previous similarity index in case the next sentence is an insertion. We can insert it after this index.
         previousSimilarIndex = largestSimilarityIndex;
-    }
 
+        largestSimilarityIndex = 0;
+    }
 }
 
 int Chapter::compareSentences(QVector<QString> sentence1, QVector<QString> sentence2)
@@ -120,7 +124,7 @@ int Chapter::compareSentences(QVector<QString> sentence1, QVector<QString> sente
             QString word2 = sentence2.at(j);
 
             //NOTE THIS NEEDS TO LATER ACCOUNT FOR SYNONYMS AS WELL.
-            if(word1 == word2)
+            if(word1.toLower() == word2.toLower())
             {
                 similarWords++;
             }
@@ -135,8 +139,7 @@ int Chapter::compareSentences(QVector<QString> sentence1, QVector<QString> sente
         totalWords = sentence2.size();
     }
 
-    percentSimilarity = (similarWords/totalWords) * 100;
-
+    percentSimilarity = (similarWords*100/totalWords);
     return percentSimilarity;
 }
 
