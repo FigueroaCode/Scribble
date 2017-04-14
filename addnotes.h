@@ -13,6 +13,7 @@ class AddNotes : public QDialog
 
 public:
     explicit AddNotes(QWidget *parent = 0);
+    void setText(QString filepath);
     ~AddNotes();
 
 private:
