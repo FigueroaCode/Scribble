@@ -245,9 +245,13 @@ void MainWindow::on_courseList_itemClicked(QTreeWidgetItem *item, int column)
            if(itemWindow != NULL)
                itemWindow->hide();
            if(noteWindow != NULL){
+               QString filepath = projectPath + "/" + getParentNames(item);
+               noteWindow->setText(filepath);
                noteWindow->show();
            }else{
                 noteWindow = new AddNotes();
+                QString filepath = projectPath + "/" + getParentNames(item);
+                noteWindow->setText(filepath);
                 groupBoxLayout->addWidget(noteWindow);
            }
 
@@ -276,7 +280,18 @@ void MainWindow::on_courseList_itemClicked(QTreeWidgetItem *item, int column)
         }
     }
 }
-
+//makes a filepath using the treewidget
+QString MainWindow::getParentNames(QTreeWidgetItem* parent){
+    if(parent->parent() != NULL){
+        //has a parent
+        QString name = parent->text(0);
+        parent = parent->parent();
+        return getParentNames(parent) + "/" + name;
+    }else{
+        return parent->text(0);
+    }
+}
+//counts the depth an item in the tree widget is
 int MainWindow::countNest(QTreeWidgetItem *parent){
     int count  = 0;
    while(parent->parent() != NULL){

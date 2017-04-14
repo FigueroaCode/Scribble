@@ -2,6 +2,7 @@
 #include "ui_addnotes.h"
 #include <QFileDialog>
 #include <QDir>
+#include <QDebug>
 #include "note.h"
 
 AddNotes::AddNotes(QWidget *parent) :
@@ -9,13 +10,20 @@ AddNotes::AddNotes(QWidget *parent) :
     ui(new Ui::AddNotes)
 {
     ui->setupUi(this);
-    ui->textEdit->setReadOnly(true);
+   // ui->textEdit->setReadOnly(true);
+}
+
+void AddNotes::setText(QString filepath){
+    Note myNote(filepath);
+    qDebug() << filepath;
+    ui->textEdit->setText(myNote.getText());
 }
 
 AddNotes::~AddNotes()
 {
     delete ui;
 }
+
 
 //void AddNotes::on_addFileBtn_clicked()
 //{

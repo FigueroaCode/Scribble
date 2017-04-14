@@ -26,6 +26,7 @@ public:
     QTreeWidgetItem* addChild(QTreeWidgetItem *parent,QString name);
     QTreeWidgetItem* getCurrentItem();
     QString getProjectPath();
+    QString getParentNames(QTreeWidgetItem* parent);
     ~MainWindow();
 
 private slots:
