@@ -15,7 +15,6 @@ AddNotes::AddNotes(QWidget *parent) :
 
 void AddNotes::setText(QString filepath){
     Note myNote(filepath);
-    qDebug() << filepath;
     ui->textEdit->setText(myNote.getText());
 }
 
