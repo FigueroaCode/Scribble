@@ -30,16 +30,12 @@ bool CourseList::courseExist(QString name){
     return false;
 }
 
-Course* CourseList::getCourse(QString name){
-    for(int i = 0; i < courses.size() ; i ++){
-        if(courses.at(i)->getCourseName() == name){
-            return courses.at(i);
-        }
-    }
-    return NULL;
+Course* CourseList::getCourse(int index){
+   return courses.at(index);
 }
 
 void CourseList::addCourse(Course* course){
     courses.append(course);
 }
 
+int CourseList::getSize(){return courses.size();}

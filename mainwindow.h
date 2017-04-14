@@ -47,6 +47,7 @@ private:
     //initialize courselist
     void loadCourseList();
     bool initializeCourseList();
+    void traverseDir(QString path);
 };
 
 #endif // MAINWINDOW_H

@@ -14,8 +14,10 @@ public:
     CourseList();
     QString sortName(QString name);
     bool courseExist(QString name);
-    Course *getCourse(QString name);
+    Course *getCourse(int index);
     void addCourse(Course* course);
+    int getSize();
+
 
 };
 

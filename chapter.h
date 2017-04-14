@@ -16,6 +16,7 @@ public:
     void mergeNotes(Note* note);
     Note* getMainNote();
     int compareSentences(QVector<QString> sentence1, QVector<QString> sentence2);
+    QString getChapterName();
 private:
     QString chapterName;
     Note* mainNote;

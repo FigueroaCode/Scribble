@@ -29,6 +29,7 @@ Note* Chapter::getMainNote()
     return mainNote;
 }
 
+QString Chapter::getChapterName(){return chapterName;}
 void Chapter::findDifferences(Note* note)
 {
     QVector<QVector<QString>> mainNoteSentences = getMainNote()->getEditedSentences();
