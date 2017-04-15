@@ -22,11 +22,13 @@ private:
 public:
     Textbook();
     QString getTextbookName();
+    bool chapterExists(Chapter* chapter);
     void setTextbookName(QString name);
     QVector<Chapter*> getChaptersList();
     Chapter* getChapter(int index);
     void addChapter(Chapter* chapter);
     void removeChapter(int index);
+    int findIndex(QString chapter);
 };
 
 #endif // TEXTBOOK_H

@@ -27,6 +27,7 @@ public:
     QTreeWidgetItem* getCurrentItem();
     QString getProjectPath();
     QString getParentNames(QTreeWidgetItem* parent);
+    CourseList getCourseList();
     ~MainWindow();
 
 private slots:

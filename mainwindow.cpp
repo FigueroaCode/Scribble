@@ -175,11 +175,24 @@ void MainWindow::on_addCourseBtn_clicked()
         crs->addTextbook(txtbook);
         courses.addCourse(crs);
 
+        //make the directories
+        QString path = projectPath;
+        QDir dir(path);
+        if(!dir.exists(course)){
+            dir.mkdir(course);
+        }
+        path += "/"+ course;
+        dir.cd(path);
+        if(!dir.exists(textbook)){
+            dir.mkdir(textbook);
+        }
+        path += "/"+textbook;
+        dir.cd(path);
+        if(!dir.exists(chapter)){
+            dir.mkdir(chapter);
+        }
     }
 
-    //----------------TODO------------------------------
-    //----------------------Make the directories for these in the
-    //project folder----------------------------------------------------
 }
 
 void MainWindow::on_courseList_itemClicked(QTreeWidgetItem *item, int column)
@@ -318,12 +331,18 @@ void MainWindow::on_deleteBtn_clicked()
             if(noteWindow != NULL){
                 noteWindow->hide();
             }
+
+        //-------------Delete the directories as well-----------//
+        QString path = projectPath + "/" + getParentNames(itemToDel);
+        QDir dir(path);
+        if(dir.exists()){
+            dir.removeRecursively();
+        }else{
+            qDebug() << "Dir doesnt exist: " << path;
+        }
         delete temp;
         itemToDel = NULL;
         ui->deleteBtn->setText("Delete");
-
-        //-------------Delete the directories as well-----------//
-
     }
 }
 
@@ -335,4 +354,8 @@ void MainWindow::on_pushButton_clicked()
 
 QString MainWindow::getProjectPath(){
     return projectPath;
+}
+
+CourseList MainWindow::getCourseList(){
+    return courses;
 }

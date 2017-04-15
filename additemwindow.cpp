@@ -1,5 +1,9 @@
 #include "additemwindow.h"
 #include "ui_additemwindow.h"
+#include "textbook.h"
+#include "chapter.h"
+#include "courselist.h"
+#include <QDebug>
 
 AddItemWindow::AddItemWindow(QWidget *parent) :
     QDialog(parent),
@@ -27,12 +31,36 @@ void AddItemWindow::setButtonName(QString name){
 void AddItemWindow::on_createBtn_clicked()
 {
     QString name = ui->nameInput->text();
-    if(!name.isEmpty()){
-        //noteName = name;
-        mainWidget->addChild(mainWidget->getCurrentItem(),name);
-        //----------------TODO------------------------------
-        //----------------------Make a txt file with this name in the right
-        //file directory----------------------------------------------------
+    if(!name.isEmpty()){ 
+        //if parent is null then its a course
+        //otherwise keep searching for the parent and then add appropriately
+        if(mainWidget->getCurrentItem()->parent() != NULL){
+            //adding a chapter
+            int courseIndex = mainWidget->getCourseList().CourseIndex(mainWidget->getCurrentItem()->parent()->text(0));
+            if(courseIndex >= 0){
+                int textbookIndex = mainWidget->getCourseList().getCourse(courseIndex)->findIndex(mainWidget->getCurrentItem()->text(0));
+                if(textbookIndex >= 0){//make sure that the textbook exists
+                    Chapter* chapter = new Chapter(name);
+                    mainWidget->getCourseList().getCourse(courseIndex)->getTextbook(textbookIndex)->addChapter(chapter);
+                    //add to treewidget
+                     mainWidget->addChild(mainWidget->getCurrentItem(),name);
+                     //make directory for it
+                     QDir dir();
+                }
+            }
+        }else{
+            //adding a textbook
+            int courseIndex = mainWidget->getCourseList().CourseIndex(mainWidget->getCurrentItem()->text(0));
+            if(courseIndex >= 0){
+                Textbook* temp = new Textbook();
+                temp->setTextbookName(name);
+                mainWidget->getCourseList().getCourse(courseIndex)->addTextbook(temp);
+                //add to treewidget
+                 mainWidget->addChild(mainWidget->getCurrentItem(),name);
+                 //make directory for it
+            }
+        }
+
         //reset input
         ui->nameInput->setText("");
     }
