@@ -2,6 +2,7 @@
 #include "ui_differenceswidget.h"
 #include "change.h"
 #include "note.h"
+#include "potentialdiffwidget.h"
 #include <QDebug>
 
 DifferencesWidget::DifferencesWidget(QWidget *parent) :
@@ -18,29 +19,27 @@ DifferencesWidget::DifferencesWidget(QWidget *parent) :
 
 }
 
-void DifferencesWidget::addDifferences(QVector<Change*> changes){
-    //put in here the text you want displayed
+void DifferencesWidget::addDifferences(QVector<Change*> changes, Chapter* chapter)
+{
+    if(!diffBox->isEmpty())
+    {
+        for(int i = 0; i < differenceWidgets.size(); i++)
+        {
+            diffBox->removeWidget(differenceWidgets.at(i));
+            delete differenceWidgets.at(i);
+        }
+    }
+
+    differenceWidgets.clear();
     for(int i = 0; i < changes.size(); i++)
     {
-        const QString labelText = "Original Sentence: " + changes.at(i)->getOriginalSentence() +
-               "\nProposed Sentence: " + changes.at(i)->getProposedSentence();
-        QLabel *label = new QLabel(labelText);
-        label->setSizePolicy(QSizePolicy::QSizePolicy::Maximum,QSizePolicy::Maximum);
-        //creating checkbox widget
-        QCheckBox *check = new QCheckBox();
-
-        //add these widgets to the box container
-        diffBox->addWidget(check);
-        diffBox->addWidget(label);
+        PotentialDiffWidget* newDiff = new PotentialDiffWidget(0, changes.at(i), chapter);
+        differenceWidgets.append(newDiff);
+        diffBox->addWidget(differenceWidgets.at(i));
     }
 }
 
 DifferencesWidget::~DifferencesWidget()
 {
     delete ui;
-}
-
-void DifferencesWidget::clearDifferences()
-{
-    //Should clear the current differences Widget.
 }

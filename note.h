@@ -34,6 +34,7 @@ public:
     bool isTitle(QString word);
     bool isPunctuation(QChar p);
     QVector<Change*> getChangeLog();
+    void clearChangeLog();
     QVector<Change*> getConfirmedChanges();
     void addChange(Change* change);
     QVector<QString> getOriginalSentences();

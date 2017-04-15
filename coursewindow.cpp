@@ -50,12 +50,13 @@ void CourseWindow::on_notTwoBtn_clicked()
 
 void CourseWindow::on_diffButton_clicked()
 {
-    differences->clearDifferences();
+    noteTwo->clearChangeLog();
     if(chapter != NULL && noteOne != NULL && noteTwo != NULL
             && !(noteOne->getText().isEmpty()) && !(noteTwo->getText().isEmpty())
             ){
         chapter->findDifferences(noteTwo);
         QVector<Change*> changeLog = noteTwo->getChangeLog();
-        differences->addDifferences(changeLog);
+        differences->addDifferences(changeLog, chapter);
     }
+    noteTwo->clearChangeLog();
 }

@@ -157,6 +157,11 @@ QVector<Change*> Note::getChangeLog()
     return changeLog;
 }
 
+void Note::clearChangeLog()
+{
+    changeLog.clear();
+}
+
 void Note::setFileName(QString name){
     fileName = name;
 }

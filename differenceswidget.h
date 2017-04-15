@@ -8,6 +8,8 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include "change.h"
+#include "chapter.h"
+#include "potentialdiffwidget.h"
 
 namespace Ui {
 class DifferencesWidget;
@@ -19,13 +21,13 @@ class DifferencesWidget : public QScrollArea
 
 public:
     explicit DifferencesWidget(QWidget *parent = 0);
-    void addDifferences(QVector<Change*> changes);
+    void addDifferences(QVector<Change*> changes, Chapter* chapter);
     ~DifferencesWidget();
-    void clearDifferences();
 private:
     Ui::DifferencesWidget *ui;
     QWidget *central;
     QVBoxLayout *diffBox;
+    QVector<PotentialDiffWidget*> differenceWidgets;
 
 };
 
