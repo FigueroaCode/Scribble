@@ -142,20 +142,71 @@ int Chapter::compareSentences(QVector<QString> sentence1, QVector<QString> sente
     return percentSimilarity;
 }
 
-//bool Chapter::isSynonym(QString word1, QString word2)
-//{
-//    QString thesaurus = "";
-//    QFile thesaurusFile(":/resources/thesaurus.txt");
-//    QTextStream in(&thesaurusFile);
+/*
+ * Compares two words and determines if they are synonyms in the thesaurus reference file.
+ * */
+bool Chapter::isSynonym(QString word1, QString word2)
+{
+    QString thesaurus = "";
+    QFile thesaurusFile(":/resources/thesaurus.txt");
+    QTextStream in(&thesaurusFile);
 
-//    thesaurusFile.open(QIODevice::ReadOnly);
+     thesaurusFile.open(QIODevice::ReadOnly);
+     thesaurus = in.readAll();
+     thesaurusFile.close();
 
-//    thesaurus = in.readAll();
+     int nextPound = 0;
+     bool found = false;
+     QString temp;
 
-//    thesaurusFile.close();
+     //the starting index of word1 in the thesaurus
+     int word1Location = thesaurus.indexOf(word1);
 
-//    return false;
-//}
+     //the beginning of the thesaurus -> word1
+     QString blockFront = thesaurus.left(word1Location);
+
+     //the end of word1 -> the subsequent #
+     QString blockBack = thesaurus.mid(word1Location, thesaurus.size() - word1Location);
+     blockBack = blockBack.left(blockBack.indexOf("#"));
+
+     //trims blockFront to: the preceeding # -> the starting index of word1
+     while(blockFront.indexOf("#") != -1)
+	 {
+         nextPound = blockFront.indexOf("#");
+         blockFront = blockFront.mid(nextPound + 1, word1Location - nextPound);
+     }
+
+     //checks if word1 and word2 are located in the same synonym block
+     for (int i = 0; i < (blockFront.length() - word2.length()); i++)
+     {
+         temp = blockFront.mid(i, word2.length());
+         if (temp.compare(word2) == 0)
+         {
+             found = true;
+         }
+     }
+
+     for (int i = 0; i < (blockBack.length() - word2.length()); i++)
+     {
+         temp = blockBack.mid(i, word2.length());
+         if (temp.compare(word2) == 0)
+         {
+             found = true;
+         }
+     }
+
+     if (found)
+     {
+         //qDebug()<< word1 << " and " << word2 << " are synonyms.";
+         return true;
+     }
+
+     else
+     {
+         //qDebug()<< word1 << " and " << word2 << " are not synonyms.";
+         return false;
+     }
+}
 
 //void Chapter::mergeNotes(Note* note)
 //{
