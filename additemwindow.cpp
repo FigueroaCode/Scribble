@@ -45,7 +45,14 @@ void AddItemWindow::on_createBtn_clicked()
                     //add to treewidget
                      mainWidget->addChild(mainWidget->getCurrentItem(),name);
                      //make directory for it
-                     QDir dir();
+                     QString path = mainWidget->getProjectPath() + +"/"+ mainWidget->getParentNames(mainWidget->getCurrentItem()) + "/";
+
+                     QDir dir(path);
+                     if(!dir.exists(name)){
+                         dir.mkdir(name);
+                     }else{
+                         qDebug() << "Dir Doesnt exist "  << path;
+                     }
                 }
             }
         }else{
@@ -58,6 +65,15 @@ void AddItemWindow::on_createBtn_clicked()
                 //add to treewidget
                  mainWidget->addChild(mainWidget->getCurrentItem(),name);
                  //make directory for it
+                 QString path = mainWidget->getProjectPath() + +"/"+ mainWidget->getParentNames(mainWidget->getCurrentItem()) + "/";
+
+                 QDir dir(path);
+                 if(!dir.exists(name)){
+                     dir.mkdir(name);
+                 }else{
+                     qDebug() << "Dir Doesnt exist "  << path;
+                 }
+
             }
         }
 
