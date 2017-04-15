@@ -144,6 +144,7 @@ int Chapter::compareSentences(QVector<QString> sentence1, QVector<QString> sente
 
 /*
  * Compares two words and determines if they are synonyms in the thesaurus reference file.
+ * A word is not a synonym to itself.
  * */
 bool Chapter::isSynonym(QString word1, QString word2)
 {
@@ -155,41 +156,71 @@ bool Chapter::isSynonym(QString word1, QString word2)
      thesaurus = in.readAll();
      thesaurusFile.close();
 
-     int nextPound = 0;
-     bool found = false;
-     QString temp;
+     bool found = false; bool completed = false;
+     QString temp; QString blockFront; QString blockBack;
+     int nextPound; int nextPercent;
+     QStringList frontList; QStringList backList;
+     QRegExp rx("(\\; |\\,|\\.|\\&|\\[)");
 
      //the starting index of word1 in the thesaurus
      int word1Location = thesaurus.indexOf(word1);
+     if(word1Location == -1)
+     {
+        return false;
+     }
 
      //the beginning of the thesaurus -> word1
-     QString blockFront = thesaurus.left(word1Location);
+     blockFront = thesaurus.left(word1Location);
 
-     //the end of word1 -> the subsequent #
-     QString blockBack = thesaurus.mid(word1Location, thesaurus.size() - word1Location);
-     blockBack = blockBack.left(blockBack.indexOf("#"));
+     //the end of word1 -> the subsequent # (or %, if a new category of words started)
+     blockBack = thesaurus.mid(word1Location, thesaurus.size() - word1Location);
+     nextPound = blockBack.indexOf("#");
+     nextPercent = blockBack.indexOf("%");
+
+     if (nextPound < nextPercent)
+     {
+         blockBack = blockBack.left(blockBack.indexOf("#"));
+     }
+     else
+     {
+         blockBack = blockBack.left(blockBack.indexOf("%"));
+     }
 
      //trims blockFront to: the preceeding # -> the starting index of word1
      while(blockFront.indexOf("#") != -1)
-	 {
+     {
          nextPound = blockFront.indexOf("#");
          blockFront = blockFront.mid(nextPound + 1, word1Location - nextPound);
      }
 
-     //checks if word1 and word2 are located in the same synonym block
-     for (int i = 0; i < (blockFront.length() - word2.length()); i++)
+     //turns blocks into lists of words separated by ; , . [ or &
+     frontList = blockFront.split(rx, QString::SkipEmptyParts);
+     backList = blockBack.split(rx, QString::SkipEmptyParts);
+
+     //trims whitespace from beginning and end of each word or phrase
+     for (int i = 0; i < frontList.length(); i++)
      {
-         temp = blockFront.mid(i, word2.length());
-         if (temp.compare(word2) == 0)
+         frontList.replaceInStrings(frontList.at(i), frontList.at(i).trimmed());
+     }
+     for (int i = 0; i < backList.length(); i++)
+     {
+         backList.replaceInStrings(backList.at(i), backList.at(i).trimmed());
+     }
+
+     //checks if word1 and word2 are located in the same synonym block
+     for (int i = 0; i < frontList.length(); i++)
+     {
+         temp = frontList.at(i);
+         if (temp.compare(word2) == 0 && temp.compare(word1) != 0)
          {
              found = true;
          }
      }
 
-     for (int i = 0; i < (blockBack.length() - word2.length()); i++)
+     for (int i = 0; i < backList.length(); i++)
      {
-         temp = blockBack.mid(i, word2.length());
-         if (temp.compare(word2) == 0)
+         temp = backList.at(i);
+         if (temp.compare(word2) == 0 && temp.compare(word1) != 0)
          {
              found = true;
          }
@@ -203,7 +234,7 @@ bool Chapter::isSynonym(QString word1, QString word2)
 
      else
      {
-         //qDebug()<< word1 << " and " << word2 << " are not synonyms.";
+         //qDebug()<< word1 << " and " << word2 << " are NOT synonyms.";
          return false;
      }
 }
