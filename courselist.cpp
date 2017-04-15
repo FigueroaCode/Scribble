@@ -39,3 +39,11 @@ void CourseList::addCourse(Course* course){
 }
 
 int CourseList::getSize(){return courses.size();}
+
+int CourseList::CourseIndex(QString name){
+    for(int i = 0; i < courses.size();i++){
+        if(courses.at(i)->getCourseName() == name)
+            return i;
+    }
+    return 0;
+}

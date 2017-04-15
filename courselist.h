@@ -17,7 +17,7 @@ public:
     Course *getCourse(int index);
     void addCourse(Course* course);
     int getSize();
-
+    int CourseIndex(QString name);
 
 };
 

@@ -5,7 +5,6 @@
 #include <QDir>
 #include <QDebug>
 #include <QTreeWidgetItem>
-#include <algorithm>
 
 ChapterInfoWindow::ChapterInfoWindow(QWidget *parent) :
     QDialog(parent),
@@ -26,25 +25,59 @@ ChapterInfoWindow::~ChapterInfoWindow()
 void ChapterInfoWindow::on_addNewNoteBtn_clicked()
 {
     QString filename = QFileDialog::getOpenFileName(this,"Choose your Note",QDir::homePath(),
-                                                    "All Files (*.*);; Text File (*.txt)");
+                                                    "Text File (*.txt)");
     int slashIndex = filename.lastIndexOf("/");
     //get just the name of the file
     QString name = filename.mid(slashIndex+1);
     int childAmount = mainWidget->getCurrentItem()->childCount();
-    if(childAmount > 0){
+    if(childAmount <= 0){
         //no child, so make a new note
         if(!name.isEmpty()){
-            mainWidget->addChild(mainWidget->getCurrentItem(),name);
+            //add to courselist
             //current path to desired path
             QString path = mainWidget->getProjectPath() +"/" + getParentNames(mainWidget->getCurrentItem()) + "/";
-            //qDebug() << path;
             QDir dir(path);
             if(dir.exists()){
                 QFile::copy(filename, path+name);
             }
+            QString courseName = mainWidget->getCurrentItem()->parent()->parent()->text(0);
+            QString textbookName = mainWidget->getCurrentItem()->parent()->text(0);
+            int courseIndex = mainWidget->getCourseList().CourseIndex(courseName);
+            if(courseIndex >= 0){
+                int textbookIndex = mainWidget->getCourseList().getCourse(courseIndex)->findIndex(textbookName);
+                if(textbookIndex >= 0){
+                    int chapterIndex =mainWidget->getCourseList().getCourse(courseIndex)->
+                            getTextbook(textbookIndex)->findIndex(mainWidget->getCurrentItem()->text(0));
+                    //add the note to the chapter in the list
+                    Note* note = new Note(path+name);
+                    mainWidget->getCourseList().getCourse(courseIndex)->
+                                                getTextbook(textbookIndex)
+                            ->getChapter(chapterIndex)->setMainNote(note);
+                    //add it to the treewidget
+                    mainWidget->addChild(mainWidget->getCurrentItem(),name);       
+                }
+            }
         }
     }else{
         //has a child, so merging
+        QString courseName = mainWidget->getCurrentItem()->parent()->parent()->text(0);
+        QString textbookName = mainWidget->getCurrentItem()->parent()->text(0);
+        int courseIndex = mainWidget->getCourseList().CourseIndex(courseName);
+        if(courseIndex >= 0){
+            int textbookIndex = mainWidget->getCourseList().getCourse(courseIndex)->findIndex(textbookName);
+            if(textbookIndex >= 0){
+                int chapterIndex =mainWidget->getCourseList().getCourse(courseIndex)->
+                        getTextbook(textbookIndex)->findIndex(mainWidget->getCurrentItem()->text(0));
+                //add the note to the chapter in the list
+                QString path = mainWidget->getProjectPath() +"/" + getParentNames(mainWidget->getCurrentItem()) + "/";
+                Note* note = new Note(path+name);
+                //make chapter object
+                Chapter* chapter = mainWidget->getCourseList().getCourse(courseIndex)->
+                                            getTextbook(textbookIndex)->getChapter(chapterIndex);
+                //merge notes
+
+            }
+        }
     }
 }
 

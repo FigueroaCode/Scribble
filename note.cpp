@@ -15,6 +15,7 @@ Note::Note(QString filename)
     editedText = "";
     // Check if file didnt open in read only
     if(!file.open(QIODevice::ReadOnly)){
+        qDebug() << "from the note class";
         QMessageBox::information(0, "error", file.errorString());
     }
 
