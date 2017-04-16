@@ -4,7 +4,6 @@
 #include "addcoursewindow.h"
 #include "chapterinfowindow.h"
 #include "addnotes.h"
-#include "coursewindow.h"
 #include "note.h"
 #include "additemwindow.h"
 #include <QFileInfo>
@@ -259,12 +258,12 @@ void MainWindow::on_courseList_itemClicked(QTreeWidgetItem *item, int column)
                itemWindow->hide();
            if(noteWindow != NULL){
                QString filepath = projectPath + "/" + getParentNames(item);
-               noteWindow->setText(filepath);
+               noteWindow->setNote(filepath);
                noteWindow->show();
            }else{
                 noteWindow = new AddNotes();
                 QString filepath = projectPath + "/" + getParentNames(item);
-                noteWindow->setText(filepath);
+                noteWindow->setNote(filepath);
                 groupBoxLayout->addWidget(noteWindow);
            }
 
@@ -344,12 +343,6 @@ void MainWindow::on_deleteBtn_clicked()
         itemToDel = NULL;
         ui->deleteBtn->setText("Delete");
     }
-}
-
-void MainWindow::on_pushButton_clicked()
-{
-    CourseWindow* differences = new CourseWindow();
-    differences->show();
 }
 
 QString MainWindow::getProjectPath(){

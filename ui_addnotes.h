@@ -15,6 +15,7 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QVBoxLayout>
 
@@ -24,6 +25,7 @@ class Ui_AddNotes
 {
 public:
     QVBoxLayout *verticalLayout;
+    QPushButton *saveChangesBtn;
     QTextEdit *textEdit;
 
     void setupUi(QDialog *AddNotes)
@@ -33,6 +35,11 @@ public:
         AddNotes->resize(400, 300);
         verticalLayout = new QVBoxLayout(AddNotes);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        saveChangesBtn = new QPushButton(AddNotes);
+        saveChangesBtn->setObjectName(QStringLiteral("saveChangesBtn"));
+
+        verticalLayout->addWidget(saveChangesBtn);
+
         textEdit = new QTextEdit(AddNotes);
         textEdit->setObjectName(QStringLiteral("textEdit"));
 
@@ -47,6 +54,7 @@ public:
     void retranslateUi(QDialog *AddNotes)
     {
         AddNotes->setWindowTitle(QApplication::translate("AddNotes", "Note", Q_NULLPTR));
+        saveChangesBtn->setText(QApplication::translate("AddNotes", "Save Changes", Q_NULLPTR));
     } // retranslateUi
 
 };

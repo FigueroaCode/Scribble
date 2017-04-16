@@ -62,7 +62,8 @@ SOURCES       = main.cpp \
 		mainwindow.cpp \
 		addcoursewindow.cpp \
 		chapterinfowindow.cpp \
-		additemwindow.cpp qrc_resources.cpp \
+		additemwindow.cpp \
+		potentialdiffwidget.cpp qrc_resources.cpp \
 		moc_addnotes.cpp \
 		moc_getdirectorywindow.cpp \
 		moc_coursewindow.cpp \
@@ -70,7 +71,8 @@ SOURCES       = main.cpp \
 		moc_mainwindow.cpp \
 		moc_addcoursewindow.cpp \
 		moc_chapterinfowindow.cpp \
-		moc_additemwindow.cpp
+		moc_additemwindow.cpp \
+		moc_potentialdiffwidget.cpp
 OBJECTS       = main.o \
 		courselist.o \
 		course.o \
@@ -86,6 +88,7 @@ OBJECTS       = main.o \
 		addcoursewindow.o \
 		chapterinfowindow.o \
 		additemwindow.o \
+		potentialdiffwidget.o \
 		qrc_resources.o \
 		moc_addnotes.o \
 		moc_getdirectorywindow.o \
@@ -94,7 +97,8 @@ OBJECTS       = main.o \
 		moc_mainwindow.o \
 		moc_addcoursewindow.o \
 		moc_chapterinfowindow.o \
-		moc_additemwindow.o
+		moc_additemwindow.o \
+		moc_potentialdiffwidget.o
 DIST          = ../../../../Qt/5.8/clang_64/mkspecs/features/spec_pre.prf \
 		../../../../Qt/5.8/clang_64/mkspecs/qdevice.pri \
 		../../../../Qt/5.8/clang_64/mkspecs/features/device_config.prf \
@@ -284,7 +288,8 @@ DIST          = ../../../../Qt/5.8/clang_64/mkspecs/features/spec_pre.prf \
 		mainwindow.h \
 		addcoursewindow.h \
 		chapterinfowindow.h \
-		additemwindow.h main.cpp \
+		additemwindow.h \
+		potentialdiffwidget.h main.cpp \
 		courselist.cpp \
 		course.cpp \
 		textbook.cpp \
@@ -298,7 +303,8 @@ DIST          = ../../../../Qt/5.8/clang_64/mkspecs/features/spec_pre.prf \
 		mainwindow.cpp \
 		addcoursewindow.cpp \
 		chapterinfowindow.cpp \
-		additemwindow.cpp
+		additemwindow.cpp \
+		potentialdiffwidget.cpp
 QMAKE_TARGET  = Scribble
 DESTDIR       = 
 TARGET        = Scribble.app/Contents/MacOS/Scribble
@@ -307,7 +313,7 @@ TARGET        = Scribble.app/Contents/MacOS/Scribble
 first: all
 ####### Build rules
 
-$(TARGET): ui_addnotes.h ui_getdirectorywindow.h ui_coursewindow.h ui_differenceswidget.h ui_addcoursewindow.h ui_chapterinfowindow.h ui_mainwindow.h ui_additemwindow.h $(OBJECTS)  
+$(TARGET): ui_addnotes.h ui_getdirectorywindow.h ui_coursewindow.h ui_differenceswidget.h ui_addcoursewindow.h ui_chapterinfowindow.h ui_mainwindow.h ui_additemwindow.h ui_potentialdiffwidget.h $(OBJECTS)  
 	@test -d Scribble.app/Contents/MacOS/ || mkdir -p Scribble.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -705,9 +711,9 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../Qt/5.8/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents courselist.h course.h textbook.h chapter.h note.h change.h addnotes.h getdirectorywindow.h coursewindow.h differenceswidget.h mainwindow.h addcoursewindow.h chapterinfowindow.h additemwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp courselist.cpp course.cpp textbook.cpp chapter.cpp note.cpp change.cpp addnotes.cpp getdirectorywindow.cpp coursewindow.cpp differenceswidget.cpp mainwindow.cpp addcoursewindow.cpp chapterinfowindow.cpp additemwindow.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents addnotes.ui getdirectorywindow.ui coursewindow.ui differenceswidget.ui addcoursewindow.ui chapterinfowindow.ui mainwindow.ui additemwindow.ui $(DISTDIR)/
+	$(COPY_FILE) --parents courselist.h course.h textbook.h chapter.h note.h change.h addnotes.h getdirectorywindow.h coursewindow.h differenceswidget.h mainwindow.h addcoursewindow.h chapterinfowindow.h additemwindow.h potentialdiffwidget.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp courselist.cpp course.cpp textbook.cpp chapter.cpp note.cpp change.cpp addnotes.cpp getdirectorywindow.cpp coursewindow.cpp differenceswidget.cpp mainwindow.cpp addcoursewindow.cpp chapterinfowindow.cpp additemwindow.cpp potentialdiffwidget.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents addnotes.ui getdirectorywindow.ui coursewindow.ui differenceswidget.ui addcoursewindow.ui chapterinfowindow.ui mainwindow.ui additemwindow.ui potentialdiffwidget.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -745,9 +751,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../../../Qt/5.8/clang_64/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk -mmacosx-version-min=10.9 $(EXPORT_QMAKE_XARCH_CFLAGS) -g -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h ../../../../Qt/5.8/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_addnotes.cpp moc_getdirectorywindow.cpp moc_coursewindow.cpp moc_differenceswidget.cpp moc_mainwindow.cpp moc_addcoursewindow.cpp moc_chapterinfowindow.cpp moc_additemwindow.cpp
+compiler_moc_header_make_all: moc_addnotes.cpp moc_getdirectorywindow.cpp moc_coursewindow.cpp moc_differenceswidget.cpp moc_mainwindow.cpp moc_addcoursewindow.cpp moc_chapterinfowindow.cpp moc_additemwindow.cpp moc_potentialdiffwidget.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_addnotes.cpp moc_getdirectorywindow.cpp moc_coursewindow.cpp moc_differenceswidget.cpp moc_mainwindow.cpp moc_addcoursewindow.cpp moc_chapterinfowindow.cpp moc_additemwindow.cpp
+	-$(DEL_FILE) moc_addnotes.cpp moc_getdirectorywindow.cpp moc_coursewindow.cpp moc_differenceswidget.cpp moc_mainwindow.cpp moc_addcoursewindow.cpp moc_chapterinfowindow.cpp moc_additemwindow.cpp moc_potentialdiffwidget.cpp
 moc_addnotes.cpp: ../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
 		addnotes.h \
@@ -784,6 +790,9 @@ moc_coursewindow.cpp: ../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Header
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qboxlayout.h \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QLabel \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		potentialdiffwidget.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		coursewindow.h \
 		moc_predefs.h \
 		../../../../Qt/5.8/clang_64/bin/moc
@@ -802,6 +811,15 @@ moc_differenceswidget.cpp: ../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/H
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QLabel \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
 		change.h \
+		chapter.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDateTime \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		note.h \
+		potentialdiffwidget.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		differenceswidget.h \
 		moc_predefs.h \
 		../../../../Qt/5.8/clang_64/bin/moc
@@ -895,11 +913,27 @@ moc_additemwindow.cpp: ../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Heade
 		../../../../Qt/5.8/clang_64/bin/moc
 	/Users/debrian/Qt/5.8/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/debrian/Qt/5.8/clang_64/mkspecs/macx-clang -I/Users/debrian/Documents/Programming/Qt/Scribble -I/Users/debrian/Qt/5.8/clang_64/lib/QtWidgets.framework/Headers -I/Users/debrian/Qt/5.8/clang_64/lib/QtGui.framework/Headers -I/Users/debrian/Qt/5.8/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/debrian/Qt/5.8/clang_64/lib additemwindow.h -o moc_additemwindow.cpp
 
+moc_potentialdiffwidget.cpp: change.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QVector \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		chapter.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDateTime \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		note.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		potentialdiffwidget.h \
+		moc_predefs.h \
+		../../../../Qt/5.8/clang_64/bin/moc
+	/Users/debrian/Qt/5.8/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/debrian/Qt/5.8/clang_64/mkspecs/macx-clang -I/Users/debrian/Documents/Programming/Qt/Scribble -I/Users/debrian/Qt/5.8/clang_64/lib/QtWidgets.framework/Headers -I/Users/debrian/Qt/5.8/clang_64/lib/QtGui.framework/Headers -I/Users/debrian/Qt/5.8/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/debrian/Qt/5.8/clang_64/lib potentialdiffwidget.h -o moc_potentialdiffwidget.cpp
+
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_addnotes.h ui_getdirectorywindow.h ui_coursewindow.h ui_differenceswidget.h ui_addcoursewindow.h ui_chapterinfowindow.h ui_mainwindow.h ui_additemwindow.h
+compiler_uic_make_all: ui_addnotes.h ui_getdirectorywindow.h ui_coursewindow.h ui_differenceswidget.h ui_addcoursewindow.h ui_chapterinfowindow.h ui_mainwindow.h ui_additemwindow.h ui_potentialdiffwidget.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_addnotes.h ui_getdirectorywindow.h ui_coursewindow.h ui_differenceswidget.h ui_addcoursewindow.h ui_chapterinfowindow.h ui_mainwindow.h ui_additemwindow.h
+	-$(DEL_FILE) ui_addnotes.h ui_getdirectorywindow.h ui_coursewindow.h ui_differenceswidget.h ui_addcoursewindow.h ui_chapterinfowindow.h ui_mainwindow.h ui_additemwindow.h ui_potentialdiffwidget.h
 ui_addnotes.h: addnotes.ui \
 		../../../../Qt/5.8/clang_64/bin/uic
 	/Users/debrian/Qt/5.8/clang_64/bin/uic addnotes.ui -o ui_addnotes.h
@@ -931,6 +965,10 @@ ui_mainwindow.h: mainwindow.ui \
 ui_additemwindow.h: additemwindow.ui \
 		../../../../Qt/5.8/clang_64/bin/uic
 	/Users/debrian/Qt/5.8/clang_64/bin/uic additemwindow.ui -o ui_additemwindow.h
+
+ui_potentialdiffwidget.h: potentialdiffwidget.ui \
+		../../../../Qt/5.8/clang_64/bin/uic
+	/Users/debrian/Qt/5.8/clang_64/bin/uic potentialdiffwidget.ui -o ui_potentialdiffwidget.h
 
 compiler_rez_source_make_all:
 compiler_rez_source_clean:
@@ -1062,6 +1100,8 @@ addnotes.o: addnotes.cpp addnotes.h \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDir \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdir.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		note.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
@@ -1130,6 +1170,9 @@ coursewindow.o: coursewindow.cpp coursewindow.h \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qboxlayout.h \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QLabel \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		potentialdiffwidget.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		ui_coursewindow.h \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
@@ -1153,12 +1196,16 @@ differenceswidget.o: differenceswidget.cpp differenceswidget.h \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QLabel \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
 		change.h \
-		ui_differenceswidget.h \
-		note.h \
+		chapter.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDateTime \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		note.h \
+		potentialdiffwidget.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		ui_differenceswidget.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o differenceswidget.o differenceswidget.cpp
@@ -1201,6 +1248,10 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QLabel \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		potentialdiffwidget.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		additemwindow.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QFileInfo \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfileinfo.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QFile \
@@ -1246,6 +1297,8 @@ chapterinfowindow.o: chapterinfowindow.cpp chapterinfowindow.h \
 		ui_chapterinfowindow.h \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o chapterinfowindow.o chapterinfowindow.cpp
@@ -1274,8 +1327,25 @@ additemwindow.o: additemwindow.cpp additemwindow.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
 		note.h \
 		change.h \
-		ui_additemwindow.h
+		ui_additemwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o additemwindow.o additemwindow.cpp
+
+potentialdiffwidget.o: potentialdiffwidget.cpp potentialdiffwidget.h \
+		change.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QVector \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		chapter.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDateTime \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		note.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		ui_potentialdiffwidget.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o potentialdiffwidget.o potentialdiffwidget.cpp
 
 qrc_resources.o: qrc_resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp
@@ -1303,6 +1373,9 @@ moc_chapterinfowindow.o: moc_chapterinfowindow.cpp
 
 moc_additemwindow.o: moc_additemwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_additemwindow.o moc_additemwindow.cpp
+
+moc_potentialdiffwidget.o: moc_potentialdiffwidget.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_potentialdiffwidget.o moc_potentialdiffwidget.cpp
 
 ####### Install
 

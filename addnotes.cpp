@@ -1,21 +1,21 @@
 #include "addnotes.h"
 #include "ui_addnotes.h"
 #include <QFileDialog>
+#include <QFile>
 #include <QDir>
 #include <QDebug>
-#include "note.h"
 
 AddNotes::AddNotes(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddNotes)
 {
     ui->setupUi(this);
-   // ui->textEdit->setReadOnly(true);
+    note = NULL;
 }
 
-void AddNotes::setText(QString filepath){
-    Note myNote(filepath);
-    ui->textEdit->setText(myNote.getText());
+void AddNotes::setNote(QString filepath){
+    note = new Note(filepath);
+    ui->textEdit->setText(note->getText());
 }
 
 AddNotes::~AddNotes()
@@ -23,21 +23,15 @@ AddNotes::~AddNotes()
     delete ui;
 }
 
-
-//void AddNotes::on_addFileBtn_clicked()
-//{
-//    //------ Open File explorer so user can select the file, then save path in string
-//      QString filename = QFileDialog::getOpenFileName(
-//                  this,
-//                  "Open File",
-//                  QDir::homePath(),
-//                  "All Files (*.*);; Text File (*.txt)"
-//                  );
-
-//    Note myNote(filename);
-//    //Display file text
-//    ui->textEdit->setText(myNote.getText());
-
-//}
-
-
+void AddNotes::on_saveChangesBtn_clicked()
+{
+    QString filepath = note->getFilePath();
+    QFile file(filepath);
+    if (file.open(QIODevice::WriteOnly | QIODevice::Text)){
+        QTextStream out(&file);
+        out << ui->textEdit->toPlainText();
+    }else{
+        qDebug() << "File didnt open";
+    }
+    file.close();
+}

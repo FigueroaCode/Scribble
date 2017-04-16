@@ -2,6 +2,7 @@
 #define ADDNOTES_H
 
 #include <QDialog>
+#include "note.h"
 
 namespace Ui {
 class AddNotes;
@@ -13,11 +14,16 @@ class AddNotes : public QDialog
 
 public:
     explicit AddNotes(QWidget *parent = 0);
-    void setText(QString filepath);
+    void setNote(QString filepath);
+    void setFilePath(QString path);
     ~AddNotes();
+
+private slots:
+    void on_saveChangesBtn_clicked();
 
 private:
     Ui::AddNotes *ui;
+    Note* note;
 };
 
 #endif // ADDNOTES_H

@@ -10,6 +10,7 @@ class Note
 {
 private:
     QString fileName;
+    QString filepath;
     QString text;
     QString editedText;
     bool underVote;
@@ -24,11 +25,13 @@ public:
     QString getText();
     QString getEditedText();
     QString getFileName();
+    QString getFilePath();
     void allowVoting(QDateTime time);
     void editNote();
     void findSentences();
     void removeSymbols();
     void setFileName(QString name);
+    void setFilePath(QString name);
     bool isArticle(QString article);
     bool isSymbol(QChar symbol);
     bool isTitle(QString word);

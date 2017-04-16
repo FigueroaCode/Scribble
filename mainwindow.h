@@ -38,8 +38,6 @@ private slots:
 
     void on_deleteBtn_clicked();
 
-    void on_pushButton_clicked();
-
 private:
     Ui::MainWindow *ui;
     CourseList courses;

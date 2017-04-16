@@ -7,15 +7,18 @@
 Note::Note(){
     text = "";
     editedText = "";
+    fileName = "";
+    filepath = "";
 }
 
 Note::Note(QString filename)
 {
+    filepath = filename;
+
     QFile file(filename);
     editedText = "";
     // Check if file didnt open in read only
     if(!file.open(QIODevice::ReadOnly)){
-        qDebug() << "from the note class";
         QMessageBox::information(0, "error", file.errorString());
     }
 
@@ -85,6 +88,9 @@ void Note::removeSymbols(){
     }
 }
 
+void Note::setFilePath(QString name){
+    filepath = name;
+}
 bool Note::isArticle(QString article){
     QString articles[3] = {
         "the","a","an",
@@ -169,4 +175,8 @@ void Note::setFileName(QString name){
 
 QString Note::getFileName(){
     return fileName;
+}
+
+QString Note::getFilePath(){
+    return filepath;
 }

@@ -11,8 +11,8 @@ CourseWindow::CourseWindow(QWidget *parent) :
     ui(new Ui::CourseWindow)
 {
     ui->setupUi(this);
-    noteOne = NULL;
-    noteTwo = NULL;
+    mergeNote = NULL;
+    chapter = NULL;
     differences = new DifferencesWidget();
     ui->verticalLayout->addWidget(differences);
 
@@ -23,40 +23,22 @@ CourseWindow::~CourseWindow()
     delete ui;
 }
 
-void CourseWindow::on_noteOneBtn_clicked()
-{
-    QString filename = QFileDialog::getOpenFileName(
-                this,
-                "Choose Note",
-                QDir::homePath(),
-                "Text Files (*.txt)");
-
-    noteOne = new Note(filename);
-
-    // make chapter
-    chapter = new Chapter("Chapter 1", noteOne);
+void CourseWindow::setChapter(Chapter* chapter){
+    this->chapter = chapter;
 }
 
-void CourseWindow::on_notTwoBtn_clicked()
-{
-    QString filename = QFileDialog::getOpenFileName(
-                this,
-                "Choose Note",
-                QDir::homePath(),
-                "Text Files (*.txt)");
-
-    noteTwo = new Note(filename);
+void CourseWindow::setMergeNote(Note *note){
+    mergeNote = note;
 }
 
-void CourseWindow::on_diffButton_clicked()
-{
-    noteTwo->clearChangeLog();
-    if(chapter != NULL && noteOne != NULL && noteTwo != NULL
-            && !(noteOne->getText().isEmpty()) && !(noteTwo->getText().isEmpty())
+void CourseWindow::displayDifferences(){
+    if(chapter != NULL  && mergeNote != NULL
+         && !(mergeNote->getText().isEmpty())
             ){
-        chapter->findDifferences(noteTwo);
-        QVector<Change*> changeLog = noteTwo->getChangeLog();
+        mergeNote->clearChangeLog();
+        chapter->findDifferences(mergeNote);
+        QVector<Change*> changeLog = mergeNote->getChangeLog();
         differences->addDifferences(changeLog, chapter);
+        mergeNote->clearChangeLog();
     }
-    noteTwo->clearChangeLog();
 }

@@ -1,5 +1,6 @@
 #include "chapterinfowindow.h"
 #include "ui_chapterinfowindow.h"
+#include "coursewindow.h"
 #include <QFileDialog>
 #include <QFile>
 #include <QDir>
@@ -69,13 +70,19 @@ void ChapterInfoWindow::on_addNewNoteBtn_clicked()
                 int chapterIndex =mainWidget->getCourseList().getCourse(courseIndex)->
                         getTextbook(textbookIndex)->findIndex(mainWidget->getCurrentItem()->text(0));
                 //add the note to the chapter in the list
-                QString path = mainWidget->getProjectPath() +"/" + getParentNames(mainWidget->getCurrentItem()) + "/";
-                Note* note = new Note(path+name);
+                //QString path = mainWidget->getProjectPath() +"/" + getParentNames(mainWidget->getCurrentItem()) + "/";
+                Note* note = new Note(filename);
                 //make chapter object
                 Chapter* chapter = mainWidget->getCourseList().getCourse(courseIndex)->
                                             getTextbook(textbookIndex)->getChapter(chapterIndex);
+                //Note* mainNote = chapter->getMainNote()->getFileName();
                 //merge notes
-
+                CourseWindow* differences = new CourseWindow();
+                //send main note and second note
+                differences->setChapter(chapter);
+                differences->setMergeNote(note);
+                differences->displayDifferences();
+                differences->show();
             }
         }
     }

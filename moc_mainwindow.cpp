@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[9];
-    char stringdata0[134];
+    QByteArrayData data[8];
+    char stringdata0[112];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,14 +38,12 @@ QT_MOC_LITERAL(3, 36, 25), // "on_courseList_itemClicked"
 QT_MOC_LITERAL(4, 62, 16), // "QTreeWidgetItem*"
 QT_MOC_LITERAL(5, 79, 4), // "item"
 QT_MOC_LITERAL(6, 84, 6), // "column"
-QT_MOC_LITERAL(7, 91, 20), // "on_deleteBtn_clicked"
-QT_MOC_LITERAL(8, 112, 21) // "on_pushButton_clicked"
+QT_MOC_LITERAL(7, 91, 20) // "on_deleteBtn_clicked"
 
     },
     "MainWindow\0on_addCourseBtn_clicked\0\0"
     "on_courseList_itemClicked\0QTreeWidgetItem*\0"
-    "item\0column\0on_deleteBtn_clicked\0"
-    "on_pushButton_clicked"
+    "item\0column\0on_deleteBtn_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -55,7 +53,7 @@ static const uint qt_meta_data_MainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       3,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -63,15 +61,13 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   34,    2, 0x08 /* Private */,
-       3,    2,   35,    2, 0x08 /* Private */,
-       7,    0,   40,    2, 0x08 /* Private */,
-       8,    0,   41,    2, 0x08 /* Private */,
+       1,    0,   29,    2, 0x08 /* Private */,
+       3,    2,   30,    2, 0x08 /* Private */,
+       7,    0,   35,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 4, QMetaType::Int,    5,    6,
-    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -86,7 +82,6 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 0: _t->on_addCourseBtn_clicked(); break;
         case 1: _t->on_courseList_itemClicked((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 2: _t->on_deleteBtn_clicked(); break;
-        case 3: _t->on_pushButton_clicked(); break;
         default: ;
         }
     }
@@ -117,13 +112,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 3;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 3)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 4;
+        _id -= 3;
     }
     return _id;
 }

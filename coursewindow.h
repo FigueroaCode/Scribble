@@ -16,20 +16,15 @@ class CourseWindow : public QDialog
 
 public:
     explicit CourseWindow(QWidget *parent = 0);
+    void setChapter(Chapter* chapter);
+    void setMergeNote(Note* note);
+    void displayDifferences();
     ~CourseWindow();
-
-private slots:
-    void on_noteOneBtn_clicked();
-
-    void on_notTwoBtn_clicked();
-
-    void on_diffButton_clicked();
 
 private:
     Ui::CourseWindow *ui;
     Chapter* chapter;
-    Note* noteOne;
-    Note* noteTwo;
+    Note* mergeNote;
     DifferencesWidget *differences;
 
 };

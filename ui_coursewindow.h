@@ -15,7 +15,6 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QPushButton>
 #include <QtWidgets/QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
@@ -24,9 +23,6 @@ class Ui_CourseWindow
 {
 public:
     QVBoxLayout *verticalLayout;
-    QPushButton *noteOneBtn;
-    QPushButton *notTwoBtn;
-    QPushButton *diffButton;
 
     void setupUi(QDialog *CourseWindow)
     {
@@ -35,21 +31,6 @@ public:
         CourseWindow->resize(400, 300);
         verticalLayout = new QVBoxLayout(CourseWindow);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        noteOneBtn = new QPushButton(CourseWindow);
-        noteOneBtn->setObjectName(QStringLiteral("noteOneBtn"));
-
-        verticalLayout->addWidget(noteOneBtn);
-
-        notTwoBtn = new QPushButton(CourseWindow);
-        notTwoBtn->setObjectName(QStringLiteral("notTwoBtn"));
-
-        verticalLayout->addWidget(notTwoBtn);
-
-        diffButton = new QPushButton(CourseWindow);
-        diffButton->setObjectName(QStringLiteral("diffButton"));
-
-        verticalLayout->addWidget(diffButton);
-
 
         retranslateUi(CourseWindow);
 
@@ -59,9 +40,6 @@ public:
     void retranslateUi(QDialog *CourseWindow)
     {
         CourseWindow->setWindowTitle(QApplication::translate("CourseWindow", "Dialog", Q_NULLPTR));
-        noteOneBtn->setText(QApplication::translate("CourseWindow", "makeNote1", Q_NULLPTR));
-        notTwoBtn->setText(QApplication::translate("CourseWindow", "makeNote2", Q_NULLPTR));
-        diffButton->setText(QApplication::translate("CourseWindow", "difference", Q_NULLPTR));
     } // retranslateUi
 
 };

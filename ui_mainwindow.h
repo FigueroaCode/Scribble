@@ -36,7 +36,6 @@ public:
     QTreeWidget *courseList;
     QPushButton *deleteBtn;
     QGroupBox *groupBox;
-    QPushButton *pushButton;
     QMenuBar *menubar;
     QMenu *menuSettings;
     QStatusBar *statusbar;
@@ -72,9 +71,6 @@ public:
         groupBox = new QGroupBox(centralwidget);
         groupBox->setObjectName(QStringLiteral("groupBox"));
         groupBox->setGeometry(QRect(240, 50, 381, 321));
-        pushButton = new QPushButton(centralwidget);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(80, 440, 89, 25));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QStringLiteral("menubar"));
@@ -101,7 +97,6 @@ public:
         ___qtreewidgetitem->setText(0, QApplication::translate("MainWindow", "My Courses", Q_NULLPTR));
         deleteBtn->setText(QApplication::translate("MainWindow", "Delete", Q_NULLPTR));
         groupBox->setTitle(QApplication::translate("MainWindow", "Information", Q_NULLPTR));
-        pushButton->setText(QApplication::translate("MainWindow", "Magic", Q_NULLPTR));
         menuSettings->setTitle(QApplication::translate("MainWindow", "Settings", Q_NULLPTR));
     } // retranslateUi
 
