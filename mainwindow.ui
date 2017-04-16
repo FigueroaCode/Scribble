@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Scribble</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="layoutWidget">
@@ -95,13 +95,10 @@
     </property>
     <property name="font">
      <font>
-      <family>American Typewriter</family>
+      <family>Chalkboard</family>
       <pointsize>19</pointsize>
       <weight>75</weight>
-      <italic>false</italic>
       <bold>true</bold>
-      <underline>false</underline>
-      <strikeout>false</strikeout>
      </font>
     </property>
     <property name="styleSheet">
