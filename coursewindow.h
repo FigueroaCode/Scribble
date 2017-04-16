@@ -18,6 +18,7 @@ public:
     explicit CourseWindow(QWidget *parent = 0);
     void setChapter(Chapter* chapter);
     void setMergeNote(Note* note);
+    Chapter* getChapter();
     void displayDifferences();
     ~CourseWindow();
 

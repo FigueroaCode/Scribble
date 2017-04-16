@@ -180,3 +180,8 @@ QString Note::getFileName(){
 QString Note::getFilePath(){
     return filepath;
 }
+
+void Note::editNote(QString txt)
+{
+    text = txt;
+}

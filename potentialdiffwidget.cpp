@@ -31,5 +31,7 @@ PotentialDiffWidget::~PotentialDiffWidget()
 
 void PotentialDiffWidget::on_mergeDiffButton_clicked()
 {
-
+    chapter->mergeNotes(change);
+    this->hide();
 }
+

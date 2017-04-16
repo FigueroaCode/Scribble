@@ -153,94 +153,90 @@ bool Chapter::isSynonym(QString word1, QString word2)
     QFile thesaurusFile(":/resources/thesaurus.txt");
     QTextStream in(&thesaurusFile);
 
-    thesaurusFile.open(QIODevice::ReadOnly);
-    thesaurus = in.readAll();
-    thesaurusFile.close();
+     thesaurusFile.open(QIODevice::ReadOnly);
+     thesaurus = in.readAll();
+     thesaurusFile.close();
 
-    bool found = false;
-    QString temp; QString blockFront; QString blockBack;
-    int nextPound; int nextPercent;
-    QStringList frontList; QStringList backList;
-    QRegExp rx("(\\; |\\,|\\.|\\&|\\[)");
+     bool found = false;
+     QStringList thesaurusList;
+     QString synonyms;
+     QString line; QString word;
+     QRegExp rx("(\\,|\\:)");
 
-    //the starting index of word1 in the thesaurus
-    int word1Location = thesaurus.indexOf(word1);
-    if(word1Location == -1)
-    {
-    return false;
-    }
+     //checks that the word is in the thesaurus
+     int word1Location = thesaurus.indexOf(word1 + "|");
+     if(word1Location == -1)
+     {
+        return false;
+     }
 
-    //the beginning of the thesaurus -> word1
-    blockFront = thesaurus.left(word1Location);
+     //splits the thesaurus file line by line
+     while(!thesaurusFile.atEnd())
+     {
+         line = in.readLine();
+         thesaurusList.push_back(line);
+     }
 
-    //the end of word1 -> the subsequent # (or %, if a new category of words started)
-    blockBack = thesaurus.mid(word1Location, thesaurus.size() - word1Location);
-    nextPound = blockBack.indexOf("#");
-    nextPercent = blockBack.indexOf("%");
+     //finds the line where word1 is located
+     for (int i = 0; i < thesaurusList.length(); i++)
+     {
+         word = thesaurusList.at(i).mid(0, word1.length() + 1);
+         if (word.compare(word1 + "|"))
+         {
+             synonyms = thesaurusList.at(i);
+         }
+     }
 
-    if (nextPound < nextPercent)
-    {
-    blockBack = blockBack.left(blockBack.indexOf("#"));
-    }
-    else
-    {
-    blockBack = blockBack.left(blockBack.indexOf("%"));
-    }
+     //separates individual synonyms by commas and colons and trims whitespace from beginning and end of each word
+     QStringList synList = synonyms.split(rx, QString::SkipEmptyParts);
+     for (int i = 0; i < synList.length(); i++)
+     {
+         synList.replaceInStrings(synList.at(i), synList.at(i).trimmed());
+     }
 
-    //trims blockFront to: the preceeding # -> the starting index of word1
-    while(blockFront.indexOf("#") != -1)
-    {
-    nextPound = blockFront.indexOf("#");
-    blockFront = blockFront.mid(nextPound + 1, word1Location - nextPound);
-    }
+     for (int i = 0; i < synList.length(); i++)
+     {
+         //qDebug()<< synList.at(i) << endl;
+         if (synList.at(i).compare(word2) == 0)
+         {
+             found = true;
+         }
+     }
 
-    //turns blocks into lists of words separated by ; , . [ or &
-    frontList = blockFront.split(rx, QString::SkipEmptyParts);
-    backList = blockBack.split(rx, QString::SkipEmptyParts);
+     if (found)
+     {
+         //qDebug()<<word1 <<" and " << word2 << " are synonyms.";
+     }
+     else
+     {
+         //qDebug()<<word1 <<" and " << word2 << " are NOT synonyms.";
+     }
 
-    //trims whitespace from beginning and end of each word or phrase
-    for (int i = 0; i < frontList.length(); i++)
-    {
-    frontList.replaceInStrings(frontList.at(i), frontList.at(i).trimmed());
-    }
-    for (int i = 0; i < backList.length(); i++)
-    {
-    backList.replaceInStrings(backList.at(i), backList.at(i).trimmed());
-    }
-
-    //checks if word1 and word2 are located in the same synonym block
-    for (int i = 0; i < frontList.length(); i++)
-    {
-    temp = frontList.at(i);
-    if (temp.compare(word2) == 0 && temp.compare(word1) != 0)
-    {
-     found = true;
-    }
-    }
-
-    for (int i = 0; i < backList.length(); i++)
-    {
-    temp = backList.at(i);
-    if (temp.compare(word2) == 0 && temp.compare(word1) != 0)
-    {
-     found = true;
-    }
-    }
-
-    if (found)
-    {
-    //qDebug()<< word1 << " and " << word2 << " are synonyms.";
-    return true;
-    }
-
-    else
-    {
-    //qDebug()<< word1 << " and " << word2 << " are NOT synonyms.";
-    return false;
-    }
+     return found;
 }
 
-//void Chapter::mergeNotes(Note* note)
-//{
+void Chapter::mergeNotes(Change* change)
+{
+    Note* mainNote = this->getMainNote();
+    QVector<QString> originalSentences = mainNote->getOriginalSentences();
+    QString noPrevSentence = "This is a new entry.";
 
-//}
+    //Replace the sentence or make an insertion in a QVector of sentences.
+    if(change->getOriginalSentence() == noPrevSentence)
+    {
+        //This is an insertion.
+        originalSentences.insert(change->getIndexOfChange(), change->getProposedSentence());
+    }else{
+        //This is a replacement.
+        originalSentences.remove(change->getIndexOfChange());
+        originalSentences.insert(change->getIndexOfChange(), change->getProposedSentence());
+    }
+
+    QString amendedText = "";
+    for(int i = 0; i < originalSentences.size(); i++)
+    {
+        amendedText += originalSentences.at(i) + " ";
+    }
+
+    mainNote->editNote(amendedText);
+}
