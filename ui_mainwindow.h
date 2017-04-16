@@ -92,13 +92,10 @@ public:
         groupBox->setObjectName(QStringLiteral("groupBox"));
         groupBox->setGeometry(QRect(240, 50, 381, 321));
         QFont font3;
-        font3.setFamily(QStringLiteral("American Typewriter"));
+        font3.setFamily(QStringLiteral("Chalkboard"));
         font3.setPointSize(19);
         font3.setBold(true);
-        font3.setItalic(false);
-        font3.setUnderline(false);
         font3.setWeight(75);
-        font3.setStrikeOut(false);
         groupBox->setFont(font3);
         groupBox->setStyleSheet(QStringLiteral(""));
         MainWindow->setCentralWidget(centralwidget);
@@ -117,7 +114,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Scribble", Q_NULLPTR));
         actionSave->setText(QApplication::translate("MainWindow", "Save", Q_NULLPTR));
         addCourseBtn->setText(QApplication::translate("MainWindow", "Add Course", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem = courseList->headerItem();
