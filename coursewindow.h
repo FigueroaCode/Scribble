@@ -22,6 +22,9 @@ public:
     void displayDifferences();
     ~CourseWindow();
 
+private slots:
+    void on_confirmBtn_clicked();
+
 private:
     Ui::CourseWindow *ui;
     Chapter* chapter;

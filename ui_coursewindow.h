@@ -15,6 +15,7 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
@@ -23,6 +24,7 @@ class Ui_CourseWindow
 {
 public:
     QVBoxLayout *verticalLayout;
+    QPushButton *confirmBtn;
 
     void setupUi(QDialog *CourseWindow)
     {
@@ -31,6 +33,11 @@ public:
         CourseWindow->resize(400, 300);
         verticalLayout = new QVBoxLayout(CourseWindow);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        confirmBtn = new QPushButton(CourseWindow);
+        confirmBtn->setObjectName(QStringLiteral("confirmBtn"));
+
+        verticalLayout->addWidget(confirmBtn);
+
 
         retranslateUi(CourseWindow);
 
@@ -40,6 +47,7 @@ public:
     void retranslateUi(QDialog *CourseWindow)
     {
         CourseWindow->setWindowTitle(QApplication::translate("CourseWindow", "Dialog", Q_NULLPTR));
+        confirmBtn->setText(QApplication::translate("CourseWindow", "Confirm", Q_NULLPTR));
     } // retranslateUi
 
 };

@@ -5,6 +5,7 @@
 #include "differenceswidget.h"
 #include "change.h"
 #include <QDebug>
+#include <QFile>
 
 CourseWindow::CourseWindow(QWidget *parent) :
     QDialog(parent),
@@ -44,4 +45,16 @@ void CourseWindow::displayDifferences(){
         differences->addDifferences(changeLog, chapter);
         mergeNote->clearChangeLog();
     }
+}
+
+void CourseWindow::on_confirmBtn_clicked()
+{
+    QFile file(chapter->getMainNote()->getFilePath());
+    if (file.open(QIODevice::WriteOnly | QIODevice::Text)){
+        QTextStream out(&file);
+        out << chapter->getMainNote()->getText();
+    }
+    file.close();
+
+    close();
 }
