@@ -30,6 +30,10 @@ void CourseWindow::setMergeNote(Note *note){
     mergeNote = note;
 }
 
+Chapter* CourseWindow::getChapter(){
+    return chapter;
+}
+
 void CourseWindow::displayDifferences(){
     if(chapter != NULL  && mergeNote != NULL
          && !(mergeNote->getText().isEmpty())

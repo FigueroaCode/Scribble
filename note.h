@@ -26,8 +26,7 @@ public:
     QString getEditedText();
     QString getFileName();
     QString getFilePath();
-    void allowVoting(QDateTime time);
-    void editNote();
+    void editNote(QString text);
     void findSentences();
     void removeSymbols();
     void setFileName(QString name);
