@@ -15,7 +15,6 @@ CourseWindow::CourseWindow(QWidget *parent) :
     chapter = NULL;
     differences = new DifferencesWidget();
     ui->verticalLayout->addWidget(differences);
-
 }
 
 CourseWindow::~CourseWindow()

@@ -42,6 +42,10 @@ public:
 
         textEdit = new QTextEdit(AddNotes);
         textEdit->setObjectName(QStringLiteral("textEdit"));
+        QFont font;
+        font.setFamily(QStringLiteral("Geneva"));
+        font.setPointSize(11);
+        textEdit->setFont(font);
 
         verticalLayout->addWidget(textEdit);
 

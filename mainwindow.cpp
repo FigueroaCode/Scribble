@@ -346,15 +346,25 @@ void MainWindow::on_deleteBtn_clicked()
 
         //-------------Delete the directories as well-----------//
         QString path = projectPath + "/" + getParentNames(itemToDel);
-        QDir dir(path);
-        if(dir.exists()){
-            dir.removeRecursively();
+        int depth = this->countNest(itemToDel);
+        if(depth == 3){
+            //delete file
+            QFile file(path);
+            file.remove();
+            delete temp;
+            itemToDel = NULL;
+            ui->deleteBtn->setText("Delete");
         }else{
-            qDebug() << "Dir doesnt exist: " << path;
+            QDir dir(path);
+            if(dir.exists()){
+                dir.removeRecursively();
+            }else{
+                qDebug() << "Dir doesnt exist: " << path;
+            }
+            delete temp;
+            itemToDel = NULL;
+            ui->deleteBtn->setText("Delete");
         }
-        delete temp;
-        itemToDel = NULL;
-        ui->deleteBtn->setText("Delete");
     }
 }
 

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>641</width>
+    <height>430</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,6 +26,17 @@
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <widget class="QPushButton" name="addCourseBtn">
+       <property name="font">
+        <font>
+         <family>American Typewriter</family>
+        </font>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
        <property name="text">
         <string>Add Course</string>
        </property>
@@ -33,15 +44,39 @@
      </item>
      <item>
       <widget class="QTreeWidget" name="courseList">
+       <property name="font">
+        <font>
+         <family>American Typewriter</family>
+         <pointsize>14</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
        <column>
         <property name="text">
          <string>My Courses</string>
+        </property>
+        <property name="background">
+         <color>
+          <red>0</red>
+          <green>0</green>
+          <blue>0</blue>
+         </color>
         </property>
        </column>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="deleteBtn">
+       <property name="font">
+        <font>
+         <family>American Typewriter</family>
+         <kerning>false</kerning>
+        </font>
+       </property>
        <property name="text">
         <string>Delete</string>
        </property>
@@ -58,6 +93,20 @@
       <height>321</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>American Typewriter</family>
+      <pointsize>19</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+      <underline>false</underline>
+      <strikeout>false</strikeout>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
     <property name="title">
      <string>Information</string>
     </property>
@@ -68,18 +117,17 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>641</width>
      <height>22</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuSettings">
-    <property name="title">
-     <string>Settings</string>
-    </property>
-   </widget>
-   <addaction name="menuSettings"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

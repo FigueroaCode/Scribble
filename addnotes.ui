@@ -22,7 +22,14 @@
     </widget>
    </item>
    <item>
-    <widget class="QTextEdit" name="textEdit"/>
+    <widget class="QTextEdit" name="textEdit">
+     <property name="font">
+      <font>
+       <family>Geneva</family>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>
