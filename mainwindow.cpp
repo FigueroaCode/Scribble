@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     currentItem = NULL;
     groupBoxLayout = new QVBoxLayout();
     itemToDel = NULL;
+    pathname = QDir::homePath()+"/StateInfo/Directory_Path.txt";
     projectPath = "";
 
     ui->groupBox->setLayout(groupBoxLayout);
@@ -45,9 +46,17 @@ bool MainWindow::initializeCourseList(){
         projectPath = file.readAll();
 
         file.close();
+        //check if project dir exists
+        QDir dir(projectPath);
+        if(!dir.exists()){
+            GetDirectoryWindow window;
+            window.setModal(true);
+            window.exec();
+
+            return initializeCourseList();
+        }
 
         //go to project path and check for course dir
-
         traverseDir(projectPath);
 
         return true;
@@ -62,44 +71,48 @@ bool MainWindow::initializeCourseList(){
 }
 void MainWindow::traverseDir(QString path){
      QDir projectDir(path);
-     QStringList dirs = projectDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
-     //add all the directories to courses list
-     if(dirs.size() > 0){
-         for(int i = 0; i < dirs.size(); i++){
-             //make course to add textbooks to
-             Course *course = new Course();
-             //set name
-             course->setCourseName(dirs.at(i));
-             //find all the textbooks and add it to the course
-             projectDir.cd(path + "/" + dirs.at(i));
-             QStringList bookDirs = projectDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
-             for(int j = 0; j < bookDirs.size();j++){
-                Textbook *temp = new Textbook();
-                temp->setTextbookName(bookDirs.at(j));
-                course->addTextbook(temp);
-             }
-             //find all the chapters and add them to the textbooks
-             for(int j = 0; j < course->getTextbooks().size();j++){
-                projectDir.cd(path + "/" + dirs.at(i) + "/"+ course->getTextbook(j)->getTextbookName());
-                QStringList chapterDirs = projectDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
-                for(int x = 0; x < chapterDirs.size();x++){
-                    Chapter* temp = new Chapter(chapterDirs.at(x));
-                    course->getTextbook(j)->addChapter(temp);
+     if(projectDir.exists()){
+         QStringList dirs = projectDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+         //add all the directories to courses list
+         if(dirs.size() > 0){
+             for(int i = 0; i < dirs.size(); i++){
+                 //make course to add textbooks to
+                 Course *course = new Course();
+                 //set name
+                 course->setCourseName(dirs.at(i));
+                 //find all the textbooks and add it to the course
+                 projectDir.cd(path + "/" + dirs.at(i));
+                 QStringList bookDirs = projectDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+                 for(int j = 0; j < bookDirs.size();j++){
+                    Textbook *temp = new Textbook();
+                    temp->setTextbookName(bookDirs.at(j));
+                    course->addTextbook(temp);
+                 }
+                 //find all the chapters and add them to the textbooks
+                 for(int j = 0; j < course->getTextbooks().size();j++){
+                    projectDir.cd(path + "/" + dirs.at(i) + "/"+ course->getTextbook(j)->getTextbookName());
+                    QStringList chapterDirs = projectDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+                    for(int x = 0; x < chapterDirs.size();x++){
+                        Chapter* temp = new Chapter(chapterDirs.at(x));
+                        course->getTextbook(j)->addChapter(temp);
 
-                     projectDir.cd(path + "/" + dirs.at(i) + "/"+ course->getTextbook(j)->getTextbookName()+"/"+temp->getChapterName());
-                     QStringList fileList = projectDir.entryList(QDir::Files | QDir::NoDotAndDotDot);
-                     for(int y = 0; y < fileList.size();y++){
-                         //make a note object for the
-                         Note *note = new Note(projectDir.path() + "/"+fileList.at(y));
-                         note->setFileName(fileList.at(y));
-                         course->getTextbook(j)->getChapter(x)->setMainNote(note);
-                     }
-                }
+                         projectDir.cd(path + "/" + dirs.at(i) + "/"+ course->getTextbook(j)->getTextbookName()+"/"+temp->getChapterName());
+                         QStringList fileList = projectDir.entryList(QDir::Files | QDir::NoDotAndDotDot);
+                         for(int y = 0; y < fileList.size();y++){
+                             //make a note object for the
+                             Note *note = new Note(projectDir.path() + "/"+fileList.at(y));
+                             note->setFileName(fileList.at(y));
+                             course->getTextbook(j)->getChapter(x)->setMainNote(note);
+                         }
+                    }
+                 }
+                //add this course to the list
+                 courses.addCourse(course);
              }
-            //add this course to the list
-             courses.addCourse(course);
+
+         }else{
+             qDebug() << "Project Directory doesnt exist";
          }
-
      }
 }
 //Add Course
