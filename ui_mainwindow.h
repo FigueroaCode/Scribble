@@ -46,6 +46,7 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->resize(641, 430);
+        MainWindow->setStyleSheet(QStringLiteral(""));
         actionSave = new QAction(MainWindow);
         actionSave->setObjectName(QStringLiteral("actionSave"));
         centralwidget = new QWidget(MainWindow);
@@ -118,7 +119,7 @@ public:
         font3.setBold(true);
         font3.setWeight(75);
         groupBox->setFont(font3);
-        groupBox->setStyleSheet(QStringLiteral(""));
+        groupBox->setStyleSheet(QStringLiteral("background-image: url(:/resources/background_image.jpeg);"));
 
         horizontalLayout->addWidget(groupBox);
 

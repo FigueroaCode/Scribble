@@ -16,8 +16,13 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <family>Times New Roman</family>
+      </font>
+     </property>
      <property name="text">
-      <string>Choose a text file you wish to add.</string>
+      <string>&lt;h3&gt;Choose a text file you wish to add.&lt;/h3&gt;</string>
      </property>
     </widget>
    </item>

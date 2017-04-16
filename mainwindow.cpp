@@ -364,6 +364,16 @@ void MainWindow::on_deleteBtn_clicked()
             delete temp;
             itemToDel = NULL;
             ui->deleteBtn->setText("Delete");
+            if(noteWindow != NULL){
+                noteWindow->hide();
+            }
+            if(infoWindow != NULL){
+                infoWindow->hide();
+            }
+            if(itemWindow != NULL){
+                itemWindow->hide();
+            }
+            ui->groupBox->setTitle("Information");
         }
     }
 }

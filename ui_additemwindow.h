@@ -62,7 +62,7 @@ public:
     void retranslateUi(QDialog *AddItemWindow)
     {
         AddItemWindow->setWindowTitle(QApplication::translate("AddItemWindow", "Dialog", Q_NULLPTR));
-        titleLabel->setText(QApplication::translate("AddItemWindow", "Add New ", Q_NULLPTR));
+        titleLabel->setText(QApplication::translate("AddItemWindow", "<h2>Add New</h2>", Q_NULLPTR));
         createBtn->setText(QApplication::translate("AddItemWindow", "Create New ", Q_NULLPTR));
     } // retranslateUi
 

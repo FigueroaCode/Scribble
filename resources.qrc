@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/resources">
         <file>thesaurus.txt</file>
+        <file>linepaper.jpeg</file>
     </qresource>
 </RCC>

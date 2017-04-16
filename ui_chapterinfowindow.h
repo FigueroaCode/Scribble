@@ -37,6 +37,9 @@ public:
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         label = new QLabel(ChapterInfoWindow);
         label->setObjectName(QStringLiteral("label"));
+        QFont font;
+        font.setFamily(QStringLiteral("Times New Roman"));
+        label->setFont(font);
 
         verticalLayout->addWidget(label);
 
@@ -54,7 +57,7 @@ public:
     void retranslateUi(QDialog *ChapterInfoWindow)
     {
         ChapterInfoWindow->setWindowTitle(QApplication::translate("ChapterInfoWindow", "Dialog", Q_NULLPTR));
-        label->setText(QApplication::translate("ChapterInfoWindow", "Choose a text file you wish to add.", Q_NULLPTR));
+        label->setText(QApplication::translate("ChapterInfoWindow", "<h3>Choose a text file you wish to add.</h3>", Q_NULLPTR));
         addNewNoteBtn->setText(QApplication::translate("ChapterInfoWindow", "Add a New Note", Q_NULLPTR));
     } // retranslateUi
 

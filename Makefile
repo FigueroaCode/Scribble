@@ -742,6 +742,7 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_resources.cpp
 qrc_resources.cpp: resources.qrc \
 		../../../../Qt/5.8/clang_64/bin/rcc \
+		linepaper.jpeg \
 		thesaurus.txt
 	/Users/debrian/Qt/5.8/clang_64/bin/rcc -name resources resources.qrc -o qrc_resources.cpp
 
@@ -756,6 +757,14 @@ compiler_moc_header_clean:
 	-$(DEL_FILE) moc_addnotes.cpp moc_getdirectorywindow.cpp moc_coursewindow.cpp moc_differenceswidget.cpp moc_mainwindow.cpp moc_addcoursewindow.cpp moc_chapterinfowindow.cpp moc_additemwindow.cpp moc_potentialdiffwidget.cpp
 moc_addnotes.cpp: ../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		note.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		change.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QVector \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDateTime \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
 		addnotes.h \
 		moc_predefs.h \
 		../../../../Qt/5.8/clang_64/bin/moc
@@ -1095,13 +1104,6 @@ change.o: change.cpp change.h \
 addnotes.o: addnotes.cpp addnotes.h \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
-		ui_addnotes.h \
-		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
-		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
-		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDir \
-		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdir.h \
-		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
-		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		note.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
@@ -1109,7 +1111,16 @@ addnotes.o: addnotes.cpp addnotes.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QVector \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qvector.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDateTime \
-		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdatetime.h
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		ui_addnotes.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDir \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdir.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o addnotes.o addnotes.cpp
 
 getdirectorywindow.o: getdirectorywindow.cpp getdirectorywindow.h \
@@ -1179,7 +1190,9 @@ coursewindow.o: coursewindow.cpp coursewindow.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDir \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdir.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
-		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfile.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o coursewindow.o coursewindow.cpp
 
 differenceswidget.o: differenceswidget.cpp differenceswidget.h \
@@ -1238,19 +1251,6 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		addcoursewindow.h \
 		chapterinfowindow.h \
 		addnotes.h \
-		coursewindow.h \
-		differenceswidget.h \
-		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QScrollArea \
-		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qscrollarea.h \
-		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QCheckBox \
-		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qcheckbox.h \
-		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QTextEdit \
-		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
-		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QLabel \
-		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
-		potentialdiffwidget.h \
-		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QWidget \
-		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		additemwindow.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QFileInfo \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfileinfo.h \
@@ -1295,6 +1295,19 @@ chapterinfowindow.o: chapterinfowindow.cpp chapterinfowindow.h \
 		note.h \
 		change.h \
 		ui_chapterinfowindow.h \
+		coursewindow.h \
+		differenceswidget.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QScrollArea \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qscrollarea.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QCheckBox \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qcheckbox.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QTextEdit \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		potentialdiffwidget.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QFile \

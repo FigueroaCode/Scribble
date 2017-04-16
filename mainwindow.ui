@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Scribble</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout_2">
     <item>
@@ -114,7 +117,7 @@
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true"/>
+         <string notr="true">background-image: url(:/resources/background_image.jpeg);</string>
         </property>
         <property name="title">
          <string>Information</string>
