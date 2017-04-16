@@ -46,7 +46,7 @@ private:
     QVBoxLayout *groupBoxLayout;
     //path to file that has filepath to project folder
     QString projectPath;
-    const QString pathname = QDir::homePath()+"/StateInfo/Directory_Path.txt";
+    QString pathname;
     //initialize courselist
     void loadCourseList();
     bool initializeCourseList();
