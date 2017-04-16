@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
@@ -30,7 +31,8 @@ class Ui_MainWindow
 public:
     QAction *actionSave;
     QWidget *centralwidget;
-    QWidget *layoutWidget;
+    QHBoxLayout *horizontalLayout_2;
+    QHBoxLayout *horizontalLayout;
     QVBoxLayout *verticalLayout;
     QPushButton *addCourseBtn;
     QTreeWidget *courseList;
@@ -48,29 +50,39 @@ public:
         actionSave->setObjectName(QStringLiteral("actionSave"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
-        layoutWidget = new QWidget(centralwidget);
-        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(10, 50, 211, 321));
-        verticalLayout = new QVBoxLayout(layoutWidget);
+        horizontalLayout_2 = new QHBoxLayout(centralwidget);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        verticalLayout->setContentsMargins(0, 0, 0, 0);
-        addCourseBtn = new QPushButton(layoutWidget);
+        addCourseBtn = new QPushButton(centralwidget);
         addCourseBtn->setObjectName(QStringLiteral("addCourseBtn"));
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(addCourseBtn->sizePolicy().hasHeightForWidth());
+        addCourseBtn->setSizePolicy(sizePolicy);
         QFont font;
-        font.setFamily(QStringLiteral("American Typewriter"));
+        font.setFamily(QStringLiteral("Times New Roman"));
         addCourseBtn->setFont(font);
         addCourseBtn->setAutoFillBackground(false);
         addCourseBtn->setStyleSheet(QStringLiteral(""));
 
         verticalLayout->addWidget(addCourseBtn);
 
-        courseList = new QTreeWidget(layoutWidget);
+        courseList = new QTreeWidget(centralwidget);
         QTreeWidgetItem *__qtreewidgetitem = new QTreeWidgetItem();
         __qtreewidgetitem->setBackground(0, QColor(0, 0, 0));
         courseList->setHeaderItem(__qtreewidgetitem);
         courseList->setObjectName(QStringLiteral("courseList"));
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(courseList->sizePolicy().hasHeightForWidth());
+        courseList->setSizePolicy(sizePolicy1);
         QFont font1;
-        font1.setFamily(QStringLiteral("American Typewriter"));
+        font1.setFamily(QStringLiteral("Times New Roman"));
         font1.setPointSize(14);
         font1.setBold(false);
         font1.setWeight(50);
@@ -79,8 +91,10 @@ public:
 
         verticalLayout->addWidget(courseList);
 
-        deleteBtn = new QPushButton(layoutWidget);
+        deleteBtn = new QPushButton(centralwidget);
         deleteBtn->setObjectName(QStringLiteral("deleteBtn"));
+        sizePolicy.setHeightForWidth(deleteBtn->sizePolicy().hasHeightForWidth());
+        deleteBtn->setSizePolicy(sizePolicy);
         QFont font2;
         font2.setFamily(QStringLiteral("American Typewriter"));
         font2.setKerning(false);
@@ -88,9 +102,16 @@ public:
 
         verticalLayout->addWidget(deleteBtn);
 
+
+        horizontalLayout->addLayout(verticalLayout);
+
         groupBox = new QGroupBox(centralwidget);
         groupBox->setObjectName(QStringLiteral("groupBox"));
-        groupBox->setGeometry(QRect(240, 50, 381, 321));
+        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Preferred);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(groupBox->sizePolicy().hasHeightForWidth());
+        groupBox->setSizePolicy(sizePolicy2);
         QFont font3;
         font3.setFamily(QStringLiteral("Chalkboard"));
         font3.setPointSize(19);
@@ -98,6 +119,12 @@ public:
         font3.setWeight(75);
         groupBox->setFont(font3);
         groupBox->setStyleSheet(QStringLiteral(""));
+
+        horizontalLayout->addWidget(groupBox);
+
+
+        horizontalLayout_2->addLayout(horizontalLayout);
+
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QStringLiteral("menubar"));

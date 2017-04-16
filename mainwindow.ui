@@ -14,100 +14,118 @@
    <string>Scribble</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>50</y>
-      <width>211</width>
-      <height>321</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QPushButton" name="addCourseBtn">
-       <property name="font">
-        <font>
-         <family>American Typewriter</family>
-        </font>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
-       <property name="text">
-        <string>Add Course</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QTreeWidget" name="courseList">
-       <property name="font">
-        <font>
-         <family>American Typewriter</family>
-         <pointsize>14</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
-       <column>
-        <property name="text">
-         <string>My Courses</string>
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QPushButton" name="addCourseBtn">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Times New Roman</family>
+           </font>
+          </property>
+          <property name="autoFillBackground">
+           <bool>false</bool>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>Add Course</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTreeWidget" name="courseList">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Times New Roman</family>
+            <pointsize>14</pointsize>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <column>
+           <property name="text">
+            <string>My Courses</string>
+           </property>
+           <property name="background">
+            <color>
+             <red>0</red>
+             <green>0</green>
+             <blue>0</blue>
+            </color>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="deleteBtn">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>American Typewriter</family>
+            <kerning>false</kerning>
+           </font>
+          </property>
+          <property name="text">
+           <string>Delete</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
-        <property name="background">
-         <color>
-          <red>0</red>
-          <green>0</green>
-          <blue>0</blue>
-         </color>
+        <property name="font">
+         <font>
+          <family>Chalkboard</family>
+          <pointsize>19</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
         </property>
-       </column>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="deleteBtn">
-       <property name="font">
-        <font>
-         <family>American Typewriter</family>
-         <kerning>false</kerning>
-        </font>
-       </property>
-       <property name="text">
-        <string>Delete</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QGroupBox" name="groupBox">
-    <property name="geometry">
-     <rect>
-      <x>240</x>
-      <y>50</y>
-      <width>381</width>
-      <height>321</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Chalkboard</family>
-      <pointsize>19</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="title">
-     <string>Information</string>
-    </property>
-   </widget>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="title">
+         <string>Information</string>
+        </property>
+        <zorder>layoutWidget</zorder>
+        <zorder>layoutWidget</zorder>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
