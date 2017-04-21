@@ -40,6 +40,7 @@ public:
     QVector<Change*> getConfirmedChanges();
     void addChange(Change* change);
     QVector<QString> getOriginalSentences();
+    void setOriginalSentence(QVector<QString> ori);
     QVector<QVector<QString>> getEditedSentences();
 
 };

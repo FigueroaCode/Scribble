@@ -94,7 +94,7 @@ void Chapter::findDifferences(Note* note)
                 //prior to this unique sentence.
                 QString newSentence = oNNS.at(newIndex);
 
-                Change* change = new Change("This is a new entry.", newSentence, previousSimilarIndex);
+                Change* change = new Change("This is a new entry.", newSentence, previousSimilarIndex+1);
                 note->addChange(change);
             }
         }else{
@@ -220,7 +220,7 @@ void Chapter::mergeNotes(Change* change)
     Note* mainNote = this->getMainNote();
     QVector<QString> originalSentences = mainNote->getOriginalSentences();
     QString noPrevSentence = "This is a new entry.";
-
+    qDebug()<<mainNote->getOriginalSentences();
     //Replace the sentence or make an insertion in a QVector of sentences.
     if(change->getOriginalSentence() == noPrevSentence)
     {
@@ -230,6 +230,7 @@ void Chapter::mergeNotes(Change* change)
         //This is a replacement.
         originalSentences.remove(change->getIndexOfChange());
         originalSentences.insert(change->getIndexOfChange(), change->getProposedSentence());
+        //qDebug()<<change->getProposedSentence();
     }
 
     QString amendedText = "";
@@ -237,6 +238,8 @@ void Chapter::mergeNotes(Change* change)
     {
         amendedText += originalSentences.at(i) + " ";
     }
-
+           // qDebug()<<mainNote->getText();
     mainNote->editNote(amendedText);
+    mainNote->setOriginalSentence(originalSentences);
+
 }

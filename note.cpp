@@ -185,3 +185,7 @@ void Note::editNote(QString txt)
 {
     text = txt;
 }
+
+void Note::setOriginalSentence(QVector<QString> ori){
+    this->sentences = ori;
+}
